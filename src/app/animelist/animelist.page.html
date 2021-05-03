@@ -1,0 +1,143 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light">
+      <b>Anime List</b>
+    </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  
+
+ 
+
+
+
+  <div>
+    <!-- Default Segment -->
+  <ion-segment scrollable (ionChange)="segmentChanged($event)" value="all">
+    <ion-segment-button value="all" (click)="animeList(0)">
+      <ion-icon name="infinite-sharp"></ion-icon>
+      <ion-label>All</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="watching" (click)="animeList(1)">
+      <ion-icon name="eye" ></ion-icon>
+      <ion-label>Watching</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="completed" (click)="animeList(2)">
+      <ion-icon name="checkmark-done" ></ion-icon>
+      <ion-label>Completed</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="ptw" (click)="animeList(3)">
+      <ion-icon name="bookmark"></ion-icon>
+      <ion-label>Plan To Watch</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="dropped" (click)="animeList(4)">
+      <ion-icon name="close"></ion-icon>
+      <ion-label>Dropped</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</div>
+
+<div class="padding-container">
+  <ion-searchbar name="search" [(ngModel)]="search" (ionChange)="animeSearch()"></ion-searchbar>
+</div>
+
+  
+  <div class="padding-container">
+    <div *ngIf="popup">
+      show me
+    </div>
+
+    <div *ngFor="let anime of it">
+
+    <ion-item  >
+      <ion-thumbnail slot="start" [routerLink]="['/animedetails/',  anime.anime.id ]">
+        <img [src]="anime.anime.image_url">
+      </ion-thumbnail>
+      <label [routerLink]="['/animedetails/',  anime.anime.id ]">
+        <p>{{ anime.anime.name }}</p>
+        
+          
+        
+        <div *ngIf="anime.status.val == 1"> 
+            <b> <ion-text color="success">{{ anime.status.tag }}</ion-text></b>
+          
+            {{anime.episodes_number}} Of  {{ anime.anime.episodes_number }} Eps
+            <p> Score: {{ anime.score }}</p>
+        </div>
+
+        <div *ngIf="anime.status.val == 2">
+          
+          <b> <ion-text color="medium"> {{ anime.status.tag }}</ion-text></b>
+          
+            {{ anime.completed }} Times
+            <p>Score: {{ anime.score }}</p>
+        </div>
+        <div *ngIf="anime.status.val == 3">
+          
+          <b> <ion-text color="danger"> {{ anime.status.tag }}</ion-text></b>
+          <p>Score: {{ anime.score }}</p>
+           
+            
+        </div>
+
+        <div *ngIf="anime.status.val == 5">
+          
+          <b> <ion-text> {{ anime.status.tag }}</ion-text></b>
+          
+            
+            
+        </div>
+        
+      </label>
+      
+        
+      
+      <ion-button slot="end" *ngIf="quickop == undefined" (click)="changeQuickOp(anime.id)">
+        <ion-icon name="ellipsis-vertical-circle-sharp"></ion-icon>
+      </ion-button>
+      <ion-button slot="end" *ngIf="quickop " (click)="resetQuickOp()">
+        <ion-icon name="ellipsis-vertical-circle-sharp"></ion-icon>
+      </ion-button>
+      
+    </ion-item>
+  
+    <div class="a_quickop" *ngIf="quickop == 'op'+anime.id">
+        <b class="font-large"><ion-icon color="primary" name="create" (click)="presentModal(anime.id)"></ion-icon></b>
+        <b class="font-large"><ion-icon color="primary" name="trash" (click)="alertDelete(anime.id)"></ion-icon></b>
+      
+      </div>
+    
+
+  </div>
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addAnimeModal()">
+      <ion-icon  color="light" name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      color="primary"
+      loadingSpinner="circular"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
+
+
+</ion-content>
+
+
+

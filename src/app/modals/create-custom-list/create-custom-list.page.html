@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-text color="light" (click)="dismiss()">
+          CLOSE
+        </ion-text>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light">
+        Create Custom List
+      </ion-text>
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="padding-container">
+    <ion-item>
+      <ion-label>
+        <h3>Create a New Custom List </h3>
+      </ion-label>
+    </ion-item>
+    <div *ngIf="error" class="text-center">
+      <h6><ion-text color="danger">{{ error }}</ion-text></h6>
+    </div>
+    <ion-item>
+      <ion-label>
+        Title
+      </ion-label>
+      <ion-input name="title" [(ngModel)]="title" placeholder="Title Here"></ion-input>
+    </ion-item>
+    <ion-item>
+    
+       <ion-label>Add Anime To Thumbnail</ion-label>
+      
+    </ion-item>
+    <ion-searchbar [(ngModel)]="search" name="search" (ionChange)="searchData()"></ion-searchbar>
+    
+      <ion-button color="primary" (click)="createCustomList()">Create Custom List</ion-button>
+    
+    <div *ngIf="postresponse">
+      {{ postresponse.msg }}
+    </div>
+    <div class="padding-container" *ngIf="searchdata">
+      <ion-list>
+        <ion-radio-group [(ngModel)]="main" name="main" >
+      <ion-item *ngFor="let anime of searchdata">
+        <ion-thumbnail slot="start">
+          <img [src]="anime.image_url">
+        </ion-thumbnail>
+        <ion-label>
+          <h3>{{anime.name}}</h3>
+          <p>Nº of Episodes: {{ anime.episodes_number }}</p>
+        </ion-label>
+        <ion-radio slot="end" value="{{ anime.id }}"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+    </ion-list>
+    </div>
+    
+  </div>
+</ion-content>

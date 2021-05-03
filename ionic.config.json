@@ -1,0 +1,7 @@
+{
+  "name": "Anibook-new",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

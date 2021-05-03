@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/tab1"><ion-icon color="light" name="home"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light">
+      My Reviews
+    </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="padding-container">
+    <ion-list>
+      <ion-item *ngFor="let a of it" >
+        <ion-thumbnail slot="start" (click)="reviewModal(a.anime.id)">
+          <img [src]="a.anime.image_url">
+        </ion-thumbnail>
+        <ion-label (click)="reviewModal(a.anime.id)">
+          <p *ngIf="a.draft == 0"> Draft </p>
+          <p *ngIf="a.draft == 1"> <ion-text color="primary"><b>Published </b></ion-text></p>
+          {{ a.anime.name }}
+          <p>{{ a.review | slice:0:25 }}...</p>
+        </ion-label>
+        <ion-button slot="end" (click)="deleteReview(a.id)">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      color="primary"
+      loadingSpinner="circular"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

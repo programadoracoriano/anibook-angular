@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/tab1"><ion-icon color="light" name="home"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light">
+        <b>Custom Anime List</b>
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ 
+
+  <div *ngIf="u_custom">
+    <ion-item>
+      <ion-thumbnail slot="start" >
+        <img [src]=" u_custom.image_url ">
+      </ion-thumbnail>
+      <ion-label>
+        {{ u_custom.title }}
+      </ion-label>
+    </ion-item>
+    
+    <ion-card>
+      
+      <ion-card-content *ngIf="creating == false">
+        <h3>
+        Anime List
+        </h3>
+        <ion-item  *ngFor="let anime of it">
+          <ion-thumbnail slot="start" [routerLink]="['/animedetails/',  anime.anime.id ]" >
+            <img [src]=" anime.anime.image_url ">
+          </ion-thumbnail>
+          <label [routerLink]="['/animedetails/',  anime.anime.id ]">
+            {{ anime.anime.name }}
+          </label>
+          <ion-button slot="end" (click)="alertDelete(anime.anime.id)">
+            <ion-icon name="trash-sharp"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    
+  </div>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      color="primary"
+      loadingSpinner="circular"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  
+  <ion-fab vertical="bottom" *ngIf="creating == false" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addAnimeModal(u_custom.id)">
+      <ion-icon color="light" name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

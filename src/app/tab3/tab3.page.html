@@ -1,0 +1,145 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button *ngIf="editstatus == true" (click)="changeStatus()"><ion-icon color="light" name="arrow-back-sharp"></ion-icon></ion-button>
+      <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="openCfg()"><ion-icon color="light" name="settings"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light">
+       <b> My Profile</b>
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-menu side="end" menuId="config" contentId="cfg">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Account Configuration</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item (click)="presentModal()"> <ion-icon name="cog" slot="start"></ion-icon> User Data </ion-item>
+      <ion-item (click)="logout()" routerLink="/tab1" *ngIf="checkUser!==''"><ion-icon name="log-out" slot="start"></ion-icon>  Logout</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-router-outlet id="cfg"></ion-router-outlet>
+
+
+<ion-content [fullscreen]="true" >
+
+
+
+<div *ngIf="profiledata">
+  <div  class="profile-header" *ngIf="profiledata.profile.cover_url == undefined">
+    <div class="user-img text-center" style="background-image: url('{{ profiledata.profile.image_url }}');">
+      
+
+    </div>
+    <div class="profile-sub-header text-center">
+
+        
+        
+        <h3>@{{ profiledata.username }}</h3>
+    </div>
+  </div>
+  <div *ngIf="profiledata.profile.cover_url" class="cover-img" style="background-image: url('{{ profiledata.profile.cover_url }}');">
+    <div class="user-img text-center" style="background-image: url('{{ profiledata.profile.image_url }}');">
+      
+
+      
+      
+        
+        
+      
+      
+    </div>
+    <div class="profile-sub-header text-center">
+
+        
+        
+        <h3>@{{ profiledata.username }}</h3>
+    </div>
+
+    </div>
+</div>
+
+  <div  class="padding-container" *ngIf="profiledata">
+    <ion-card >
+    
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <center>
+            <ion-button color="primary" routerLink="/followinglist"><ion-text color="light"><b>Following</b></ion-text></ion-button>
+          </center>
+        </ion-col>
+        <ion-col>
+          <center>
+            <ion-button color="primary" routerLink="/followerslist"><ion-text color="light"><b>Followers</b></ion-text></ion-button>
+          </center>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <div class="img-center"*ngIf="userdata">
+  <div class="circle-border text-center">
+    <h5><ion-text color="primary">Level</ion-text></h5>
+    <h3 class="text-bold"><ion-text color="primary">{{ totaldays | number : '1.1-1' }} </ion-text></h3>
+  </div>
+  <div class="text-center">
+    <ion-text color="primary">Level = Total Days</ion-text>
+  </div>
+</div>
+
+  <div class="cubic" *ngIf="editstatus == false">
+    <h5><b>Your Data</b></h5>
+    <ion-grid *ngIf="userdata">
+      <ion-row>
+       
+        <ion-col size="12">
+          <ion-item >
+           
+              <ion-icon name="eye" color="success"></ion-icon>
+            
+          <p >
+            
+            <b>
+             Watching:</b> 
+            {{ userdata.animes_watching }}</p>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item >
+            <ion-icon name="checkmark-done" color="medium"></ion-icon>
+            <p><b> Completed:</b> {{ userdata.animes_completed }}</p>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item >
+            <ion-icon name="bookmark" color="dark"></ion-icon>
+            <p><b> Plan To Watch:</b> {{ userdata.animes_plan }}</p>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item >
+            <ion-icon name="close" color="danger"></ion-icon>
+            <p><b> Dropped:</b> {{ userdata.animes_dropped }}</p>
+          </ion-item>
+        </ion-col>
+        
+      </ion-row>
+    </ion-grid>
+
+  </div>
+
+  
+
+

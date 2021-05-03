@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/tab1"><ion-icon color="light" name="home"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text *ngIf="userdata" color="light">
+        {{ userdata.username }} Anime List
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+   <!-- Default Segment -->
+   <ion-segment scrollable (ionChange)="segmentChanged($event)" value="all">
+    <ion-segment-button value="all" (click)="animeList(0)">
+      <ion-icon name="infinite-sharp"></ion-icon>
+      <ion-label>All</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="watching" (click)="animeList(1)">
+      <ion-icon name="eye" ></ion-icon>
+      <ion-label>Watching</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="completed" (click)="animeList(2)">
+      <ion-icon name="checkmark-done" ></ion-icon>
+      <ion-label>Completed</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="ptw" (click)="animeList(3)">
+      <ion-icon name="bookmark"></ion-icon>
+      <ion-label>Plan To Watch</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-item [routerLink]="['/animedetails/',  anime.anime.id ]" *ngFor="let anime of animedata" >
+    <ion-thumbnail slot="start">
+      <img [src]="anime.anime.image_url">
+    </ion-thumbnail>
+    <ion-label>
+      <h3>{{ anime.anime.name }}</h3>
+      
+        
+      
+      <div *ngIf="anime.status.val == 1"> 
+          <b>Status: <ion-text color="success">{{ anime.status.tag }}</ion-text></b>
+        
+          {{anime.episodes_number}} Of  {{ anime.anime.episodes_number }} Episodes
+      </div>
+
+      <div *ngIf="anime.status.val == 2">
+        
+        <b>Status: <ion-text color="medium"> {{ anime.status.tag }}</ion-text></b>
+        
+          {{ anime.completed }} Times
+          <p>Score: {{ anime.score }}</p>
+      </div>
+    </ion-label>
+  </ion-item>
+</ion-content>

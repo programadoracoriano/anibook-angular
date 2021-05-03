@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/tab1"><ion-icon color="light" name="home"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title><ion-text *ngIf="getstudio">{{ getstudio.name}}</ion-text> Studio's Anime</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="padding-container">
+    
+    <ion-list>
+      <ion-item *ngFor="let item of responsedata" [routerLink]="['/animedetails/',  item.id ]">
+        <ion-thumbnail slot="start">
+          <img [src]="item.image_url">
+        </ion-thumbnail>
+        <ion-label>
+          {{ item.name }}
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

@@ -1,0 +1,146 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button  (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
+      
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/tab1"><ion-icon color="light" name="home"></ion-icon></ion-button>
+    </ion-buttons>
+    
+    <ion-title>
+      <ion-text color="light">
+        <b>User Details</b>
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="profile-header" *ngIf="userdata">
+    <div class="user-img">
+      
+      
+        <img *ngIf="userdata.profile" class="img-circle img-center" width="155px" height="155px" [src]=" userdata.profile.image_url">
+      
+     
+    </div>
+    <div class="profile-sub-header">
+      
+        <h3 class="img-center">@{{ userdata.username }}</h3>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              <div *ngIf="detectfollowing">
+              
+              <ion-button class="img-center" *ngIf="detectfollowing.f_state == 1" color="primary" (click)="Follow()">
+                <ion-text color="light">
+                  Follow
+                </ion-text>
+              </ion-button>
+              
+              <ion-button class="img-center" *ngIf="detectfollowing.f_state == 0" color="light" (click)="Follow()">
+                <ion-text color="primary">
+                  unfollow
+                </ion-text>
+              </ion-button>
+            
+            </div>
+            </ion-col>
+            
+          </ion-row>
+        </ion-grid>
+     
+    </div>
+  </div>
+
+  <div class="padding-container" *ngIf="userdata">
+
+    <div class="cubic">
+      <h5><b>Data</b></h5>
+      <ion-grid *ngIf="extradata">
+        <ion-row>
+          <ion-col size="12">
+            <ion-item >
+              <ion-icon name="today" color="tertiary"></ion-icon>
+              <p><b>Total Days:</b> {{ totaldays | number : '1.1-1' }}</p>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item >
+             
+                <ion-icon name="eye" color="success"></ion-icon>
+              
+            <p >
+              
+              <b>
+              Watching:</b> 
+              {{ extradata.animes_watching }}</p>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item >
+              <ion-icon name="checkmark-done" color="medium"></ion-icon>
+              <p><b>Completed:</b> {{ extradata.animes_completed }}</p>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item >
+              <ion-icon name="bookmark" color="dark"></ion-icon>
+              <p><b> Plan To Watch:</b> {{ extradata.animes_plan }}</p>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item >
+              <ion-icon name="close" color="danger"></ion-icon>
+              <p><b> Dropped:</b> {{ extradata.animes_dropped }}</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+</div>
+
+  <ion-card>
+    <h3>
+      <b>Custom List</b>
+    </h3>
+    <ion-card-content>
+      <ion-item [routerLink]="['/publiccustomlist/',  c.id ]" *ngFor="let c of customlist">
+        <ion-thumbnail slot="start">
+          <img [src]=" c.image_url">
+        </ion-thumbnail>
+        <ion-label>{{c.title}}</ion-label>
+      </ion-item>
+      
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card>
+    <h3>
+      <b>Recently Completed</b>
+    </h3>
+    <ion-card-content>
+      <ion-item [routerLink]="['/animedetails/',  anime.anime.id ]" *ngFor="let anime of animedata">
+        <ion-thumbnail slot="start">
+          <img [src]="anime.anime.image_url">
+        </ion-thumbnail>
+        <ion-label>{{anime.anime.name}}</ion-label>
+      </ion-item>
+      
+        
+        <ion-button class="img-center" color="primary" [routerLink]="['/publiclist/',  userdata.id ]">
+          <ion-text color="light">
+            Show Full List
+          </ion-text>
+        </ion-button>
+      
+    </ion-card-content>
+  </ion-card>
+
+  
+</div>
+  </ion-content>
+
+

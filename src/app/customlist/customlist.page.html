@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      
+      <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button  (click)="helpAlert()"><ion-icon color="light" name="help-circle"></ion-icon></ion-button>
+      <ion-button routerLink="/tab1"><ion-icon color="light" name="home"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light">
+        <b>Custom List</b>
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+  <div>
+    <!-- Default Segment -->
+  <ion-segment scrollable (ionChange)="segmentChanged($event)" value="all">
+    <ion-segment-button value="all" (click)="publicList()">
+      <ion-icon name="infinite-sharp"></ion-icon>
+      <ion-label>All</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="watching" (click)="customListData()">
+      <ion-icon name="eye" ></ion-icon>
+      <ion-label>My Lists</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</div>
+
+  <div class="padding-container">
+    
+    <ion-list>
+      <ion-item *ngFor="let anime of it">
+        <div slot="start" *ngIf="mine">
+          <ion-thumbnail [routerLink]="['/showcustomlist/',  anime.id ]" >
+            <img [src]="anime.image_url">
+          </ion-thumbnail>
+        </div>
+        <div slot="start" *ngIf="mine == false">
+          <ion-thumbnail [routerLink]="['/publiccustomlist/',  anime.id ]" >
+            <img [src]="anime.image_url">
+          </ion-thumbnail>
+        </div>
+        <div *ngIf="mine">
+          <label [routerLink]="['/showcustomlist/',  anime.id ]">
+            {{ anime.title }}<br>
+          </label>
+        </div>
+
+        <div *ngIf="mine == false">
+          <label [routerLink]="['/publiccustomlist/',  anime.id ]">
+            {{ anime.title }}<br>
+            
+            
+          </label>
+          <ion-chip color="primary" slot="end" [routerLink]="['/userdetails/',  anime.user.id ]">
+            <ion-avatar>
+              <img [src]="anime.user.profile.image_url" />
+            </ion-avatar>
+            <label>{{ anime.user.username }}</label>
+          </ion-chip>
+        </div>
+
+          <div *ngIf="mine" slot="end">
+            <ion-button  (click)="alertDelete(anime.id)">
+              <ion-icon name="trash-sharp"></ion-icon>
+            </ion-button>
+          </div>
+      </ion-item>
+    </ion-list>
+    
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="createListModal()">
+      <ion-icon color="light" name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      color="primary"
+      loadingSpinner="circular"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
+</ion-content>

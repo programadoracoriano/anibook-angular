@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-text color="light" (click)="dismiss()">
+          CLOSE
+        </ion-text>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light">
+        Add Anime to Custom List
+    </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="padding-container">
+    <ion-item *ngIf="u_custom">
+      <ion-thumbnail slot="start" >
+        <img [src]=" u_custom.image_url ">
+      </ion-thumbnail>
+      <ion-label>
+        {{ u_custom.title }}
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h1>Add Anime</h1>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Search Anime
+      </ion-label>
+      <ion-searchbar [(ngModel)]="search" name="search" (ionChange)="searchData()"></ion-searchbar>
+    </ion-item>
+    
+      <ion-button color="primary" (click)="createAnimeCustomList()">Add Anime</ion-button>
+    
+    <div class="padding-container" *ngIf="searchdata">
+      <ion-list>
+        <ion-radio-group [(ngModel)]="main" name="main" >
+      <ion-item *ngFor="let anime of searchdata">
+        <ion-thumbnail slot="start">
+          <img [src]="anime.image_url">
+        </ion-thumbnail>
+        <ion-label>
+          <h3>{{anime.name}}</h3>
+          <p>Nº of Episodes: {{ anime.episodes_number }}</p>
+        </ion-label>
+        <ion-radio slot="end" value="{{ anime.id }}"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+    </ion-list>
+    </div>
+
+  </div>
+</ion-content>

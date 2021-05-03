@@ -1,0 +1,77 @@
+.text-synopsis{
+    text-align: justify;
+    font-size: 9;
+}
+.padding-container{
+    padding:20px;
+    background-color:white;
+}
+
+
+.hidenshow{
+    text-align: center;
+    font-style: bold;
+}
+
+.bg-header{
+        
+    background-image: rgba(0, 0, 0, 0.1);
+    
+        
+        width: 100%;
+        
+        height: 250px;
+        
+        background-size: 100% 100%;
+      
+        
+}
+
+.img-anime{
+    padding-bottom:20%;
+    padding-left:10%;
+    border-style: solid;
+    border-width: 3px;
+    width: 50px;
+    height: 50px;
+}
+
+.score-font{
+    padding-top:3px;
+    font-size:20px;
+    color:#7e57c2;
+    font-style: bold;
+    background-color: white;
+    border-color: #7e57c2;
+    border-width: 2px;
+    border-style: solid;
+    box-shadow: 3px 3px;
+    border-radius:50px; 
+    text-align: center;
+    width: 60px;
+    height: 30px;
+}
+
+.score-font-small{
+    padding-top:7px;
+    font-size:12px;
+    color:#7e57c2;
+    font-style: bold;
+    background-color: white;
+    border-color: #7e57c2;
+    border-width: 2px;
+    border-style: solid;
+    
+    text-align: center;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.embed-container{
+    max-width: 100%;
+    height: auto;
+    background-color: white;
+    text-align: center;
+    
+}

@@ -1,0 +1,51 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light">
+       <b> Login</b>
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="padding-container margin-top">
+    <h4 class="white-text text-center"><b>Sign in Now</b></h4>
+
+    <ion-item>
+      <ion-label><ion-icon name="person-outline"></ion-icon></ion-label>
+      <ion-input [(ngModel)]="username" type="text" placeholder="Username" required="true"></ion-input>
+    </ion-item>
+    <ion-item>
+    <ion-label><ion-icon name="lock-closed-outline"></ion-icon></ion-label>
+    <ion-input [(ngModel)]="password" type="password" placeholder="Password" required="true"></ion-input>
+  </ion-item>
+  
+    <ion-button (click)="login()" primary placeholder="Username"><ion-icon name="log-in-outline"></ion-icon> Sign in </ion-button>
+  </div>
+
+  <div *ngIf="msg">
+    <div class="danger-box">
+      {{ msg }}<br>
+    </div>
+  </div>
+  
+  <div *ngIf="logindata" class="content-padding">
+    <div class="danger-box">
+      {{ logindata.msg }}
+    </div>
+    
+</div>
+
+
+  <div class="component-center">
+    <h4><ion-text color="primary">Click below create a account</ion-text></h4>
+      <ion-button color="primary" routerLink="/signup">Signup</ion-button>
+  </div>
+
+  
+
+</ion-content>

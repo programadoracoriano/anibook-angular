@@ -1,0 +1,76 @@
+<ion-app>
+  <ion-router-outlet></ion-router-outlet>
+  <ion-menu side="start" menuId="first" contentId="main">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>
+          <ion-text color="light">
+            Main Menu
+          </ion-text>
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      
+      <ion-list>
+        <ion-item-divider color="primary">
+          <ion-label>
+            Main
+          </ion-label>
+        </ion-item-divider>
+        <ion-item (click)="closeFirst()" routerLink="/tab1"><ion-icon slot="start" name="home-sharp"></ion-icon>  Home</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/database"><ion-icon slot="start" name="list-circle-sharp"></ion-icon>  Last Added</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/tab2"><ion-icon slot="start"  name="search"></ion-icon>  Search Anime</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/searchuser"><ion-icon slot="start"  name="person-outline"></ion-icon>  Search Users</ion-item>
+        
+        <ion-item-divider color="primary">
+          <ion-label>
+            User
+          </ion-label>
+        </ion-item-divider>
+        <ion-item (click)="closeFirst()" routerLink="/tab3"><ion-icon slot="start" name="person-sharp"></ion-icon>  Profile</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/listtab"><ion-icon slot="start" name="list-sharp"></ion-icon>  Anime List</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/customlist"><ion-icon slot="start" name="list-circle-sharp"></ion-icon>  Custom Lists</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/myreviews"><ion-icon slot="start"  name="newspaper"></ion-icon>  Reviews</ion-item>
+        <ion-item-divider color="primary">
+          <ion-label>
+            Tools
+          </ion-label>
+        </ion-item-divider>
+        
+
+        <ion-item (click)="closeFirst()" routerLink="/randomizer"><ion-icon slot="start"  name="refresh"></ion-icon>  Randomizer</ion-item>
+        
+        
+      </ion-list>
+    </ion-content>
+
+    <ion-footer class="bar-stable">
+      <ion-item nav-clear menu-close href="#" style="left:0;right:0;margin:0; width: 100%;position: fixed;bottom:0;">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="4">
+              <a href="https://www.facebook.com/anibookapp" target="_blank" class="font-med"><ion-icon name="logo-facebook" color="tertiary"></ion-icon></a>
+            </ion-col>
+            <ion-col size="4">
+              <a href="https://discord.gg/gSafvpdUB4" target="_blank" class="font-med"><ion-icon name="logo-discord"   color="tertiary"></ion-icon></a>
+            </ion-col>
+            <ion-col size="4">
+              <a href="https://twitter.com/Anibook_app" target="_blank" class="font-med"><ion-icon name="logo-twitter" color="tertiary"></ion-icon></a>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        
+        
+      </ion-item>
+    </ion-footer>
+  </ion-menu>
+
+
+  
+
+
+
+
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app>

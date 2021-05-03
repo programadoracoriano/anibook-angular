@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/tab1"><ion-icon color="light" name="home"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light">
+      Custom List 
+    </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item *ngIf="u_custom">
+    <ion-thumbnail slot="start" >
+      <img [src]=" u_custom.image_url ">
+    </ion-thumbnail>
+    <ion-label>
+      {{ u_custom.title }}
+    </ion-label>
+    <ion-chip color="primary" [routerLink]="['/userdetails/',  u_custom.user.id ]">
+      <ion-avatar>
+        <img [src]="u_custom.user.profile.image_url" />
+      </ion-avatar>
+      <label>{{ u_custom.user.username }}</label>
+    </ion-chip>
+  </ion-item>
+
+  <ion-card>
+      
+    <ion-card-content>
+      <h3>
+      Anime List
+      </h3>
+      <ion-item [routerLink]="['/animedetails/',  anime.anime.id ]" *ngFor="let anime of getdata">
+        <ion-thumbnail slot="start" >
+          <img [src]=" anime.anime.image_url ">
+        </ion-thumbnail>
+        <label>
+          {{ anime.anime.name }}
+        </label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

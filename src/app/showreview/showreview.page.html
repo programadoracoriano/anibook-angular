@@ -1,0 +1,32 @@
+<ion-header>
+  
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/tab1"><ion-icon color="light" name="home"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>
+     <ion-text color="light"> Review</ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="reviewdata">
+    <ion-item >
+      <ion-thumbnail slot="start">
+        <img [src]="reviewdata.anime.image_url">
+      </ion-thumbnail>
+      <ion-label>{{ reviewdata.anime.name }}</ion-label>
+    </ion-item>
+    <ion-card>
+      <ion-card-content>
+        <h3><ion-text color="primary" [routerLink]="['/userdetails/',  reviewdata.user.id ]">
+          {{ reviewdata.user.username }}</ion-text> on {{ reviewdata.date }}</h3> 
+        <p><b>{{ reviewdata.review }}</b></p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

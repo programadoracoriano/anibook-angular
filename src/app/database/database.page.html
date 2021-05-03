@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/tab1"><ion-icon color="light" name="home"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light">
+        Last Added
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-item>
+      <h4><b>Last Added Anime</b></h4>
+    </ion-item>
+  
+        <div class="list-container">
+          <ion-item [routerLink]="['/animedetails/',  anime.id ]" *ngFor="let anime of getdata">
+            <ion-thumbnail slot="start">
+              <img [src]="anime.image_url">
+            </ion-thumbnail>
+            <ion-label>{{anime.name}}</ion-label>
+          </ion-item>
+        
+        </div>
+      </ion-card>
+</ion-content>

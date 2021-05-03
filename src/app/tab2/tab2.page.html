@@ -1,0 +1,134 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button *ngIf="options == true" (click)="changeOptions()"><ion-icon color="light" name="arrow-back-sharp"></ion-icon></ion-button>
+      <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="openSearchMenu()"><ion-icon color="light" name="search"></ion-icon></ion-button>
+    </ion-buttons>
+
+    <ion-title>
+      <ion-text color="light">
+      <b>Search</b>
+    </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-menu side="end" menuId="searchMenu" contentId="searchM">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title><ion-text color="light">Search Menu</ion-text></ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item (click)="changeAnimeSearch(2)"><ion-icon name="calendar"></ion-icon>Season</ion-item>
+        <ion-item (click)="changeAnimeSearch(3)"><ion-icon name="apps"></ion-icon>Genre</ion-item>
+      </ion-list>
+
+      <!-- Begin Search Season -->
+      <div *ngIf="animeSearch == 2">
+        <ion-card>
+          
+        <ion-card-content>
+        <ion-item>
+          <ion-label>Season</ion-label>
+          <ion-select [(ngModel)]="season" name="season" interface="popover">
+            <ion-select-option value="winter">Winter</ion-select-option>
+            <ion-select-option value="spring">Spring</ion-select-option>
+            <ion-select-option value="summer">Summer</ion-select-option>
+            <ion-select-option value="fall">Fall</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label>Year</ion-label>
+          <ion-input type="number" name="year" [(ngModel)]="year"></ion-input>
+        </ion-item>
+        <ion-button (click)="searchBySeason()"> Search</ion-button>
+      </ion-card-content>
+      </ion-card>
+    
+      </div>
+      <!-- End Search Season -->
+
+      <!-- Begin Genre Search-->
+
+      <div *ngIf="animeSearch == 3">
+        <ion-card>
+          <ion-card-content>
+            <ion-item>
+              <ion-label>
+                Genre
+              </ion-label>
+              <ion-select [(ngModel)]="genre" name="genre" interface="popover">
+                <ion-select-option *ngFor="let g of getgenres" value="{{ g.id }}">{{ g.categorie }}</ion-select-option>
+                
+              </ion-select>
+            </ion-item>
+            <ion-button (click)="searchByGenre()"> Search</ion-button>
+        </ion-card-content>
+      </ion-card>
+      </div>
+
+      <!-- End Genre Search -->
+
+
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="searchM"></ion-router-outlet>
+
+<ion-content [fullscreen]="true">
+  
+
+
+  
+  <div *ngIf="options == false">
+    <ion-searchbar [(ngModel)]="search" name="search" (ionChange)="searchData()"></ion-searchbar>
+  </div>
+
+  
+
+
+<div *ngIf="searchdata">
+  
+
+  <ion-list>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size-xs="6" size-sm="6"  *ngFor="let anime of it">
+          <ion-card>
+            <div class="card-header">
+              <ion-icon name="add-circle" color="light" (click)="presentModal(anime.id)"></ion-icon>
+            </div>
+            <div class="ov-img">
+              <img [src]="anime.image_url" [routerLink]="['/animedetails/',  anime.id ]">
+            </div>
+            <ion-card-header>
+              <ion-card-subtitle *ngIf="anime.type">{{ anime.type.type }}</ion-card-subtitle>
+              <ion-card-title class="card-title">{{ anime.name }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+            
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+  
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      color="primary"
+      loadingSpinner="circular"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  
+</div>
+</ion-content>

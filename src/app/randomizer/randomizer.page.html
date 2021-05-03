@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/tab1"><ion-icon color="light" name="home"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light"><b>Randomizer</b></ion-text>
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="padding-container full-body">
+<ion-grid>
+  <ion-row>
+    <!--<ion-col size="12">
+      <ion-card>
+        <ion-card-content>
+          <p>Have any hard time choosing what anime to watch? Well, that time is over, pick a genre and click the pick button!</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>-->
+    <ion-col>
+      <ion-card>
+        <ion-card-content>
+          <ion-item>
+            <ion-label>
+              Genre
+            </ion-label>
+            <ion-select [(ngModel)]="genre" name="genre" interface="popover">
+              <ion-select-option *ngFor="let g of getgenres" value="{{ g.id }}">{{ g.categorie }}</ion-select-option>
+              
+            </ion-select>
+          </ion-item>
+          <div class="text-center">
+            <ion-button (click)="getAnime()"> Pick</ion-button>
+          </div>
+      </ion-card-content>
+    </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+<!--<ion-grid *ngIf="response">
+  <ion-row>
+    <ion-col size="12">
+      <ion-item [routerLink]="['/animedetails/',  response.id ]">
+      <ion-thumbnail slot="start">
+        <img [src]="response.image_url">
+      </ion-thumbnail>
+      <p>{{ response.name }}</p>
+      <p slot="end">{{ response.type.type }}</p>
+    </ion-item>
+    </ion-col>
+  </ion-row>
+</ion-grid>-->
+
+
+<ion-grid *ngIf="response">
+  <ion-row>
+    <ion-col size="12">
+      <ion-card [routerLink]="['/animedetails/',  response.id ]">
+        <div class="image-card" style="background-image: url('{{ response.image_url }}');">
+
+        </div>
+        <ion-card-title class="text-center">
+          <h5>{{ response.name }}</h5>
+        </ion-card-title>
+      </ion-card>
+    </ion-col>
+    <ion-col size="12">
+      
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</div>
+</ion-content>

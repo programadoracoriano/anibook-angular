@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/tab1"><ion-icon color="light" name="home"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light">
+      <b>Following</b>
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="padding-container" *ngIf="getfollowers">
+    <div >
+      <ion-item [routerLink]="['/userdetails/',  u.id ]" *ngFor="let u of getfollowers" >
+        <ion-thumbnail slot="start">
+          <img [src]="u.profile.image_url">
+        </ion-thumbnail>
+        <ion-label>
+          <h3>{{ u.username }}</h3>
+          
+          
+        </ion-label>
+      </ion-item>
+    </div>
+    </div>
+</ion-content>

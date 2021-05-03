@@ -1,0 +1,136 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light">
+      <b>Home</b>
+    </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide [routerLink]="['/animedetails/',  a.id ]" *ngFor="let a of seasonanimes">
+      
+      
+      <div  class="slider-size">
+        <div class="left-align">
+          <ion-chip class="bg-white">
+            Winter 2021
+          </ion-chip>  
+        </div>
+        <div class="slider-title">
+        
+          <h3 >{{ a.name }}</h3>
+        
+        </div>
+        <img [src]="a.image_url">
+        
+      </div>
+    </ion-slide>
+   
+    
+  </ion-slides>
+  
+  <!--<ion-card>
+    <ion-item>
+      <h4><b>Seasonal Anime</b></h4>
+    </ion-item>
+  
+        <div class="list-container">
+          <ion-item [routerLink]="['/animedetails/',  a.id ]" *ngFor="let a of seasonanimes">
+            <ion-thumbnail slot="start">
+              <img [src]="a.image_url">
+            </ion-thumbnail>
+            <ion-label>{{a.name}}</ion-label>
+          </ion-item>
+        
+        </div>
+      </ion-card>-->
+
+  
+      <div class="padding-container" *ngIf="getlist">
+    <div class="cubic ">
+      <ion-list>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              <ion-item>
+                <label><h5><b>Last Follower Updates</b></h5></label>
+                <ion-chip slot="end" color="primary" [routerLink]="['/followerupdate']">
+                  View More
+                </ion-chip>
+              </ion-item>
+            </ion-col>
+            
+          </ion-row>
+        </ion-grid>
+        
+        <ion-item *ngFor="let list of getlist">
+            <ion-thumbnail slot="start">
+              <img [routerLink]="['/animedetails/',  list.anime.id ]" height="150px" [src]="list.anime.image_url">
+            </ion-thumbnail>
+            <label>
+
+              <!-- Is watching-->
+              <div *ngIf="list.status.val == 1">
+                <ion-chip color="primary" [routerLink]="['/userdetails/',  list.user.id ]">
+                  <ion-avatar>
+                    <img [src]="list.user.profile.image_url" />
+                  </ion-avatar>
+                  <ion-label>{{ list.user.username }}</ion-label>
+                </ion-chip>
+                <ion-text color="success" class="text-bold" >is Watching</ion-text> <br>
+                <ion-text [routerLink]="['/animedetails/',  list.anime.id ]">{{ list.anime.name }}</ion-text>
+              </div>
+
+
+              <!-- Has completed-->
+              <div *ngIf="list.status.val == 2">
+                <ion-chip color="primary" [routerLink]="['/userdetails/',  list.user.id ]">
+                  <ion-avatar>
+                    <img [src]="list.user.profile.image_url" />
+                  </ion-avatar>
+                  <ion-label>{{ list.user.username }}</ion-label>
+                </ion-chip>
+                <ion-text color="medium" class="text-bold">Completed</ion-text> <br>
+                <ion-text [routerLink]="['/animedetails/',  list.anime.id ]">{{ list.anime.name }}</ion-text>
+              </div>
+
+              <!-- Plans to Watch -->
+              <div *ngIf="list.status.val == 5">
+                <ion-chip color="primary" [routerLink]="['/userdetails/',  list.user.id ]">
+                  <ion-avatar>
+                    <img [src]="list.user.profile.image_url" />
+                  </ion-avatar>
+                  <ion-label>{{ list.user.username }}</ion-label>
+                </ion-chip>
+                <ion-text class="text-bold">Plans to Watch</ion-text> <br>
+                <ion-text [routerLink]="['/animedetails/',  list.anime.id ]">{{ list.anime.name }}</ion-text>
+              </div>
+
+              <!-- Dropped -->
+
+              <div *ngIf="list.status.val == 3">
+                <ion-chip color="primary" [routerLink]="['/userdetails/',  list.user.id ]">
+                  <ion-avatar>
+                    <img [src]="list.user.profile.image_url" />
+                  </ion-avatar>
+                  <ion-label>{{ list.user.username }}</ion-label>
+                </ion-chip>
+                <ion-text color="danger" class="text-bold">Dropped</ion-text> <br>
+                <ion-text [routerLink]="['/animedetails/',  list.anime.id ]">{{ list.anime.name }}</ion-text>
+              </div>
+
+
+            </label>
+        </ion-item>
+      </ion-list>
+      
+    </div>
+  </div>
+</ion-content>

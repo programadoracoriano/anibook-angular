@@ -1,0 +1,152 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-text color="light" (click)="dismiss()">
+          CLOSE
+        </ion-text>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> 
+      <ion-text color="light">
+        Edit Anime
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="padding-container" *ngIf="animedata">
+    <ion-item>
+      <ion-thumbnail slot="start">
+      <img height="200px" [src]="animedata.image_url">
+      </ion-thumbnail>
+      <ion-label>
+        <h4>
+          {{ animedata.name }}
+        </h4>
+        
+      </ion-label>
+    </ion-item>
+
+   
+
+    <ion-item>
+      <ion-label><h4>Change Status</h4></ion-label>
+      <ion-select value="brown" okText="Okay" [(ngModel)]="options" name="options" (ionChange)="changeSelectOptions()" cancelText="Dismiss">
+        <ion-select-option value="1">Watching</ion-select-option>
+        <ion-select-option value="2">Completed</ion-select-option>
+        <ion-select-option value="3">Plan To Watch</ion-select-option>
+        <ion-select-option value="4">Dropped</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+
+    <!-- Watching Menu Section -->
+    <div *ngIf="option==1">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            <ion-text color="primary">
+              <b>Watching</b>
+            </ion-text>
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <ion-label>
+              How Many Episodes?
+              
+            </ion-label>
+            <ion-input type="hidden" [(ngModel)]="radioanime" name="radioanime"></ion-input>
+            <ion-input [(ngModel)]="n_episodes" name="n_episodes" type="text"></ion-input>
+            
+          </ion-item>
+          <ion-item>
+            <label>Score <ion-icon name="star"></ion-icon></label>
+            <ion-select [(ngModel)]="score" name="score" interface="popover" >
+              <ion-select-option  *ngFor="let s of scoreArr" value="{{ s }}">{{ s }}  </ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-button  (click)="addAnime(1)" slot="end"><ion-icon name="add-circle-outline"></ion-icon></ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <!-- End Menu Watching Section -->
+
+    <!-- Completed Menu Section -->
+    <div *ngIf="option==2">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            <ion-text color="primary">
+              <b>Completed</b>
+            </ion-text>
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+      <ion-item>
+        <ion-label>
+          How Many Times?
+        </ion-label>
+        <ion-input type="number" placeholder="Type here" [(ngModel)]="completed" name="completed"></ion-input>
+        
+      </ion-item>
+      
+      
+        <ion-item>
+          <label>Score <ion-icon name="star"></ion-icon></label>
+          <ion-select [(ngModel)]="score" name="score" interface="popover" (ionChange)="addAnime(2)">
+            <ion-select-option  *ngFor="let s of scoreArr" value="{{ s }}">{{ s }}  </ion-select-option>
+          </ion-select>
+          
+        </ion-item>
+        <ion-button  slot="end"><ion-icon name="add-circle-outline"></ion-icon></ion-button>
+        </ion-card-content>
+        </ion-card>
+    </div>
+    <!-- End Completed Menu Section -->
+
+    <!-- Begin Dropped Menu Section -->
+    <div *ngIf="option==3">
+      <ion-card>
+        <ion-item>
+          <ion-label>
+            <h4>Plan To Watch</h4>
+          </ion-label>
+        </ion-item>
+        <ion-button color="primary" (click)="addAnime(3)">
+          Add to Plan To Watch
+        </ion-button>
+      </ion-card>
+    </div>
+    <!-- End Dropped Menu Section -->
+
+
+    <!-- Begin Dropped Menu Section -->
+    <div *ngIf="option==4">
+      <ion-card>
+        <ion-item>
+          <ion-label>
+            <h4>Dropped</h4>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <label>Score <ion-icon name="star"></ion-icon></label>
+          <ion-select [(ngModel)]="score" name="score" interface="popover" (ionChange)="addAnime(4)">
+            <ion-select-option  *ngFor="let s of scoreArr" value="{{ s }}">{{ s }}  </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-card>
+    </div>
+    <!-- End Dropped Menu Section -->
+
+
+   
+
+    
+
+  </div>
+
+</ion-content>

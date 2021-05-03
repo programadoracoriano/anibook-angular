@@ -1,0 +1,225 @@
+import { Component } from '@angular/core';
+import { ApiService, mediaUrl } from '../services/api.service';
+import {LoginguardService} from '../services/loginguard.service';
+import { Router } from '@angular/router';
+import { MenuController, ModalController, ToastController } from '@ionic/angular';
+import { AdmobService } from '../services/admob.service';
+import { AuthguardService } from '../services/authguard.service';
+import { ActionSheetController } from '@ionic/angular';
+
+import { UserconfigPage } from '../modals/userconfig/userconfig.page';
+@Component({
+  selector: 'app-tab3',
+  templateUrl: 'tab3.page.html',
+  styleUrls: ['tab3.page.scss']
+})
+export class Tab3Page {
+  public checkUser:any = localStorage.getItem("token");
+  public r_logout:any;
+  public profiledata:any;
+  public userdata:any;
+  public totaldays:any;
+  public image:File;
+  public postresponse:any;
+  public avatarresponse:any;
+  public editstatus:boolean = false;
+  public avatarradio:any;
+  public base64Image:any;
+  public uploadresponse:any;
+  constructor(
+    public guard: LoginguardService,
+    public api: ApiService,
+    public router: Router,
+    private menu: MenuController,
+    public toastController: ToastController,
+    private admobService: AdmobService,
+    public checkuser: AuthguardService,
+    public actionSheetController: ActionSheetController,
+  
+    public modalController: ModalController,
+  ) {}
+
+  MediaUrl = mediaUrl;
+  
+    ngOnInit(){
+      
+     
+    }
+
+    async presentToast() {
+      const toast = await this.toastController.create({
+        message: this.postresponse.msg,
+        duration: 3000
+      });
+      toast.present();
+    }
+
+    
+  
+    ionViewWillLeave(){
+      this.admobService.HideBanner();
+    }
+
+  ionViewDidEnter(){
+    
+    if (localStorage.getItem("token") == ''){
+      this.router.navigate(['/login']);
+    }
+    this.getProfile();
+    this.getUserData();
+    this.getAvatar();
+    this.admobService.ShowBanner();
+  }
+
+  openFirst() {
+    this.menu.enable(true, 'first');
+    this.menu.open('first');
+  }
+
+  changeStatus(){
+    this.editstatus = !this.editstatus;
+    
+  }
+
+  openCfg() {
+    this.menu.enable(true, 'config');
+    this.menu.open('config');
+  }
+  
+  
+
+  async getAvatar() {
+    await this.api.getData("get/default/avatar/",)
+    .subscribe(res => {
+      this.avatarresponse = res;
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  public updateAvatar(id){
+    this.api.postData("get/default/avatar/", {"avatar":id})
+      .subscribe(res => {
+        
+        this.postresponse = res;
+        this.presentToast();
+      }, err => {
+        console.log(err);
+      });
+    }
+
+  async getProfile() {
+    await this.api.getData("get/profile/",)
+    .subscribe(res => {
+      this.profiledata = res;
+    }, err => {
+      console.log(err);
+    });
+  }
+
+   async getUserData() {
+    await this.api.getData("get/user/data/",)
+    .subscribe(res => {
+      this.userdata = res;
+      this.totaldays =  (this.userdata.total_completed + this.userdata.total_hours) / 1440  
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  
+
+  logout() {
+    this.api.getData("logout/",)
+    .subscribe(res => {
+      this.r_logout = res;
+      
+        localStorage.removeItem("token");
+        this.checkuser.loginGuard();
+        this.router.navigate(['/tab1']);
+      
+    }, err => {
+      console.log(err);
+    });
+    this.menu.enable(true, 'first');
+    this.menu.close('first');
+  }
+
+
+
+  async alertChangeImage() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Change Profile Image',
+      cssClass: 'my-custom-class',
+      buttons: [{
+        text: 'Camera',
+        role: 'destructive',
+        icon: 'camera',
+        handler: () => {
+          
+        }
+      }, {
+        text: 'Gallery',
+        icon: 'image',
+        handler: () => {
+          
+        } 
+      }]
+    });
+    await actionSheet.present();
+  }
+
+
+
+ 
+
+  
+
+
+  async presentModal() {
+    this.admobService.HideBanner();
+    const modal = await this.modalController.create({
+      component: UserconfigPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'id': '',
+      }
+      
+    });
+    modal.onDidDismiss().then(mr => {
+      this.getProfile();
+      this.admobService.ShowBanner();
+    });;
+    return await modal.present();
+  }
+
+
+  /*public uploadImage(){
+    this.nativeHttp.post("https://api.anibook.app/upload/profile/image/", {"image": this.base64Image}, {'enctype': 'multipart/form-data;','Content-Type': 'application/json', 'Authorization':'Token ' + localStorage.getItem("token")})
+      .then(
+        res => this.postresponse = JSON.parse(res.data),
+        this.base64Image = undefined
+        
+        
+      )
+      .catch(
+        err => this.postresponse = err
+        
+      )
+      console.log(this.postresponse);
+      this.base64Image = undefined;
+
+      setTimeout(this.getProfile,3000);
+      
+  }*/
+
+ 
+
+  
+
+  public discardImage(){
+    this.base64Image = undefined;
+  }
+  
+
+}
