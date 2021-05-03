@@ -28,16 +28,10 @@ export class PublicanimelistPage implements OnInit {
   }
 
 
-  //Entering the Page
-  ionViewDidEnter(){
-    this.admobService.ShowBanner();
-  }
+  
 
 
-  //Leaving The page
-  ionViewWillLeave(){
-    this.admobService.HideBanner();
-  }
+  
 
   segmentChanged(ev: any) {
   }

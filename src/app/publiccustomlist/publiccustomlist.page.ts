@@ -26,14 +26,12 @@ export class PubliccustomlistPage implements OnInit {
   }
 
   ionViewDidEnter(){
-    this.admobService.ShowBanner();
+   
     this.getData();
     this.uniqueCustomData();
   }
 
-  ionViewWillLeave(){
-    this.admobService.HideBanner();
-  }
+  
 
   openFirst() {
     this.menu.enable(true, 'first');

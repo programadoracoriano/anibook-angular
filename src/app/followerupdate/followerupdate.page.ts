@@ -24,13 +24,11 @@ export class FollowerupdatePage implements OnInit {
 
 
   ionViewDidEnter(){
-    this.admobService.ShowBanner();
+    
     this.getFollowersUpdates();
   }
 
-  ionViewWillLeave(){
-    this.admobService.HideBanner();
-  }
+  
 
 
   openFirst() {

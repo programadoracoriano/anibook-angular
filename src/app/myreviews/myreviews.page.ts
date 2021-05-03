@@ -40,7 +40,7 @@ export class MyreviewsPage implements OnInit {
   //Entering the Page
   ionViewDidEnter(){
     this.getData();
-    this.admobService.ShowBanner();
+    
   }
 
 

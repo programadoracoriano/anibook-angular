@@ -48,21 +48,18 @@ export class ShowcustomlistPage implements OnInit {
 
   //Entering the Page
   ionViewDidEnter(){
-    this.admobService.ShowBanner();
+    
     this.getData();
     this.uniqueCustomData();
   }
 
 
-  //Leaving The page
-  ionViewWillLeave(){
-    this.admobService.HideBanner();
-  }
+  
 
 
 
   async addAnimeModal(id) {
-    this.admobService.HideBanner();
+    
     const modal = await this.modalController.create({
       component: AddAnimeCustomListPage,
       cssClass: 'my-custom-class',

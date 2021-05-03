@@ -50,6 +50,7 @@ export class UserconfigPage implements OnInit {
       resultType: CameraResultType.DataUrl,
       source: CameraSource.Prompt
     });
+    this.base64Image = image.dataUrl;
   }
 
   public openGallery(){

@@ -52,18 +52,16 @@ export class AnimelistPage implements OnInit {
   }
   
   ionViewDidEnter(){
-    this.admobService.ShowBanner();
+    
     this.addstatus = false;
   }
 
-  ionViewWillLeave(){
-    this.admobService.HideBanner();
-  }
+  
 
 
 
   async presentModal(id) {
-    this.admobService.HideBanner();
+    
     const modal = await this.modalController.create({
       component: ModalListPage,
       cssClass: 'my-custom-class',
@@ -74,14 +72,14 @@ export class AnimelistPage implements OnInit {
     });
     modal.onDidDismiss().then(mr => {
       this.animeList(0);
-      this.admobService.ShowBanner();
+      
     });;
     return await modal.present();
   }
 
 
   async addAnimeModal() {
-    this.admobService.HideBanner();
+    
     const modal = await this.modalController.create({
       component: AddAnimeListPage,
       cssClass: 'my-custom-class',
@@ -91,7 +89,7 @@ export class AnimelistPage implements OnInit {
       
     });
     modal.onDidDismiss().then(mr => {
-      this.admobService.ShowBanner();
+      
       this.animeList(0);
     });;
     return await modal.present();

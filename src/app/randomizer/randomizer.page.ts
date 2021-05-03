@@ -21,13 +21,7 @@ export class RandomizerPage implements OnInit {
     this.getGenres();
   }
 
-  ionViewDidEnter(){
-    this.admobService.ShowBanner();
-  }
-
-  ionViewDidLeave(){
-    this.admobService.HideBanner();
-  }
+  
 
 
   async getGenres(){

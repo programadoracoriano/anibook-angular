@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "Anibook-new",
+  "appId": "anibook.app.com",
+  "appName": "Anibook",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

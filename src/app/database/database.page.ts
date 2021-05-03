@@ -16,13 +16,7 @@ export class DatabasePage implements OnInit {
   ) { }
 
 
-  ionViewDidEnter(){
-    this.admobService.ShowBanner();
-  }
-
-  ionViewWillLeave(){
-    this.admobService.HideBanner();
-  }
+  
   
   ngOnInit() {
     this.getAnime();

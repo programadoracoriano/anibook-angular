@@ -40,13 +40,7 @@ export class UserdetailsPage implements OnInit {
   }
 
 
-  ionViewDidEnter(){
-    this.admobService.ShowBanner();
-  }
-
-  ionViewDidLeave(){
-    this.admobService.HideBanner();
-  }
+  
 
   public getUser(){
     this.api.getData("get/user/profile/?id=" + this.user_id,)

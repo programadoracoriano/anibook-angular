@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     if(localStorage.getItem("token") == undefined || localStorage.getItem("token") == ''){
-      this.router.navigate(['tabs/tab3']);
+      this.router.navigate(['/tab3']);
     }
   }
   openFirst() {
@@ -45,7 +45,7 @@ export class LoginPage implements OnInit {
        this.logindata = res;
        if (this.logindata.success == true) {
            localStorage.setItem("token", this.logindata.token)
-           this.router.navigate(['tabs/tab3']);
+           this.router.navigate(['/tab3']);
        }
        
      }, err => {

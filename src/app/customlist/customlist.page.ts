@@ -34,13 +34,13 @@ export class CustomlistPage implements OnInit {
   }
 
   ionViewDidEnter(){
-    this.admobService.ShowBanner();
+    
     this.publicList();
   }
   
 
   ionViewWillLeave(){
-    this.admobService.HideBanner();
+    
   }
 
   async helpAlert() {

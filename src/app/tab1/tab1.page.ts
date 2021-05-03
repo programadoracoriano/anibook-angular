@@ -38,15 +38,13 @@ export class Tab1Page {
 
 
   ionViewDidEnter(){
-    this.admobService.ShowBanner();
+    
     this.checkuser.loginGuard();
     this.getFollowersUpdates();
     this.seasonAnimes();
   }
 
-  ionViewWillLeave(){
-    this.admobService.HideBanner();
-  }
+  
   
   ngOnInit() {
 

@@ -28,12 +28,10 @@ export class StudioanimePage implements OnInit {
   }
 
   ionViewDidEnter(){
-    this.admobService.ShowBanner();
+    
   }
 
-  ionViewWillLeave(){
-    this.admobService.HideBanner();
-  }
+  
 
   openFirst() {
     this.menu.enable(true, 'first');

@@ -19,7 +19,7 @@ private options: AdOptions = {
     adSize: AdSize.SMART_BANNER,
     position: AdPosition.BOTTOM_CENTER,
     margin: 0,
-     isTesting: true
+    isTesting: false
     // npa: true
   };
 

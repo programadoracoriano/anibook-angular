@@ -49,13 +49,7 @@ export class AnimedetailsPage implements OnInit {
     this.getExtra();
   }
 
-  ionViewDidEnter(){
-    this.admobService.ShowBanner();
-  }
-
-  ionViewWillLeave(){
-    this.admobService.HideBanner();
-  }
+  
 
 
   openFirst() {
@@ -122,7 +116,7 @@ async getReviews(){
 
 
   async presentModal(id) {
-    this.admobService.HideBanner();
+    
     const modal = await this.modalController.create({
       component: AddAnimeFromDetailsPage,
       cssClass: 'my-custom-class',
@@ -135,13 +129,13 @@ async getReviews(){
       this.getAnime();
       this.getScore();
       this.getReviews();
-      this.admobService.ShowBanner();
+      
     });;
     return await modal.present();
   }
 
   async reviewModal(id) {
-    this.admobService.HideBanner();
+    
     const modal = await this.modalController.create({
       component: ReviewModalPage,
       cssClass: 'my-custom-class',
@@ -154,7 +148,7 @@ async getReviews(){
       this.getAnime();
       this.getScore();
       this.getReviews();
-      this.admobService.ShowBanner();
+      
     });;
     return await modal.present();
   }

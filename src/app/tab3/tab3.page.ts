@@ -56,9 +56,7 @@ export class Tab3Page {
 
     
   
-    ionViewWillLeave(){
-      this.admobService.HideBanner();
-    }
+    
 
   ionViewDidEnter(){
     
@@ -68,7 +66,7 @@ export class Tab3Page {
     this.getProfile();
     this.getUserData();
     this.getAvatar();
-    this.admobService.ShowBanner();
+    
   }
 
   openFirst() {
@@ -177,7 +175,7 @@ export class Tab3Page {
 
 
   async presentModal() {
-    this.admobService.HideBanner();
+    
     const modal = await this.modalController.create({
       component: UserconfigPage,
       cssClass: 'my-custom-class',
@@ -188,7 +186,7 @@ export class Tab3Page {
     });
     modal.onDidDismiss().then(mr => {
       this.getProfile();
-      this.admobService.ShowBanner();
+      
     });;
     return await modal.present();
   }
