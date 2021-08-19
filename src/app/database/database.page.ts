@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { AdmobService } from '../services/admob.service';
+import { ToswarningService } from '../services/toswarning.service';
 @Component({
   selector: 'app-database',
   templateUrl: './database.page.html',
@@ -12,7 +13,7 @@ export class DatabasePage implements OnInit {
   constructor(
     public api: ApiService,
     private menu: MenuController,
-    private admobService: AdmobService,
+    private toswarning:ToswarningService,
   ) { }
 
 
@@ -23,6 +24,11 @@ export class DatabasePage implements OnInit {
 
   }
 
+  ionViewDidEnter(){
+    if (localStorage.getItem("tos") == "d" || localStorage.getItem("tos") == undefined){
+      this.toswarning.presentAlert();
+    }
+  }
 
   openFirst() {
     this.menu.enable(true, 'first');

@@ -32,13 +32,44 @@
 
 
 .padding-container{
-    padding:12px;
+    padding:20px;
+    
+
+    animation: fadeIn 2s;
+  -webkit-animation: fadeIn 2s;
+  -moz-animation: fadeIn 2s;
+  -o-animation: fadeIn 2s;
+  -ms-animation: fadeIn 2s;
+}
+
+.header-container{
+    padding: 0;
+}
+
+.wrap-container{
+    
+    min-height: 100%;
+    
+    border-radius: 15px;
 }
 
 .profile-header{
     background-color: #fce4ec;
     height: 300px;
     padding-top:15px;
+}
+
+
+.profile-sub-header{
+    
+    text-shadow: 1px 1px #fff;
+    font-weight: bolder;
+    width: 50%;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 25px;
+    
 }
 
 .cover-img{
@@ -49,6 +80,7 @@
     -webkit-box-shadow: inset 0 0 10px #000000;
     box-shadow:         inset 0 0 10px #000000;
     padding-top:15px;
+     
 }
 
 .user-img{
@@ -81,6 +113,11 @@
     align-content: center;
     text-align: center;
     padding-top:20px;
+}
+
+.anime-list-image{
+    background-size: cover;
+    height: 150px;
 }
 
 .text-center{
@@ -116,14 +153,16 @@
 }
 
 .cubic{
-    padding:10px;
-    border-style:double;
+    
+    padding-bottom:10px;
+    border-style:solid;
     border-width: 5px;
-    border-radius:20px;
+    border-radius:5px;
     height: auto;
     min-height: auto;
     border-color: #d1c4e9;
     margin-top: 10px;
+    box-shadow: #d1c4e9 1px 1px 10px;
 }
 
 .card-med{
@@ -217,13 +256,14 @@
 
 
 .cubic-tiny{
-    border-style:double;
+    border-style:solid;
     border-width: 5px;
-    border-radius:20px;
+    border-radius:5px;
     height: auto;
     min-height: auto;
     border-color: #d1c4e9;
     margin-top: 10px;
+    box-shadow: #d1c4e9 1px 1px 10px;
 }
 
 
@@ -240,12 +280,18 @@
     margin-left: auto;
 }
 .ov-img{
-    overflow:hidden;
-    height:125px ;
+    height: 225px;
 }
+
 
 .card-medium{
     height: 310px;
+}
+
+.card-img-header{
+    height: 150px;
+    border-radius: 20px;
+    background-size: cover;
 }
 
 .card-title{
@@ -259,8 +305,63 @@
 .card-header{
     padding-top:3px;
     padding-left: 3px;
-    font-size: 20px;
-    border-style: solid;
-    border-width: 1px;
-    background-color: #7e57c2;
+    font-size: 12px;
+    
 }
+
+
+ion-segment-button{
+    min-width: auto;
+}
+
+spoiler{
+    /* Add the blur effect */
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+}
+
+
+
+.spoiler-active{
+    font-size: large;
+    filter: blur(0px);
+  -webkit-filter: blur(0px);
+}
+
+.show-spoilers{
+    
+    font-size: large;
+    filter: blur(0px);
+  -webkit-filter: blur(0px);
+}
+
+
+.grid{
+    padding: 5px;
+}
+
+
+@keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-moz-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-webkit-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-o-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  
+  @-ms-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }

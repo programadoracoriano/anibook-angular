@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { MenuController } from '@ionic/angular';
+import { ToswarningService } from '../services/toswarning.service';
 @Component({
   selector: 'app-searchuser',
   templateUrl: './searchuser.page.html',
@@ -12,11 +13,19 @@ export class SearchuserPage implements OnInit {
   constructor(
     public api: ApiService,
     private menu: MenuController,
+    private toswarning:ToswarningService,
   ) { }
 
   
   ngOnInit() {
   }
+
+  ionViewDidEnter(){
+    if (localStorage.getItem("tos") == "d" || localStorage.getItem("tos") == undefined){
+      this.toswarning.presentAlert();
+    }
+  }
+
 
   openFirst() {
     this.menu.enable(true, 'first');

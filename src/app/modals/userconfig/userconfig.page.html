@@ -111,4 +111,41 @@
     </ion-row>
   </ion-grid>
 </ion-card>
+
+<ion-card>
+  <ion-card-content>
+    <h4>This section is a filter of what type of content you don't want to see on app.</h4>
+    <ion-item>
+      <ion-label>
+        Genre
+      </ion-label>
+      <ion-select [(ngModel)]="rating" name="rating" interface="popover">
+        <ion-select-option *ngFor="let g of getrating" value="{{ g.id }}">{{ g.rating }}</ion-select-option>
+        
+      </ion-select>
+    </ion-item>
+    <ion-button (click)="excludeRating()"> Exclude</ion-button>
+    <hr>
+    
+    <div *ngIf="getuser">
+      <h4>Excluded Content</h4>
+    <ion-item *ngFor="let item of getuser.profile.rating">
+      <ion-label slot="start">
+        {{ item.rating }}
+      </ion-label>
+        
+          <ion-icon (click)="removeExcludeRating(item.id)" name="remove-circle" slot="end" color="danger"></ion-icon>
+        
+    </ion-item>
+    <hr>
+    <h4>Blocked Users</h4>
+      <ion-item *ngFor="let item of getuser.profile.blockuser">
+        <ion-label>
+          {{ item.username }}
+        </ion-label>
+        <ion-icon (click)="removeBlockUser(item.id)" name="remove-circle" slot="end" color="danger"></ion-icon>
+      </ion-item>
+    </div>
+</ion-card-content>
+</ion-card>
 </ion-content>

@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header >
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
@@ -11,7 +11,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
 
   <ion-slides pager="true" [options]="slideOpts">
     <ion-slide [routerLink]="['/animedetails/',  a.id ]" *ngFor="let a of seasonanimes">
@@ -20,7 +20,7 @@
       <div  class="slider-size">
         <div class="left-align">
           <ion-chip class="bg-white">
-            Winter 2021
+            {{ season | titlecase }} {{ year }}
           </ion-chip>  
         </div>
         <div class="slider-title">
@@ -35,6 +35,8 @@
    
     
   </ion-slides>
+
+  
   
   <!--<ion-card>
     <ion-item>
@@ -52,9 +54,13 @@
         </div>
       </ion-card>-->
 
-  
+     
       <div class="padding-container" *ngIf="getlist">
-    <div class="cubic ">
+        <div class="text-center">
+          <ion-fab-button><ion-icon name="add"></ion-icon></ion-fab-button>
+        </div>
+    <ion-card>
+      <ion-card-content>
       <ion-list>
         <ion-grid>
           <ion-row>
@@ -130,7 +136,8 @@
             </label>
         </ion-item>
       </ion-list>
-      
-    </div>
+    </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>
+

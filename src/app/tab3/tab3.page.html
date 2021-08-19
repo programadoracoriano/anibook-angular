@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header >
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button *ngIf="editstatus == true" (click)="changeStatus()"><ion-icon color="light" name="arrow-back-sharp"></ion-icon></ion-button>
@@ -24,6 +24,12 @@
   </ion-header>
   <ion-content>
     <ion-list>
+      <!--<ion-item>
+          <ion-label slot="start">Light</ion-label>
+            <ion-toggle slot="start" name="theme" *ngIf="theme == 'light'" (click)="changeTheme()"></ion-toggle>
+            <ion-toggle slot="start" name="theme" *ngIf="theme == 'dark'" checked (click)="changeTheme()"></ion-toggle>
+          <ion-label slot="end">Dark</ion-label>
+      </ion-item>-->
       <ion-item (click)="presentModal()"> <ion-icon name="cog" slot="start"></ion-icon> User Data </ion-item>
       <ion-item (click)="logout()" routerLink="/tab1" *ngIf="checkUser!==''"><ion-icon name="log-out" slot="start"></ion-icon>  Logout</ion-item>
     </ion-list>
@@ -78,12 +84,12 @@
       <ion-row>
         <ion-col>
           <center>
-            <ion-button color="primary" routerLink="/followinglist"><ion-text color="light"><b>Following</b></ion-text></ion-button>
+            <ion-button shape="round" color="primary" routerLink="/followinglist"><ion-text color="light"><b>Following</b></ion-text></ion-button>
           </center>
         </ion-col>
         <ion-col>
           <center>
-            <ion-button color="primary" routerLink="/followerslist"><ion-text color="light"><b>Followers</b></ion-text></ion-button>
+            <ion-button shape="round" color="primary" routerLink="/followerslist"><ion-text color="light"><b>Followers</b></ion-text></ion-button>
           </center>
         </ion-col>
       </ion-row>

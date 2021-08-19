@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ApiService, mediaUrl } from '../services/api.service';
 import { MenuController, IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { AddAnimeFromDetailsPage } from '../modals/add-anime-from-details/add-anime-from-details.page';
+import { ToswarningService } from '../services/toswarning.service';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -31,15 +32,19 @@ export class Tab2Page {
     public api: ApiService,
     private menu: MenuController,
     public modalController: ModalController,
+    private toswarning:ToswarningService,
   ) {}
 
-  MediaUrl = mediaUrl;
+  
 
   ngOnInit(){
     
   }
 
-  ionViewWillEnter(){
+  ionViewDidEnter(){
+    if (localStorage.getItem("tos") == "d" || localStorage.getItem("tos") == undefined){
+      this.toswarning.presentAlert();
+    }
     this.getGenres();
     this.searchBySeason();
   }

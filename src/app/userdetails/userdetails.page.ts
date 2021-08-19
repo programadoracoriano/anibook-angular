@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService, mediaUrl } from '../services/api.service';
-import { MenuController } from '@ionic/angular';
-import { AdmobService } from '../services/admob.service';
+import { MenuController, ModalController, PopoverController } from '@ionic/angular';
+import { ReportmodalPage } from '../modals/reportmodal/reportmodal.page';
+import { UserpopoverPage } from '../popover/userpopover/userpopover.page';
 
 @Component({
   selector: 'app-userdetails',
@@ -17,11 +18,13 @@ export class UserdetailsPage implements OnInit {
   public detectfollowing:any;
   public animedata:any;
   public customlist:any;
+
   constructor(
     private actRoute: ActivatedRoute,
     public api: ApiService,
     private menu: MenuController,
-    private admobService: AdmobService,
+    public modalController: ModalController,
+    public popoverController: PopoverController
   ) { 
     this.user_id = this.actRoute.snapshot.params.id;
   }
@@ -106,5 +109,43 @@ async getUserData() {
     console.log(err);
   });
 }
+
+
+
+
+
+async reportModal(pid) {
+  const modal = await this.modalController.create({
+    component: ReportmodalPage,
+    cssClass: 'my-custom-class',
+    componentProps: {
+      'pid': pid,
+      'type': 'user',
+
+    }
+    
+  });
+  modal.onDidDismiss().then(mr => {
+    
+  });;
+  return await modal.present();
+}
+
+
+async userPopover(event:any) {
+  const popover = await this.popoverController.create({
+    component: UserpopoverPage,
+    cssClass: 'custom-popover',
+    event,
+    translucent: true,
+    componentProps: {
+      'id':this.userdata.id
+    }
+  });
+  return await popover.present();
+
+  
+}
+
 
 }

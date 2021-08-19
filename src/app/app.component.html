@@ -18,6 +18,7 @@
             Main
           </ion-label>
         </ion-item-divider>
+        
         <ion-item (click)="closeFirst()" routerLink="/tab1"><ion-icon slot="start" name="home-sharp"></ion-icon>  Home</ion-item>
         <ion-item (click)="closeFirst()" routerLink="/database"><ion-icon slot="start" name="list-circle-sharp"></ion-icon>  Last Added</ion-item>
         <ion-item (click)="closeFirst()" routerLink="/tab2"><ion-icon slot="start"  name="search"></ion-icon>  Search Anime</ion-item>
@@ -40,30 +41,35 @@
         
 
         <ion-item (click)="closeFirst()" routerLink="/randomizer"><ion-icon slot="start"  name="refresh"></ion-icon>  Randomizer</ion-item>
-        
-        
+        <ion-item-divider color="primary">
+          <ion-label>
+            Terms and Conditions
+          </ion-label>
+        </ion-item-divider>
+        <ion-item (click)="closeFirst()" routerLink="/tos"><ion-icon slot="start" name="checkbox"></ion-icon> Terms and Conditions</ion-item>
+        <ion-item-divider color="primary">
+          <ion-label>
+            Social Networks
+          </ion-label>
+        </ion-item-divider>
+        <ion-item >
+          <ion-grid>
+            <ion-row>
+              <ion-col size="4">
+                <a href="https://www.facebook.com/anibookapp" target="_blank" class="font-med"><ion-icon size="medium" name="logo-facebook" color="tertiary"></ion-icon></a>
+              </ion-col>
+              <ion-col size="4">
+                <a href="https://twitter.com/Anibook_app" target="_blank" class="font-med"><ion-icon size="medium" name="logo-twitter" color="tertiary"></ion-icon></a>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          
+          
+        </ion-item>
       </ion-list>
     </ion-content>
 
-    <ion-footer class="bar-stable">
-      <ion-item nav-clear menu-close href="#" style="left:0;right:0;margin:0; width: 100%;position: fixed;bottom:0;">
-        <ion-grid>
-          <ion-row>
-            <ion-col size="4">
-              <a href="https://www.facebook.com/anibookapp" target="_blank" class="font-med"><ion-icon name="logo-facebook" color="tertiary"></ion-icon></a>
-            </ion-col>
-            <ion-col size="4">
-              <a href="https://discord.gg/gSafvpdUB4" target="_blank" class="font-med"><ion-icon name="logo-discord"   color="tertiary"></ion-icon></a>
-            </ion-col>
-            <ion-col size="4">
-              <a href="https://twitter.com/Anibook_app" target="_blank" class="font-med"><ion-icon name="logo-twitter" color="tertiary"></ion-icon></a>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-        
-        
-      </ion-item>
-    </ion-footer>
+    
   </ion-menu>
 
 

@@ -15,6 +15,9 @@ export class UserconfigPage implements OnInit {
   public uploadType:string;
   public base64Image:any;
   public postresponse:any;
+  public getrating:any;
+  public rating:any;
+  public getuser:any;
   constructor(
   public api:ApiService,
   
@@ -23,6 +26,8 @@ export class UserconfigPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getRating();
+    this.getUser();
   }
 
 
@@ -46,7 +51,6 @@ export class UserconfigPage implements OnInit {
   async openCamera(){
     const image = await Camera.getPhoto({
       quality: 90,
-      allowEditing: true,
       resultType: CameraResultType.DataUrl,
       source: CameraSource.Prompt
     });
@@ -55,6 +59,27 @@ export class UserconfigPage implements OnInit {
 
   public openGallery(){
     
+  }
+
+
+  async getRating(){
+    await this.api.getData("get/rating/")
+     .subscribe(res => {
+       this.getrating = res;
+       
+     }, err => {
+       console.log(err);
+     });
+  }
+
+
+  async getUser(){
+    await this.api.getData("get/profile/")
+     .subscribe(res => {
+       this.getuser = res;
+     }, err => {
+       console.log(err);
+     });
   }
 
   
@@ -68,7 +93,7 @@ export class UserconfigPage implements OnInit {
         console.log(err);
       });
       this.uploadType = undefined;
-  
+      this.dismiss();
   }
 
 
@@ -85,6 +110,43 @@ export class UserconfigPage implements OnInit {
       
       this.uploadType = undefined;
   
+  }
+
+
+
+  public excludeRating(){
+    
+    this.api.postData("add/rating/filter/", {"rating":this.rating})
+      .subscribe(res => {
+        this.postresponse = res;
+        this.presentToast();
+        this.getUser();
+      }, err => {
+        console.log(err);
+      });
+  
+  }
+
+  public removeExcludeRating(id){
+    this.api.postData("remove/rating/filter/", {"rating":id})
+      .subscribe(res => {
+        this.postresponse = res;
+        this.presentToast();
+        this.getUser();
+      }, err => {
+        console.log(err);
+      });
+  }
+
+  public removeBlockUser(id){
+    this.api.postData("unblock/user/", {"user":id})
+      .subscribe(res => {
+        this.postresponse = res;
+        this.presentToast();
+        this.getUser();
+      }, err => {
+        console.log(err);
+      });
   }
 
   public changeUploadType(str:string){

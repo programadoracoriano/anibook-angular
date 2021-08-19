@@ -39,6 +39,7 @@ export class ModalListPage implements OnInit {
     this.modalController.dismiss({
       'dismissed': true
     });
+    this.option = undefined;
   }
 
   async presentToast() {

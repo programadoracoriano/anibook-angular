@@ -8,6 +8,7 @@ import { AuthguardService } from '../services/authguard.service';
 import { ActionSheetController } from '@ionic/angular';
 
 import { UserconfigPage } from '../modals/userconfig/userconfig.page';
+import { ToswarningService } from '../services/toswarning.service';
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
@@ -26,20 +27,20 @@ export class Tab3Page {
   public avatarradio:any;
   public base64Image:any;
   public uploadresponse:any;
+  public theme:string;
   constructor(
     public guard: LoginguardService,
     public api: ApiService,
     public router: Router,
     private menu: MenuController,
     public toastController: ToastController,
-    private admobService: AdmobService,
     public checkuser: AuthguardService,
     public actionSheetController: ActionSheetController,
-  
+    private toswarning:ToswarningService,
     public modalController: ModalController,
   ) {}
 
-  MediaUrl = mediaUrl;
+  
   
     ngOnInit(){
       
@@ -60,13 +61,17 @@ export class Tab3Page {
 
   ionViewDidEnter(){
     
+      if (localStorage.getItem("tos") == "d" || localStorage.getItem("tos") == undefined){
+        this.toswarning.presentAlert();
+      }
+      
     if (localStorage.getItem("token") == ''){
       this.router.navigate(['/login']);
     }
     this.getProfile();
     this.getUserData();
     this.getAvatar();
-    
+    this.detectTheme();
   }
 
   openFirst() {
@@ -219,5 +224,30 @@ export class Tab3Page {
     this.base64Image = undefined;
   }
   
+
+  public changeTheme(){
+    if (localStorage.getItem("theme") == undefined 
+    || localStorage.getItem("theme") == '' || localStorage.getItem("theme") == 'light'){
+      this.theme = "dark";
+      localStorage.setItem("theme", "dark");
+    }
+    else{
+      localStorage.setItem("theme", "light");
+      this.theme = "light";
+    }
+  }
+
+  public detectTheme(){
+    if (localStorage.getItem("theme") == undefined 
+    || localStorage.getItem("theme") == '' || localStorage.getItem("theme") == 'light'){
+      this.theme = "light";
+    }
+    else{
+      
+      this.theme = "dark";
+    }
+  }
+
+
 
 }

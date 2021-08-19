@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import {LoginguardService} from '../services/loginguard.service';
 import { AuthguardService } from '../services/authguard.service';
-import { MenuController } from '@ionic/angular';
-import { AdmobService } from '../services/admob.service';
+import { ToswarningService } from '../services/toswarning.service';
+import {  MenuController } from '@ionic/angular';
+
+
 
 @Component({
   selector: 'app-tab1',
@@ -16,11 +18,11 @@ export class Tab1Page {
     initialSlide: 1,
     speed: 400
   };
-
+  public hidespoilers:boolean = true;
   public getdata:any;
   public getcategorie:any;
   public getlist:any;
-  public season:string = "spring";
+  public season:string = "summer";
   public year:number = 2021;
   public seasonanimes:any;
   constructor(
@@ -28,9 +30,11 @@ export class Tab1Page {
     public api: ApiService,
     public checkuser: AuthguardService,
     private menu: MenuController,
-    private admobService: AdmobService,
+    private toswarning:ToswarningService,
+  ) {
+
     
-  ) {}
+  }
 
 
   
@@ -38,11 +42,15 @@ export class Tab1Page {
 
 
   ionViewDidEnter(){
-    
+    if (localStorage.getItem("tos") == "d" || localStorage.getItem("tos") == undefined){
+      this.toswarning.presentAlert();
+    }
     this.checkuser.loginGuard();
     this.getFollowersUpdates();
     this.seasonAnimes();
   }
+
+  
 
   
   
@@ -87,4 +95,13 @@ seasonAnimes(){
 }
 
 
+
+public showSpoiler(){
+  this.hidespoilers = !this.hidespoilers;
+  
+  
 }
+
+
+}
+

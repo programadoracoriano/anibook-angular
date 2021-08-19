@@ -32,7 +32,7 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-2428515290968728~5635575728</string>
+	<string>ca-app-pub-2428515290968728~2475412849</string>
 	<key>GADIsAdManagerApp</key>
 	<true/>
 	<key>LSRequiresIPhoneOS</key>
@@ -43,7 +43,7 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>To Take Photos and Video</string>
+	<string>We need to access your camera in order to update your images on app.(Ex Profile Avatar or Cover)</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Always allow Geolocation?</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
@@ -53,9 +53,9 @@
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Store camera photos to camera</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>To Pick Photos from Library</string>
+	<string>We need to access your photolibrary in order to update your images on app.(Ex Profile Avatar or Cover)</string>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>Why you use NSUserTracking. ex: This identifier will be used to deliver personalized ads to you.</string>
+	<string>This identifier will be used to deliver personalized ads to you.</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>

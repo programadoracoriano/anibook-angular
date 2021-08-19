@@ -7,12 +7,14 @@ import { ApiService } from '../services/api.service'
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit {
-  userdata:any;
-  username:any;
-  email:string;
-  password:any;
-  password2:any;
-  error:any;
+  public userdata:any;
+  public username:any;
+  public email:string;
+  public password:any;
+  public password2:any;
+  public error:any;
+  public tos:string;
+  
   constructor(
     public api: ApiService,
     private menu: MenuController,
@@ -34,6 +36,7 @@ export class SignupPage implements OnInit {
       this.error = "The passwords don't match!"
     }
     else{
+      this.error == undefined;
     this.api.postData("signup/user/", {"username":this.username, "email":this.email,"password":this.password})
      .subscribe(res => {
        console.log(res);
@@ -44,4 +47,8 @@ export class SignupPage implements OnInit {
     }
   }
 
+
+  
+
+  
 }

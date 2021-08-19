@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button  (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
+      
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button slot="end">
+        <ion-text color="light" (click)="dismiss()">
+          CLOSE
+        </ion-text>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light">
+        <b>Report User</b>
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+  <ion-list>
+    <ion-radio-group name="motive" [(ngModel)]="motive">
+      <ion-list-header>
+        <ion-label>Report Motive</ion-label>
+      </ion-list-header>
+  
+      <ion-item *ngFor="let item of motives">
+        <ion-label>{{ item.motive }}</ion-label>
+        <ion-radio slot="start" value="{{ item.id }}"></ion-radio>
+      </ion-item>
+  
+      
+    </ion-radio-group>
+  </ion-list>
+  <ion-button (click)="reportButton()">
+    Report
+  </ion-button>
+</ion-content>

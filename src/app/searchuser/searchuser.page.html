@@ -3,19 +3,20 @@
     <ion-buttons slot="start">
       <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
     </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button routerLink="/tab1"><ion-icon color="light" name="home"></ion-icon></ion-button>
-    </ion-buttons>
+    
     <ion-title>
       <ion-text color="light">
         <b>Search User</b>
       </ion-text>
     </ion-title>
   </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="search" name="search" (ionChange)="searchUser()"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-searchbar [(ngModel)]="search" name="search" (ionChange)="searchUser()"></ion-searchbar>
+  
   <div *ngIf="userdata">
     <ion-item [routerLink]="['/userdetails/',  u.id ]" *ngFor="let u of userdata" >
       <ion-thumbnail slot="start">

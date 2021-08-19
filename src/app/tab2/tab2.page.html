@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header >
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button *ngIf="options == true" (click)="changeOptions()"><ion-icon color="light" name="arrow-back-sharp"></ion-icon></ion-button>
@@ -13,6 +13,9 @@
       <b>Search</b>
     </ion-text>
     </ion-title>
+  </ion-toolbar >
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="search" name="search" (ionChange)="searchData()"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -88,9 +91,7 @@
 
 
   
-  <div *ngIf="options == false">
-    <ion-searchbar [(ngModel)]="search" name="search" (ionChange)="searchData()"></ion-searchbar>
-  </div>
+  
 
   
 
@@ -98,29 +99,43 @@
 <div *ngIf="searchdata">
   
 
-  <ion-list>
-    <ion-grid>
-      <ion-row class="ion-align-items-center">
-        <ion-col size-xs="6" size-sm="6"  *ngFor="let anime of it">
-          <ion-card>
-            <div class="card-header">
-              <ion-icon name="add-circle" color="light" (click)="presentModal(anime.id)"></ion-icon>
-            </div>
-            <div class="ov-img">
-              <img [src]="anime.image_url" [routerLink]="['/animedetails/',  anime.id ]">
-            </div>
-            <ion-card-header>
-              <ion-card-subtitle *ngIf="anime.type">{{ anime.type.type }}</ion-card-subtitle>
-              <ion-card-title class="card-title">{{ anime.name }}</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
+  
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col size-xs="6" size-sm="6"   *ngFor="let anime of it">
+          
             
-            </ion-card-content>
-          </ion-card>
+              <div class="card-img-header" style="background-image: url('{{ anime.image_url }}');" [routerLink]="['/animedetails/',  anime.id ]">
+                
+              </div>
+              <ion-grid no-padding>
+                <ion-row>
+                  <ion-col size="6">
+                    <p >{{ anime.name }}</p>
+                  </ion-col>
+                  
+                  
+                  <ion-col size="6">
+                    <p *ngIf="anime.type"><ion-chip color="primary">{{ anime.type.type }}</ion-chip></p>
+                  </ion-col>
+                  <hr>
+                </ion-row>
+              </ion-grid>
+                
+                
+              
+            
+            
+              
+            
+            
+          
+          
+          
         </ion-col>
       </ion-row>
     </ion-grid>
-  </ion-list>
+  
   
   <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
     <ion-infinite-scroll-content

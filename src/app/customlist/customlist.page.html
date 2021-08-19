@@ -5,8 +5,7 @@
       <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button  (click)="helpAlert()"><ion-icon color="light" name="help-circle"></ion-icon></ion-button>
-      <ion-button routerLink="/tab1"><ion-icon color="light" name="home"></ion-icon></ion-button>
+      <ion-button  (click)="createListModal()">Create</ion-button>
     </ion-buttons>
     <ion-title>
       <ion-text color="light">
@@ -75,13 +74,9 @@
       </ion-item>
     </ion-list>
     
-  </div>
+  
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="createListModal()">
-      <ion-icon color="light" name="add-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+  
 
 
   <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
@@ -91,6 +86,6 @@
       loadingText="Loading more data...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
-
+</div>
 
 </ion-content>

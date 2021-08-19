@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActionSheetController, MenuController, ModalController, 
   IonInfiniteScroll } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
-import { AdmobService } from '../services/admob.service';
+
 import { ReviewModalPage } from '../modals/review-modal/review-modal.page';
+import { ToswarningService } from '../services/toswarning.service';
 
 @Component({
   selector: 'app-myreviews',
@@ -24,7 +25,7 @@ export class MyreviewsPage implements OnInit {
     private menu: MenuController,
     public actionSheetController: ActionSheetController,
     public modalController: ModalController,
-    private admobService: AdmobService,
+    private toswarning:ToswarningService,
   ) { }
 
   ngOnInit() {
@@ -39,6 +40,9 @@ export class MyreviewsPage implements OnInit {
 
   //Entering the Page
   ionViewDidEnter(){
+    if (localStorage.getItem("tos") == "d" || localStorage.getItem("tos") == undefined){
+      this.toswarning.presentAlert();
+    }
     this.getData();
     
   }

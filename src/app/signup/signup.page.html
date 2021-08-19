@@ -34,18 +34,21 @@
       <ion-label><ion-icon name="lock-closed-outline"></ion-icon></ion-label>
       <ion-input [(ngModel)]="password2" type="password" placeholder="Password"></ion-input>
     </ion-item>
-  
-    <ion-button (click)="signupUser()" primary ><ion-icon name="log-in-outline"></ion-icon> Sign up </ion-button>
-  </div>
-  <div class="component-center">
-    <p>Click Below to login</p>
-        <ion-button color="primary" routerLink="/login">Login</ion-button>
-  </div>
-  <div *ngIf="error">
-      <div class="">
+    
+    
+    <ion-button (click)="signupUser()" primary ><ion-icon name="log-in-outline"></ion-icon> Sign up </ion-button><br>
+    <div *ngIf="error">
+      <div class="danger-box">
       <p>{{ error }}</p>
     </div>
   </div>
+  </div>
+  
+  <div class="text-center">
+    <p>Click Below to login</p>
+        <ion-button color="primary" routerLink="/login">Login</ion-button>
+  </div>
+  
   <div *ngIf="userdata" class="padding-container">
       <ion-label>
         {{ userdata.msg }}

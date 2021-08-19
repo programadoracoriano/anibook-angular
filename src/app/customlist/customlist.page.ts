@@ -4,6 +4,7 @@ import { ActionSheetController, MenuController, ModalController, AlertController
 
 import { CreateCustomListPage } from '../modals/create-custom-list/create-custom-list.page';
 import { AdmobService } from '../services/admob.service';
+import { ToswarningService } from '../services/toswarning.service';
 @Component({
   selector: 'app-customlist',
   templateUrl: './customlist.page.html',
@@ -25,7 +26,7 @@ export class CustomlistPage implements OnInit {
     public actionSheetController: ActionSheetController,
     public modalController: ModalController,
     public alertController: AlertController,
-    private admobService: AdmobService,
+    private toswarning:ToswarningService,
   ) { }
 
   ngOnInit() {
@@ -34,7 +35,9 @@ export class CustomlistPage implements OnInit {
   }
 
   ionViewDidEnter(){
-    
+    if (localStorage.getItem("tos") == "d" || localStorage.getItem("tos") == undefined){
+      this.toswarning.presentAlert();
+    }
     this.publicList();
   }
   

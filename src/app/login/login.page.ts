@@ -13,7 +13,7 @@ export class LoginPage implements OnInit {
   public username:any;
   public password:any;
   public msg:any;
-
+  
   constructor(
     public api: ApiService,
     public router: Router,
@@ -65,5 +65,7 @@ export class LoginPage implements OnInit {
   }
   
 }
+
+
 
 }

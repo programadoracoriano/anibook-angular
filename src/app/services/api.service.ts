@@ -10,6 +10,7 @@ export const mediaUrl = "https://api.anibook.app";
 
 //-- dev urls
 //export const apiUrl   = "http://localhost:8000/";
+//export const mediaUrl = "http://localhost:8000/";
 @Injectable({
   providedIn: 'root'
 })

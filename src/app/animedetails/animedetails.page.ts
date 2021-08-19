@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { MenuController, ToastController, ModalController} from '@ionic/angular';
-import { AdmobService } from '../services/admob.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AddAnimeFromDetailsPage } from '../modals/add-anime-from-details/add-anime-from-details.page';
 import { ReviewModalPage } from '../modals/review-modal/review-modal.page';
+import { ReportmodalPage } from '../modals/reportmodal/reportmodal.page';
+import { ToswarningService } from '../services/toswarning.service';
+import {AdmobService } from '../services/admob.service';
 @Component({
   selector: 'app-animedetails',
   templateUrl: './animedetails.page.html',
@@ -34,14 +36,16 @@ export class AnimedetailsPage implements OnInit {
     public api: ApiService,
     private menu: MenuController,
     public toastController: ToastController,
-    private admobService: AdmobService,
+    private toswarning:ToswarningService,
     private sanitizer: DomSanitizer,
     public modalController: ModalController,
+    private admob: AdmobService,
   ) {
     this.anime_id = this.actRoute.snapshot.params.id;
    }
 
   ngOnInit() {
+    this.admob.ShowInterstitial();
     this.getAnime();
     this.getScore();
     this.getReviews();
@@ -49,6 +53,12 @@ export class AnimedetailsPage implements OnInit {
     this.getExtra();
   }
 
+  ionViewDidEnter(){
+    if (localStorage.getItem("tos") == "d" || localStorage.getItem("tos") == undefined){
+      this.toswarning.presentAlert();
+    }
+  }
+  
   
 
 
@@ -111,7 +121,22 @@ async getReviews(){
    });
 }
 
+async reportModal(pid) {
+  const modal = await this.modalController.create({
+    component: ReportmodalPage,
+    cssClass: 'my-custom-class',
+    componentProps: {
+      'pid': pid,
+      'type': 'review',
 
+    }
+    
+  });
+  modal.onDidDismiss().then(mr => {
+    
+  });;
+  return await modal.present();
+}
 
 
 

@@ -2,12 +2,13 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ApiService, mediaUrl } from '../services/api.service';
 import { Router } from '@angular/router';
 import { MenuController, ModalController, ActionSheetController,
-   IonInfiniteScroll } from '@ionic/angular';
-
-
-import { ModalListPage } from '../modals/modal-list/modal-list.page';
+   IonInfiniteScroll, PopoverController } from '@ionic/angular';
 import { AddAnimeListPage } from '../modals/add-anime-list/add-anime-list.page';
-import { AdmobService } from '../services/admob.service';
+import { ToswarningService } from '../services/toswarning.service';
+import { ListoptionspopoverPage } from '../popover/listoptionspopover/listoptionspopover.page';
+
+
+var theme = localStorage.getItem("theme");
 
 @Component({
   selector: 'app-animelist',
@@ -22,12 +23,10 @@ export class AnimelistPage implements OnInit {
   public order:any = "-score";
   public popup:any;
   public getnote:any;
-  note:any;
-  option:any;
-  options:any;
-  tstate:any = 0;
-  quickop:string;
-  it = [];
+  public note:any;
+  public tstate:any = 0;
+  public quickop:string;
+  public it = [];
   public search:any;
   private readonly offset:number = 12;
   private index:number = 0;
@@ -37,14 +36,16 @@ export class AnimelistPage implements OnInit {
     private elementRef: ElementRef,
     public router: Router,
     private menu: MenuController,
-    private admobService: AdmobService,
+    private toswarning:ToswarningService,
     public modalController: ModalController,
+    public popoverController: PopoverController,
     public actionSheetController: ActionSheetController,
   ) { }
 
   ngOnInit() {
     
     this.animeList(0);
+    
   }
 
   ngOndestroy() {
@@ -52,7 +53,9 @@ export class AnimelistPage implements OnInit {
   }
   
   ionViewDidEnter(){
-    
+    if (localStorage.getItem("tos") == "d" || localStorage.getItem("tos") == undefined){
+      this.toswarning.presentAlert();
+    }
     this.addstatus = false;
   }
 
@@ -60,22 +63,7 @@ export class AnimelistPage implements OnInit {
 
 
 
-  async presentModal(id) {
-    
-    const modal = await this.modalController.create({
-      component: ModalListPage,
-      cssClass: 'my-custom-class',
-      componentProps: {
-        'id': id,
-      }
-      
-    });
-    modal.onDidDismiss().then(mr => {
-      this.animeList(0);
-      
-    });;
-    return await modal.present();
-  }
+  
 
 
   async addAnimeModal() {
@@ -137,42 +125,6 @@ export class AnimelistPage implements OnInit {
   }
 
 
-
-async deleteAnime(val){
-  this.index = 0;
-  await this.api.getData("delete/anime/list/?id="+val + '&status=0')
-      .subscribe(res => {
-        this.animedata = res;
-        this.it = this.animedata.slice(this.index, this.offset + this.index)
-      }, err => {
-        console.log(err);
-      });
-}
-  
-
-async alertDelete(val) {
-  const actionSheet = await this.actionSheetController.create({
-    header: 'Are you sure you want to delete it?',
-    cssClass: 'my-custom-class',
-    buttons: [{
-      text: 'Yes',
-      role: 'destructive',
-      icon: 'sad',
-      handler: () => {
-        this.deleteAnime(val);
-      }
-    }, {
-      text: 'No',
-      icon: 'happy',
-      handler: () => {
-        
-      } 
-    }]
-  });
-  await actionSheet.present();
-}
-
-
 loadData(event) {
   setTimeout(() => {
     this.addItems();
@@ -200,12 +152,29 @@ addItems(){
   
 
 
-public changeQuickOp(val){
-  this.quickop = "op" + val;
+
+
+
+async animePopover(event:any, val) {
+  const popover = await this.popoverController.create({
+    component: ListoptionspopoverPage,
+    cssClass: 'custom-popover',
+    event,
+    translucent: true,
+    animated: true,
+    componentProps: {
+      'id':val
+    }
+  });
+  popover.onDidDismiss().then(mr => {
+    this.animeList(0);
+  });;
+  return await popover.present();
+
+  
+
+  }
+  
 }
 
-public resetQuickOp(){
-  this.quickop = undefined;
-}
 
-}

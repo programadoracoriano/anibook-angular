@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
-import { AdmobService } from '../services/admob.service';
-import { MenuController, IonInfiniteScroll } from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
+import { ToswarningService } from '../services/toswarning.service';
 @Component({
   selector: 'app-randomizer',
   templateUrl: './randomizer.page.html',
@@ -14,14 +14,18 @@ export class RandomizerPage implements OnInit {
   constructor(
     public api: ApiService,
     private menu: MenuController,
-    private admobService: AdmobService,
+    private toswarning:ToswarningService,
   ) { }
 
   ngOnInit() {
     this.getGenres();
   }
 
-  
+  ionViewDidEnter(){
+    if (localStorage.getItem("tos") == "d" || localStorage.getItem("tos") == undefined){
+      this.toswarning.presentAlert();
+    }
+  }
 
 
   async getGenres(){

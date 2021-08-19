@@ -13,7 +13,8 @@ const routes: Routes = [
   },
   {
     path: 'signup',
-    loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
+    loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule),
+    
   },
   {
     path: 'login',
@@ -22,7 +23,8 @@ const routes: Routes = [
   },
   {
     path: 'animedetails/:id',
-    loadChildren: () => import('./animedetails/animedetails.module').then( m => m.AnimedetailsPageModule)
+    loadChildren: () => import('./animedetails/animedetails.module').then( m => m.AnimedetailsPageModule),
+    canActivate: [LoginguardService],
   },
   {
     path: 'userdetails/:id',
@@ -46,11 +48,13 @@ const routes: Routes = [
   },
   {
     path: 'publiccustomlist/:id',
-    loadChildren: () => import('./publiccustomlist/publiccustomlist.module').then( m => m.PubliccustomlistPageModule)
+    loadChildren: () => import('./publiccustomlist/publiccustomlist.module').then( m => m.PubliccustomlistPageModule),
+    canActivate: [LoginguardService],
   },
   {
     path: 'showcustomlist/:id',
-    loadChildren: () => import('./showcustomlist/showcustomlist.module').then( m => m.ShowcustomlistPageModule)
+    loadChildren: () => import('./showcustomlist/showcustomlist.module').then( m => m.ShowcustomlistPageModule),
+    canActivate: [LoginguardService],
   },
   {
     path: 'publiclist/:id',
@@ -64,7 +68,8 @@ const routes: Routes = [
   },
   {
     path: 'database',
-    loadChildren: () => import('./database/database.module').then( m => m.DatabasePageModule)
+    loadChildren: () => import('./database/database.module').then( m => m.DatabasePageModule),
+    canActivate: [LoginguardService],
   },
   {
     path: 'reviews/:id',
@@ -108,7 +113,8 @@ const routes: Routes = [
   },
   {
     path: 'studioanime/:id',
-    loadChildren: () => import('./studioanime/studioanime.module').then( m => m.StudioanimePageModule)
+    loadChildren: () => import('./studioanime/studioanime.module').then( m => m.StudioanimePageModule),
+    canActivate: [LoginguardService],
   },
   {
     path: 'followerupdate',
@@ -117,7 +123,8 @@ const routes: Routes = [
   },
   {
     path: 'randomizer',
-    loadChildren: () => import('./randomizer/randomizer.module').then( m => m.RandomizerPageModule)
+    loadChildren: () => import('./randomizer/randomizer.module').then( m => m.RandomizerPageModule),
+    canActivate: [LoginguardService],
   },
   {
     path: 'tos',
@@ -128,19 +135,26 @@ const routes: Routes = [
     loadChildren: () => import('./modals/userconfig/userconfig.module').then( m => m.UserconfigPageModule),
     canActivate: [LoginguardService],
   },
-
-  
-  
-
-
+  {
+    path: 'userpopover',
+    loadChildren: () => import('./popover/userpopover/userpopover.module').then( m => m.UserpopoverPageModule),
+    canActivate: [LoginguardService],
+  },
+  {
+    path: 'reportmodal',
+    loadChildren: () => import('./modals/reportmodal/reportmodal.module').then( m => m.ReportmodalPageModule),
+    canActivate: [LoginguardService],
+  },
 
   {
     path: 'tab1',
-    loadChildren: () => import('./tab1/tab1.module').then(m => m.Tab1PageModule)
+    loadChildren: () => import('./tab1/tab1.module').then(m => m.Tab1PageModule),
+    canActivate: [LoginguardService],
   },
   {
     path: 'tab2',
-    loadChildren: () => import('./tab2/tab2.module').then(m => m.Tab2PageModule)
+    loadChildren: () => import('./tab2/tab2.module').then(m => m.Tab2PageModule),
+    canActivate: [LoginguardService],
   },
   {
     path: 'tab3',
@@ -152,6 +166,17 @@ const routes: Routes = [
     loadChildren: () => import('./animelist/animelist.module').then( m => m.AnimelistPageModule),
     canActivate: [LoginguardService],
   },
+  {
+    path: 'create-topic',
+    loadChildren: () => import('./modals/create-topic/create-topic.module').then( m => m.CreateTopicPageModule)
+  },
+  {
+    path: 'listoptionspopover',
+    loadChildren: () => import('./popover/listoptionspopover/listoptionspopover.module').then( m => m.ListoptionspopoverPageModule),
+    canActivate: [LoginguardService],
+  },
+  
+  
 ];
 @NgModule({
   imports: [

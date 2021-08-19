@@ -3,9 +3,6 @@
     <ion-buttons slot="start">
       <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
     </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button routerLink="/tab1"><ion-icon color="light" name="home"></ion-icon></ion-button>
-    </ion-buttons>
     <ion-title>
       <ion-text color="light"><b>Terms of Service</b></ion-text>
     </ion-title>
@@ -14,9 +11,17 @@
 </ion-header>
 
 <ion-content>
+
+  
+  
   <div class="padding-container">
     <ion-card>
       <ion-card-content>
+        <a href="https://www.iubenda.com/privacy-policy/32696724">Privacy Policy - Important to Read</a>
+  <br>
+  <a href="https://www.iubenda.com/terms-and-conditions/32696724">Terms of Use - Important to Read</a><br><br>
+
+  <h3>More Clausules Below:</h3>
         <p>The Anibook App is an app made for entertainment purposes only. All of our content serves to help users organize their
           Anime Lists and let users share their own lists. All of the images used on the app are for informative use only, and are owned by their respective 
           copyright owners.<br><br>
@@ -71,6 +76,12 @@
         </ol>
       </ion-card-content>
     </ion-card>
-    
+    <ion-item>
+      <ion-label slot="start">
+        Accept ToS
+      </ion-label>
+      <ion-toggle *ngIf="tosbutton == true" color="primary" slot="end" (click)="acceptTos()" checked></ion-toggle>
+      <ion-toggle *ngIf="tosbutton == false" color="primary" slot="end" (click)="acceptTos()"></ion-toggle>
+    </ion-item>
   </div>
 </ion-content>

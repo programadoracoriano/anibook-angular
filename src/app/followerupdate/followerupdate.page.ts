@@ -23,7 +23,7 @@ export class FollowerupdatePage implements OnInit {
   }
 
 
-  ionViewDidEnter(){
+  ionViewWillEnter(){
     
     this.getFollowersUpdates();
   }
