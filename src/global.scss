@@ -26,6 +26,12 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 
+.ad-margin{
+    width: 100%;
+    height: 100px;
+}
+
+
 .text-bold{
     font-weight: bold;
 }
@@ -75,18 +81,36 @@
 .cover-img{
     background-size: cover;
     width: 100%;
-    height: 300px;
-    -moz-box-shadow:    inset 0 0 10px #000000;
-    -webkit-box-shadow: inset 0 0 10px #000000;
-    box-shadow:         inset 0 0 10px #000000;
+    height: 250px;
+    
     padding-top:15px;
      
 }
 
+
+.box-div{
+    height: 200px;
+    width: 100%;
+    padding-top: 35px;
+}
+
+.profile-wrap{
+    height: 450px;
+    width: 100%;
+}
+
+.avatar-image{
+    display: block;
+	top: 250px;
+    left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+}
+
 .user-img{
     background-color: white;
-    width: 155px;
-    height: 155px;
+    width: 100px;
+    height: 100px;
     margin-right: auto;
     margin-left: auto;
     border-radius: 50%;

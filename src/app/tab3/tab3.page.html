@@ -39,25 +39,21 @@
 <ion-router-outlet id="cfg"></ion-router-outlet>
 
 
-<ion-content [fullscreen]="true" >
+<ion-content>
 
 
-
-<div *ngIf="profiledata">
+<div class="profile-wrap" *ngIf="profiledata">
+  <div class="user-img text-center avatar-image" style="background-image: url('{{ profiledata.profile.image_url }}');"></div>
+<div >
   <div  class="profile-header" *ngIf="profiledata.profile.cover_url == undefined">
     <div class="user-img text-center" style="background-image: url('{{ profiledata.profile.image_url }}');">
       
 
     </div>
-    <div class="profile-sub-header text-center">
-
-        
-        
-        <h3>@{{ profiledata.username }}</h3>
-    </div>
+    
   </div>
-  <div *ngIf="profiledata.profile.cover_url" class="cover-img" style="background-image: url('{{ profiledata.profile.cover_url }}');">
-    <div class="user-img text-center" style="background-image: url('{{ profiledata.profile.image_url }}');">
+  <div *ngIf="profiledata.profile.cover_url" class="cover-img" style="background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.95)), url('{{ profiledata.profile.cover_url }}');">
+    
       
 
       
@@ -67,18 +63,18 @@
       
       
     </div>
-    <div class="profile-sub-header text-center">
-
-        
-        
-        <h3>@{{ profiledata.username }}</h3>
-    </div>
+    
 
     </div>
-</div>
 
-  <div  class="padding-container" *ngIf="profiledata">
-    <ion-card >
+
+
+
+
+
+  <div  class="padding-container box-div" *ngIf="profiledata">
+    
+    <h5 class="text-center">@{{ profiledata.username }}</h5>
     
     <ion-grid>
       <ion-row>
@@ -94,58 +90,51 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-  </ion-card>
-  <div class="img-center"*ngIf="userdata">
-  <div class="circle-border text-center">
-    <h5><ion-text color="primary">Level</ion-text></h5>
-    <h3 class="text-bold"><ion-text color="primary">{{ totaldays | number : '1.1-1' }} </ion-text></h3>
-  </div>
-  <div class="text-center">
-    <ion-text color="primary">Level = Total Days</ion-text>
   </div>
 </div>
 
-  <div class="cubic" *ngIf="editstatus == false">
-    <h5><b>Your Data</b></h5>
-    <ion-grid *ngIf="userdata">
+
+  <ion-item-divider color="medium">
+    My Statistics
+  </ion-item-divider>
+
+  <div class="padding-container" *ngIf="userdata">
+
+    <ion-grid>
       <ion-row>
-       
+
         <ion-col size="12">
-          <ion-item >
-           
-              <ion-icon name="eye" color="success"></ion-icon>
-            
-          <p >
-            
-            <b>
-             Watching:</b> 
-            {{ userdata.animes_watching }}</p>
-          </ion-item>
+          <p class="text-center">Total Days - {{ totaldays | number : '1.1-1' }}</p>
+          <p class="text-center"></p>
         </ion-col>
-        <ion-col size="12">
-          <ion-item >
-            <ion-icon name="checkmark-done" color="medium"></ion-icon>
-            <p><b> Completed:</b> {{ userdata.animes_completed }}</p>
-          </ion-item>
+
+        <ion-col size="3">
+          <p class="text-center"><ion-icon name="eye" color="success"></ion-icon></p>
+          <p class="text-center">{{ userdata.animes_watching }}</p>
         </ion-col>
-        <ion-col size="12">
-          <ion-item >
-            <ion-icon name="bookmark" color="dark"></ion-icon>
-            <p><b> Plan To Watch:</b> {{ userdata.animes_plan }}</p>
-          </ion-item>
+
+        <ion-col size="3">
+          <p class="text-center"><ion-icon name="checkmark-done" color="warning"></ion-icon></p>
+          <p class="text-center">{{ userdata.animes_completed }}</p>
         </ion-col>
-        <ion-col size="12">
-          <ion-item >
-            <ion-icon name="close" color="danger"></ion-icon>
-            <p><b> Dropped:</b> {{ userdata.animes_dropped }}</p>
-          </ion-item>
+
+        <ion-col size="3">
+          <p class="text-center"><ion-icon name="bookmark" color="dark"></ion-icon></p>
+          <p class="text-center">{{ userdata.animes_plan }}</p>
         </ion-col>
-        
+        <ion-col size="3">
+          <p class="text-center"><ion-icon name="close" color="danger"></ion-icon></p>
+          <p class="text-center">{{ userdata.animes_dropped }}</p>
+        </ion-col>
       </ion-row>
     </ion-grid>
-
   </div>
 
   
+  
 
+ 
+  <div class="ad-margin"></div>
+  
 
+</ion-content>
