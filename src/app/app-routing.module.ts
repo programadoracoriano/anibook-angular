@@ -175,6 +175,10 @@ const routes: Routes = [
     loadChildren: () => import('./popover/listoptionspopover/listoptionspopover.module').then( m => m.ListoptionspopoverPageModule),
     canActivate: [LoginguardService],
   },
+  {
+    path: 'lang',
+    loadChildren: () => import('./lang/lang.module').then( m => m.LangPageModule)
+  },
   
   
 ];

@@ -8,12 +8,16 @@ import { ReviewModalPage } from '../modals/review-modal/review-modal.page';
 import { ReportmodalPage } from '../modals/reportmodal/reportmodal.page';
 import { ToswarningService } from '../services/toswarning.service';
 import {AdmobService } from '../services/admob.service';
+import { LanguageService } from '../services/language.service';
 @Component({
   selector: 'app-animedetails',
   templateUrl: './animedetails.page.html',
   styleUrls: ['./animedetails.page.scss'],
 })
 export class AnimedetailsPage implements OnInit {
+
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
   public anime_id: string;
   public animedata: any;
   public extra:any;
@@ -31,6 +35,7 @@ export class AnimedetailsPage implements OnInit {
   public testing:any;
   public cover:any;
   scoreArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
   constructor(
     private actRoute: ActivatedRoute,
     public api: ApiService,
@@ -40,12 +45,13 @@ export class AnimedetailsPage implements OnInit {
     private sanitizer: DomSanitizer,
     public modalController: ModalController,
     private admob: AdmobService,
+    public language:LanguageService
   ) {
     this.anime_id = this.actRoute.snapshot.params.id;
    }
 
   ngOnInit() {
-    this.admob.ShowInterstitial();
+    //this.admob.ShowInterstitial();
     this.getAnime();
     this.getScore();
     this.getReviews();
@@ -57,6 +63,7 @@ export class AnimedetailsPage implements OnInit {
     if (localStorage.getItem("tos") == "d" || localStorage.getItem("tos") == undefined){
       this.toswarning.presentAlert();
     }
+    this.strings = this.language.setStrings();
   }
   
   

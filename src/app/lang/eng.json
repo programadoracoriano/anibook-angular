@@ -1,0 +1,78 @@
+{
+    "search":"Search",
+    "searchMenu":"Search Menu",
+    "all":"All",
+    "season":"Season",
+    "genre":"Genre",
+    "user":"User",
+    "lastAddedAnime":"Last added Anime",
+    "days":"days",
+    "image":"Image",
+    "cover":"Cover",
+    "signin":"Sign In",
+    "signup":"Sign Up",
+    "logout":"Logout",
+    "viewMore":"View more",
+    "year":"Year",
+    "update":"Update",
+    "addToList":"Add to List",      
+    "seasons":{
+        "winter":"Winter",
+        "spring":"Spring",
+        "summer":"Summer",
+        "fall":"Fall"
+    },
+    "animeOpt":{
+        "info":"Info",
+        "details":"Details",
+        "reviews":"Reviews",
+        "synopsis":"Synopsis",
+        "broadcast":"Broadcast",
+        "broadData":"Broadcast Data",
+        "trailer":"Trailer",
+        "genres":"Genres",
+        "studios":"Studios",
+        "producers":"Producers",
+        "licensors":"Licensors",
+        "showAllRv":"Show all reviews"
+    },
+    "animeListOpt":{
+        "watching":"Watching",
+        "completed":"Completed",
+        "ptw":"Plan to Watch",
+        "dropped":"Dropped",
+        "addPtw":"Add to plan to Watch",
+        "addDropped":"Add to dropped",
+        "addTo":"Add Anime to",
+        "howManyEps":"How Many Episodes",
+        "score":"Score",
+        "isWatching":"Is Watching"
+    },
+    "menuOpt":{
+        "home":"Home",
+        "lastAdded":"Last Added",
+        "searchAnime":"Search Anime",
+        "searchUsers":"Search Users",
+        "profile":"Profile",
+        "animeList":"Anime List",
+        "customLists":"Custom Lists",
+        "reviews":"Reviews",
+        "randomizer":"Randomizer",
+        "tos":"Terms and Conditions",
+        "tools":"Tools",
+        "main":"Main",
+        "social":"Social Nerworks"
+    },
+    "profileOpts":{
+        "lastFollowerUp":"Last follower's update",
+        "following":"Following",
+        "followers":"Followers",
+        "myStatistics":"My Statistics",
+        "userData":"User Data",
+        "excludedContent":"Excluded Content",
+        "blockUsers":"Blocked Users",
+        "myProfile":"My Profile",
+        "accountConf":"Account Configuration"
+
+    }
+}

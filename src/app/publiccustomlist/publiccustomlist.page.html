@@ -15,28 +15,68 @@
 </ion-header>
 
 <ion-content>
-  <div class="padding-container">
-  <ion-item *ngIf="u_custom">
-    <ion-thumbnail slot="start" >
-      <img [src]=" u_custom.image_url ">
-    </ion-thumbnail>
-    <ion-label>
-      {{ u_custom.title }}
-    </ion-label>
-    <ion-chip color="primary" [routerLink]="['/userdetails/',  u_custom.user.id ]">
-      <ion-avatar>
-        <img [src]="u_custom.user.profile.image_url" />
-      </ion-avatar>
-      <label>{{ u_custom.user.username }}</label>
-    </ion-chip>
-  </ion-item>
 
-  <ion-card>
+
+
+  <div class="anime-wrap" *ngIf="u_custom">
+
+
+    
+    <div class="anime-image" style="background-image: url('{{u_custom.image_url}}')"></div>
+    <div class="title-box">
       
-    <ion-card-content>
-      <h3>
-      Anime List
-      </h3>
+      <h6><b>{{u_custom.title}}</b></h6>
+    </div>
+
+    <div class="user-font" [routerLink]="['/userdetails/',  u_custom.user.id ]">
+      {{ u_custom.user.username }}
+    </div>
+
+    
+
+    
+
+    <div style="background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.95)), url('{{u_custom.image_url}}')" class="cover-anime">
+      
+    </div>
+
+    <div class="header-div">
+
+      <div class="extreme-top text-center">
+      
+          
+    
+    
+  
+</div>
+
+    </div>
+
+    
+    
+    
+
+
+
+
+
+
+ 
+
+
+
+
+</div>
+
+
+
+<ion-item-divider color="medium" class="margin-header">
+  Anime List
+</ion-item-divider>
+  <div class="padding-container ">
+ 
+
+  
       <ion-item [routerLink]="['/animedetails/',  anime.anime.id ]" *ngFor="let anime of getdata">
         <ion-thumbnail slot="start" >
           <img [src]=" anime.anime.image_url ">
@@ -45,8 +85,7 @@
           {{ anime.anime.name }}
         </label>
       </ion-item>
-    </ion-card-content>
-  </ion-card>
+    
 </div>
 <div class="ad-margin"></div>
 </ion-content>

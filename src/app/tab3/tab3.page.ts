@@ -3,18 +3,21 @@ import { ApiService, mediaUrl } from '../services/api.service';
 import {LoginguardService} from '../services/loginguard.service';
 import { Router } from '@angular/router';
 import { MenuController, ModalController, ToastController } from '@ionic/angular';
-import { AdmobService } from '../services/admob.service';
 import { AuthguardService } from '../services/authguard.service';
 import { ActionSheetController } from '@ionic/angular';
 
 import { UserconfigPage } from '../modals/userconfig/userconfig.page';
 import { ToswarningService } from '../services/toswarning.service';
+import { LanguageService } from '../services/language.service';
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
   public checkUser:any = localStorage.getItem("token");
   public r_logout:any;
   public profiledata:any;
@@ -28,6 +31,7 @@ export class Tab3Page {
   public base64Image:any;
   public uploadresponse:any;
   public theme:string;
+
   constructor(
     public guard: LoginguardService,
     public api: ApiService,
@@ -38,6 +42,7 @@ export class Tab3Page {
     public actionSheetController: ActionSheetController,
     private toswarning:ToswarningService,
     public modalController: ModalController,
+    public language:LanguageService
   ) {}
 
   
@@ -68,6 +73,7 @@ export class Tab3Page {
     if (localStorage.getItem("token") == ''){
       this.router.navigate(['/login']);
     }
+    this.strings = this.language.setStrings();
     this.getProfile();
     this.getUserData();
     this.getAvatar();

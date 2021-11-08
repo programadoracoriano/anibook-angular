@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 
-import {AdmobService } from './services/admob.service';
-
+import { AdmobService } from './services/admob.service';
+import { LanguageService } from './services/language.service';
 // Events (iOS only)
 window.addEventListener('statusTap', function () {
   console.log("statusbar tapped");
@@ -27,9 +27,12 @@ const { SplashScreen } = Plugins;
 export class AppComponent {
   private eventOnAdSize;
   private appMargin = 0;
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
   constructor(
     private menu: MenuController,
     private admob: AdmobService,
+    public language:LanguageService
   ) {
     AdMob.initialize();
     
@@ -52,9 +55,8 @@ export class AppComponent {
   }
 
   ngOnInit() :void{
-    
-    this.admob.ShowBanner();
-    this.admob.ShowBanner();
+    this.strings = this.language.setStrings();
+    //this.admob.ShowBanner();
   }
 
   closeFirst() {

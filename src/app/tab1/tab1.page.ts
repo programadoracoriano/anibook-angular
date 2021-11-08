@@ -4,7 +4,7 @@ import {LoginguardService} from '../services/loginguard.service';
 import { AuthguardService } from '../services/authguard.service';
 import { ToswarningService } from '../services/toswarning.service';
 import {  MenuController } from '@ionic/angular';
-
+import { LanguageService } from '../services/language.service';
 
 
 @Component({
@@ -18,6 +18,7 @@ export class Tab1Page {
     initialSlide: 1,
     speed: 400
   };
+  public strings:any;
   public hidespoilers:boolean = true;
   public getdata:any;
   public getcategorie:any;
@@ -25,12 +26,14 @@ export class Tab1Page {
   public season:string = "summer";
   public year:number = 2021;
   public seasonanimes:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
   constructor(
     public guard: LoginguardService,
     public api: ApiService,
     public checkuser: AuthguardService,
     private menu: MenuController,
     private toswarning:ToswarningService,
+    public language:LanguageService
   ) {
 
     
@@ -42,6 +45,8 @@ export class Tab1Page {
 
 
   ionViewDidEnter(){
+    this.strings = this.language.setStrings();
+    
     if (localStorage.getItem("tos") == "d" || localStorage.getItem("tos") == undefined){
       this.toswarning.presentAlert();
     }

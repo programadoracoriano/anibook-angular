@@ -1,0 +1,17 @@
+
+<ion-content>
+  <div class="padding-container">
+    <h3 class="text-center"><ion-text color="primary">Choose your language</ion-text></h3>
+    <ion-list>
+      <ion-item>
+        <ion-label>Language/Idioma</ion-label>
+        <ion-select value="dog" [(ngModel)]="lag" name="lag" (ionChange)="setLang()">
+          <ion-select-option value="en">🇬🇧 English</ion-select-option>
+          <ion-select-option value="pt">🇵🇹 Português</ion-select-option>
+          
+        </ion-select>
+      </ion-item>
+      </ion-list>
+      <h3 class="text-center"><ion-text color="primary">Escolhe o teu Idioma</ion-text></h3>
+  </div>
+</ion-content>

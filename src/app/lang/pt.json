@@ -1,0 +1,78 @@
+{
+    "search":"Pesquisar",
+    "searchMenu":"Menu de Pesquisa",
+    "all":"Todos",
+    "season":"Temporada",
+    "genre":"Género",
+    "user":"Utilizador",
+    "lastAddedAnime":"Ultimos anime adicionados",
+    "days":"Dias",
+    "image":"Imagem",
+    "cover":"Capa",
+    "signin":"Logar",
+    "signup":"Registrar",
+    "logout":"Logout",
+    "viewMore":"Ver mais",
+    "year":"Ano",
+    "update":"Actualizar",
+    "addToList":"Adicionar à Lista",
+    "seasons":{
+        "winter":"Inverno",
+        "spring":"Primavera",
+        "summer":"Verão",
+        "fall":"Outono"
+    },
+    "animeOpt":{
+        "info":"Info",
+        "details":"Detalhes",
+        "reviews":"Reviews",
+        "synopsis":"Sinopse",
+        "broadcast":"Broadcast",
+        "broadData":"Informação de Broadcast",
+        "trailer":"Trailer",
+        "genres":"Género",
+        "studios":"Estúdios",
+        "producers":"Produtores",
+        "licensors":"Licenciadores",
+        "showAllRv":"Mostrar todas as reviews"
+    },
+    "animeListOpt":{
+        "watching":"Assistindo",
+        "completed":"Completado",
+        "ptw":"Planeando assistir",
+        "dropped":"Dropado",
+        "addPtw":"Adicionar a planeando assistir",
+        "addDropped":"Adicionar a dropado",
+        "addTo":"Adicionar anime a",
+        "howManyEps":"Quantos episódios?",
+        "score":"Pontuação",
+        "isWatching":"Está assistindo"
+    },
+    "menuOpt":{
+        "home":"Home",
+        "lastAdded":"Ultimos Adicionados",
+        "searchAnime":"Pesquisar Anime",
+        "searchUsers":"Pesquisar Utilizadores",
+        "profile":"Perfil",
+        "animeList":"Lista de Anime",
+        "customLists":"Listas Personalizadas",
+        "reviews":"Reviews",
+        "randomizer":"Randomizer",
+        "tos":"Termos e Condições",
+        "tools":"Ferramentas",
+        "main":"Principal",
+        "social":"Redes Sociais"
+    },
+    "profileOpts":{
+        "lastFollowerUp":"Ultimas actualizações dos seguidores",
+        "following":"Seguindo",
+        "followers":"Seguidores",
+        "myStatistics":"Minhas Estatísticas",
+        "userData":"Dados do Utilizador",
+        "excludedContent":"Conteúdo Excluido.",
+        "blockUsers":"Utilizadores Bloqueados",
+        "myProfile":"Meu Perfil",
+        "accountConf":"Configuração de Conta"
+
+    }
+}

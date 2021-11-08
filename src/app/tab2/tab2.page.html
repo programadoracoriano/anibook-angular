@@ -1,4 +1,4 @@
-<ion-header >
+<ion-header *ngIf="strings">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button *ngIf="options == true" (click)="changeOptions()"><ion-icon color="light" name="arrow-back-sharp"></ion-icon></ion-button>
@@ -10,26 +10,26 @@
 
     <ion-title>
       <ion-text color="light">
-      <b>Search</b>
+      <b>{{ strings.search }} Anime</b>
     </ion-text>
     </ion-title>
   </ion-toolbar >
   <ion-toolbar color="primary">
-    <ion-searchbar [(ngModel)]="search" name="search" (ionChange)="searchData()"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="search" name="search" (ionChange)="searchData()" placeholder="{{ strings.search }}"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 
-<ion-menu side="end" menuId="searchMenu" contentId="searchM">
+<ion-menu side="end" menuId="searchMenu" contentId="searchM" *ngIf="strings">
     <ion-header>
       <ion-toolbar color="primary">
-        <ion-title><ion-text color="light">Search Menu</ion-text></ion-title>
+        <ion-title><ion-text color="light">{{ strings.searchMenu }}</ion-text></ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item (click)="changeAnimeSearch(2)"><ion-icon name="calendar"></ion-icon>Season</ion-item>
-        <ion-item (click)="changeAnimeSearch(3)"><ion-icon name="apps"></ion-icon>Genre</ion-item>
+        <ion-item (click)="changeAnimeSearch(2)"><ion-icon name="calendar" slot="start"></ion-icon>{{ strings.season }}</ion-item>
+        <ion-item (click)="changeAnimeSearch(3)"><ion-icon name="apps" slot="start"></ion-icon>{{ strings.genre }}</ion-item>
       </ion-list>
 
       <!-- Begin Search Season -->
@@ -38,21 +38,23 @@
           
         <ion-card-content>
         <ion-item>
-          <ion-label>Season</ion-label>
+          <ion-label>{{ strings.season }}</ion-label>
+          
           <ion-select [(ngModel)]="season" name="season" interface="popover">
-            <ion-select-option value="winter">Winter</ion-select-option>
-            <ion-select-option value="spring">Spring</ion-select-option>
-            <ion-select-option value="summer">Summer</ion-select-option>
-            <ion-select-option value="fall">Fall</ion-select-option>
+              <ion-select-option value="winter">{{ strings.seasons.winter }}</ion-select-option>
+              <ion-select-option value="spring">{{ strings.seasons.spring }}</ion-select-option>
+              <ion-select-option value="summer">{{ strings.seasons.summer }}</ion-select-option>
+              <ion-select-option value="fall">{{ strings.seasons.fall }}</ion-select-option>
+            
           </ion-select>
         </ion-item>
 
 
         <ion-item>
-          <ion-label>Year</ion-label>
+          <ion-label>{{ strings.year }}</ion-label>
           <ion-input type="number" name="year" [(ngModel)]="year"></ion-input>
         </ion-item>
-        <ion-button (click)="searchBySeason()"> Search</ion-button>
+        <ion-button (click)="searchBySeason()"> {{ strings.genre }}</ion-button>
       </ion-card-content>
       </ion-card>
     
@@ -66,14 +68,18 @@
           <ion-card-content>
             <ion-item>
               <ion-label>
-                Genre
+                {{ strings.genre }}
               </ion-label>
               <ion-select [(ngModel)]="genre" name="genre" interface="popover">
-                <ion-select-option *ngFor="let g of getgenres" value="{{ g.id }}">{{ g.categorie }}</ion-select-option>
-                
+                <div *ngIf="idi == 'en'">
+                  <ion-select-option *ngFor="let g of getgenres" value="{{ g.id }}">{{ g.categorie }}</ion-select-option>
+                </div>
+                <div *ngIf="idi == 'pt'">
+                  <ion-select-option *ngFor="let g of getgenres" value="{{ g.id }}">{{ g.categorie_pt }}</ion-select-option>
+                </div>
               </ion-select>
             </ion-item>
-            <ion-button (click)="searchByGenre()"> Search</ion-button>
+            <ion-button (click)="searchByGenre()"> {{ strings.search }}</ion-button>
         </ion-card-content>
       </ion-card>
       </div>
@@ -116,7 +122,8 @@
                   
                   
                   <ion-col size="6">
-                    <p *ngIf="anime.type"><ion-chip color="primary">{{ anime.type.type }}</ion-chip></p>
+                    <p *ngIf="anime.type && idi == 'en'"><ion-chip color="primary">{{ anime.type.type }}</ion-chip></p>
+                    <p *ngIf="anime.type && idi == 'pt'"><ion-chip color="primary">{{ anime.type.type_pt }}</ion-chip></p>
                   </ion-col>
                   <hr>
                 </ion-row>

@@ -1,11 +1,11 @@
-<ion-app>
+<ion-app *ngIf="strings">
 
   <ion-menu side="start" menuId="first" contentId="main">
     <ion-header>
       <ion-toolbar color="primary">
         <ion-title>
           <ion-text color="light">
-            Main Menu
+            Menu
           </ion-text>
         </ion-title>
       </ion-toolbar>
@@ -15,41 +15,41 @@
       <ion-list>
         <ion-item-divider color="primary">
           <ion-label>
-            Main
+            {{ strings.menuOpt.main }}
           </ion-label>
         </ion-item-divider>
         
-        <ion-item (click)="closeFirst()" routerLink="/tab1"><ion-icon slot="start" name="home-sharp"></ion-icon>  Home</ion-item>
-        <ion-item (click)="closeFirst()" routerLink="/database"><ion-icon slot="start" name="list-circle-sharp"></ion-icon>  Last Added</ion-item>
-        <ion-item (click)="closeFirst()" routerLink="/tab2"><ion-icon slot="start"  name="search"></ion-icon>  Search Anime</ion-item>
-        <ion-item (click)="closeFirst()" routerLink="/searchuser"><ion-icon slot="start"  name="person-outline"></ion-icon>  Search Users</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/tab1"><ion-icon slot="start" name="home-sharp"></ion-icon>  {{ strings.menuOpt.home }}</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/database"><ion-icon slot="start" name="list-circle-sharp"></ion-icon>  {{ strings.menuOpt.lastAdded }}</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/tab2"><ion-icon slot="start"  name="search"></ion-icon>  {{ strings.menuOpt.searchAnime }}</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/searchuser"><ion-icon slot="start"  name="person-outline"></ion-icon>  {{ strings.menuOpt.searchUsers }}</ion-item>
         
         <ion-item-divider color="primary">
           <ion-label>
-            User
+            {{ strings.menuOpt.user }}
           </ion-label>
         </ion-item-divider>
-        <ion-item (click)="closeFirst()" routerLink="/tab3"><ion-icon slot="start" name="person-sharp"></ion-icon>  Profile</ion-item>
-        <ion-item (click)="closeFirst()" routerLink="/listtab"><ion-icon slot="start" name="list-sharp"></ion-icon>  Anime List</ion-item>
-        <ion-item (click)="closeFirst()" routerLink="/customlist"><ion-icon slot="start" name="list-circle-sharp"></ion-icon>  Custom Lists</ion-item>
-        <ion-item (click)="closeFirst()" routerLink="/myreviews"><ion-icon slot="start"  name="newspaper"></ion-icon>  Reviews</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/tab3"><ion-icon slot="start" name="person-sharp"></ion-icon>  {{ strings.menuOpt.profile }}</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/listtab"><ion-icon slot="start" name="list-sharp"></ion-icon>  {{ strings.menuOpt.animeList }}</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/customlist"><ion-icon slot="start" name="list-circle-sharp"></ion-icon>  {{ strings.menuOpt.customLists }}</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/myreviews"><ion-icon slot="start"  name="newspaper"></ion-icon>  {{ strings.menuOpt.reviews }}</ion-item>
         <ion-item-divider color="primary">
           <ion-label>
-            Tools
+            {{ strings.menuOpt.tools }}
           </ion-label>
         </ion-item-divider>
         
 
-        <ion-item (click)="closeFirst()" routerLink="/randomizer"><ion-icon slot="start"  name="refresh"></ion-icon>  Randomizer</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/randomizer"><ion-icon slot="start"  name="refresh"></ion-icon>  {{ strings.menuOpt.randomizer }}</ion-item>
         <ion-item-divider color="primary">
           <ion-label>
-            Terms and Conditions
+            {{ strings.menuOpt.tos }}
           </ion-label>
         </ion-item-divider>
-        <ion-item (click)="closeFirst()" routerLink="/tos"><ion-icon slot="start" name="checkbox"></ion-icon> Terms and Conditions</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/tos"><ion-icon slot="start" name="checkbox"></ion-icon> {{ strings.menuOpt.tos }}</ion-item>
         <ion-item-divider color="primary">
           <ion-label>
-            Social Networks
+            {{ strings.menuOpt.social }}
           </ion-label>
         </ion-item-divider>
         <ion-item >

@@ -3,7 +3,9 @@
     <ion-buttons slot="start">
       <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
     </ion-buttons>
-    
+    <ion-buttons slot="end">
+      <ion-button (click)="addAnimeModal(u_custom.id)"><ion-icon name="add"></ion-icon></ion-button>
+    </ion-buttons>
     <ion-title>
       <ion-text color="light">
         <b>Custom Anime List</b>
@@ -14,23 +16,65 @@
 
 <ion-content>
  
+  <div class="anime-wrap" *ngIf="u_custom">
 
-  <div *ngIf="u_custom">
-    <ion-item>
-      <ion-thumbnail slot="start" >
-        <img [src]=" u_custom.image_url ">
-      </ion-thumbnail>
-      <ion-label>
-        {{ u_custom.title }}
-      </ion-label>
-    </ion-item>
+
     
-    <ion-card>
+      <div class="anime-image" style="background-image: url('{{u_custom.image_url}}')"></div>
+      <div class="title-box">
+        
+        <h6><b>{{u_custom.title}}</b></h6>
+      </div>
+
+      <div class="user-font" [routerLink]="['/userdetails/',  u_custom.user.id ]">
+        {{ u_custom.user.username }}
+      </div>
+  
       
-      <ion-card-content *ngIf="creating == false">
-        <h3>
-        Anime List
-        </h3>
+  
+      
+  
+      <div style="background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.95)), url('{{u_custom.image_url}}')" class="cover-anime">
+        
+      </div>
+  
+      <div class="header-div">
+  
+        <div class="extreme-top text-center">
+        
+            
+      
+      
+    
+  </div>
+  
+      </div>
+  
+      
+      
+      
+  
+  
+  
+  
+  
+  
+   
+
+
+
+
+  </div>
+
+
+
+  <div *ngIf="u_custom" class="margin-header">
+    <ion-item-divider color="medium">
+      Anime list
+    </ion-item-divider>
+    
+    
+        <div class="padding-container">
         <ion-item  *ngFor="let anime of it">
           <ion-thumbnail slot="start" [routerLink]="['/animedetails/',  anime.anime.id ]" >
             <img [src]=" anime.anime.image_url ">
@@ -42,8 +86,7 @@
             <ion-icon name="trash-sharp"></ion-icon>
           </ion-button>
         </ion-item>
-      </ion-card-content>
-    </ion-card>
+      </div>
     
   </div>
 
@@ -55,10 +98,6 @@
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
   
-  <ion-fab vertical="bottom" *ngIf="creating == false" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="addAnimeModal(u_custom.id)">
-      <ion-icon color="light" name="add-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+  
   <div class="ad-margin"></div>
 </ion-content>

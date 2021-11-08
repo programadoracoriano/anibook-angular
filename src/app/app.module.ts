@@ -10,10 +10,13 @@ import { ReverseloginService } from './services/reverselogin.service';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AdmobService } from './services/admob.service';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule,
+    SocketIoModule.forRoot(config)],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   LoginguardService,
 ReverseloginService,
