@@ -12,7 +12,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
+<ion-content *ngIf="strings && animedata">
   
   <div class="anime-wrap" *ngIf="animedata">
     <div class="anime-image" style="background-image: url('{{animedata.image_url}}')"></div>
@@ -73,13 +73,16 @@
   <ion-col size="6">
     <p *ngIf="getstatus"> <b><ion-text *ngFor="let g of getstatus" >
       <p *ngIf="g.status.val == 1" >
-         <ion-text color="success">{{ g.status.tag }}</ion-text>
+         <ion-text *ngIf="idi == 'en'" color="success">{{ g.status.tag }}</ion-text>
+         <ion-text *ngIf="idi == 'pt'" color="success">{{ g.status.tag_pt }}</ion-text>
       </p>
       <p *ngIf="g.status.val == 2" >
-         <ion-text color="warning">{{ g.status.tag }}</ion-text>
+        <ion-text *ngIf="idi == 'en'" color="warning">{{ g.status.tag }}</ion-text>
+        <ion-text *ngIf="idi == 'pt'" color="warning">{{ g.status.tag_pt }}</ion-text>
       </p>
       <p *ngIf="g.status.val == 3" >
-         <ion-text color="danger">{{ g.status.tag }}</ion-text>
+        <ion-text *ngIf="idi == 'en'" color="danger">{{ g.status.tag }}</ion-text>
+        <ion-text *ngIf="idi == 'pt'" color="danger">{{ g.status.tag_pt }}</ion-text>
       </p>
       
     </ion-text></b></p>
@@ -129,15 +132,15 @@
   <ion-segment scrollable (ionChange)="segmentChanged($event)" value="info">
     <ion-segment-button value="info" (click)="clickSegment(0)">
       <ion-icon name="infinite-sharp"></ion-icon>
-      <ion-label>Info</ion-label>
+      <ion-label>{{ strings.animeOpt.info }}</ion-label>
     </ion-segment-button>
     <ion-segment-button value="details" (click)="clickSegment(1)">
       <ion-icon name="eye" ></ion-icon>
-      <ion-label>Details</ion-label>
+      <ion-label>{{ strings.animeOpt.details }}</ion-label>
     </ion-segment-button>
     <ion-segment-button value="reviews" (click)="clickSegment(2)">
       <ion-icon name="newspaper"></ion-icon>
-      <ion-label>Reviews</ion-label>
+      <ion-label>{{ strings.animeOpt.reviews }}</ion-label>
     </ion-segment-button>
     <!--<ion-segment-button value="ptw" >
       <ion-icon name="bookmark"></ion-icon>
@@ -150,7 +153,7 @@
 
 <ion-item-divider color="medium">
   <ion-label>
-    Anime Statistics
+    {{ strings.animeOpt.statistics }}
   </ion-label>
 </ion-item-divider>
 <div class="" *ngIf="extra">
@@ -158,19 +161,19 @@
     <ion-row>
       <ion-col size="3" class="text-center">
         <h4><ion-text color="success"><ion-icon name="eye" color="success"></ion-icon></ion-text></h4>
-        <p class="tiny-font">{{ extra.watching }} Users</p>
+        <p class="tiny-font">{{ extra.watching }} {{ strings.users }}</p>
       </ion-col>
       <ion-col size="3" class="text-center">
         <h4><ion-text ><ion-icon name="checkmark-done" color="warning"></ion-icon></ion-text></h4>
-        <p class="tiny-font">{{ extra.completed }} Users</p>
+        <p class="tiny-font">{{ extra.completed }} {{ strings.users }}</p>
       </ion-col>
       <ion-col size="3" class="text-center">
         <h4><ion-text color="dark"><ion-icon name="bookmark" color="dark"></ion-icon></ion-text></h4>
-        <p class="tiny-font">{{ extra.plan }} Users</p>
+        <p class="tiny-font">{{ extra.plan }} {{ strings.users }}</p>
       </ion-col>
       <ion-col size="3" class="text-center">
         <h4><ion-text color="danger"><ion-icon name="close" color="danger"></ion-icon></ion-text></h4>
-        <p class="tiny-font">{{ extra.dropped }} Users</p>
+        <p class="tiny-font">{{ extra.dropped }} {{ strings.users }}</p>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -182,15 +185,21 @@
     <!-- begin synopsis-->
     <ion-item-divider color="medium">
       <ion-label>
-        Synopsis
+        {{ strings.animeOpt.synopsis }}
       </ion-label>
     </ion-item-divider>
     <div class="padding-container" *ngIf="animedata">
     
       <label>
         <div>
-          <div *ngIf="h_synopsis == false" class="text-synopsis" [innerHTML]="animedata.sinopse | slice:0:75"></div>
-          <div *ngIf="h_synopsis == true" class="text-synopsis" [innerHTML]="animedata.sinopse"></div>
+          <div *ngIf="idi == 'pt'">
+            <div *ngIf="h_synopsis == false" class="text-synopsis" [innerHTML]="animedata.sinopse_pt | slice:0:75"></div>
+            <div *ngIf="h_synopsis == true" class="text-synopsis" [innerHTML]="animedata.sinopse_pt"></div>
+          </div>
+          <div *ngIf="idi == 'en'">
+            <div *ngIf="h_synopsis == false" class="text-synopsis" [innerHTML]="animedata.sinopse | slice:0:75"></div>
+            <div *ngIf="h_synopsis == true" class="text-synopsis" [innerHTML]="animedata.sinopse"></div>
+          </div>
           <p class="hidenshow" color="tertiary" *ngIf="h_synopsis == false" (click)="ShowHideSynopsis()"><ion-icon name="chevron-down-outline"></ion-icon></p>
           <p class="hidenshow" *ngIf="h_synopsis == true" (click)="ShowHideSynopsis()"><ion-icon name="chevron-up-outline"></ion-icon></p>
         </div>
@@ -202,46 +211,46 @@
   <!-- begin synopsis-->
   <ion-item-divider color="medium">
     <ion-label>
-      Broadcast Data
+      {{ strings.animeOpt.broadData }}
     </ion-label>
   </ion-item-divider>
     <div class="padding-container" *ngIf="animedata">
     
       <ion-label>
-        <h3><b>Number of Episodes: </b>{{ animedata.episodes_number }}</h3>
-        <h3><b>Minutes Per Episode: </b>{{ animedata.minutes_per_episode }} min.</h3>
-        <h3><b>Type: </b>{{ animedata.type.type }} </h3>
-        <h3><b>Source: </b>{{ animedata.source.source }} </h3>
+        <h3><b>{{ strings.animeOpt.epsNumber }} </b>{{ animedata.episodes_number }}</h3>
+        <h3><b>{{ strings.animeOpt.epsMinutes }} </b>{{ animedata.minutes_per_episode }} min.</h3>
+        <h3><b>{{ strings.animeOpt.type }} :  </b>{{ animedata.type.type }} </h3>
+        <h3><b>{{ strings.animeOpt.source }} :   </b>{{ animedata.source.source }} </h3>
         <div *ngIf="animedata.date_option">
 
         <div *ngIf="animedata.date_option.id == 1">
-          <h3><b>Aired: </b>{{ animedata.aired | date:'MMMM , y' }}</h3>
+          <h3><b>{{ strings.animeOpt.aired }} : </b>{{ animedata.aired | date:'MMMM , y' }}</h3>
         </div>
         <div *ngIf="animedata.date_option.id == 2">
-          <h3><b>Aired: </b>{{ animedata.aired | date:'y' }}</h3>
+          <h3><b>{{ strings.animeOpt.aired }} : </b>{{ animedata.aired | date:'y' }}</h3>
         </div>
         <div *ngIf="animedata.date_option.id == 3">
-          <h3><b>Aired: </b>{{ animedata.aired | date:'y' }}</h3>
-          <h3><b>End: </b>{{ animedata.date_end | date:'y' }}</h3>
+          <h3><b>{{ strings.animeOpt.aired }} : </b>{{ animedata.aired | date:'y' }}</h3>
+          <h3><b>{{ strings.animeOpt.end }} : </b>{{ animedata.date_end | date:'y' }}</h3>
         </div>
         <div *ngIf="animedata.date_option.id == 4">
-          <h3><b>Aired: </b>{{ animedata.aired | date:'MMMM , y' }}</h3>
-          <h3><b>End: </b>{{ animedata.date_end | date:'MMMM , y' }}</h3>
+          <h3><b>{{ strings.animeOpt.aired }} : </b>{{ animedata.aired | date:'MMMM , y' }}</h3>
+          <h3><b>{{ strings.animeOpt.end }} : </b>{{ animedata.date_end | date:'MMMM , y' }}</h3>
         </div>
         <div *ngIf="animedata.date_option.id == 5">
-          <h3><b>Aired: </b>{{ animedata.aired | date:'EEEE, MMMM d, y' }}</h3>
-          <h3><b>End: </b>{{ animedata.date_end | date:'y' }}</h3>
+          <h3><b>{{ strings.animeOpt.aired }} : </b>{{ animedata.aired | date:'EEEE, MMMM d, y' }}</h3>
+          <h3><b>{{ strings.animeOpt.end }} : </b>{{ animedata.date_end | date:'y' }}</h3>
         </div>
         <div *ngIf="animedata.date_option.id == 6">
-          <h3><b>Aired: </b>{{ animedata.aired | date:'EEEE, MMMM d, y' }}</h3>
-          <h3><b>End: </b>{{ animedata.date_end | date:'MMMM, y' }}</h3>
+          <h3><b>{{ strings.animeOpt.aired }} : </b>{{ animedata.aired | date:'EEEE, MMMM d, y' }}</h3>
+          <h3><b>{{ strings.animeOpt.end }} : </b>{{ animedata.date_end | date:'MMMM, y' }}</h3>
         </div>
       </div>
 
         <div *ngIf="animedata.date_option == undefined">
-          <h3><b>Broadcast: </b>{{ animedata.aired | date:'EEEE ' }}</h3>
-          <h3><b>Aired: </b>{{ animedata.aired | date:' MMMM d, y' }}</h3>
-          <h3><b>End: </b>{{ animedata.date_end | date:' MMMM d, y' }}</h3>
+          <h3><b>{{ strings.animeOpt.broadcast }} : </b>{{ animedata.aired | date:'EEEE ' }}</h3>
+          <h3><b>{{ strings.animeOpt.aired }} : </b>{{ animedata.aired | date:' MMMM d, y' }}</h3>
+          <h3><b>{{ strings.animeOpt.end }} : </b>{{ animedata.date_end | date:' MMMM d, y' }}</h3>
         </div>
       </ion-label>
     
@@ -249,14 +258,14 @@
     
   <ion-item-divider color="medium">
     <ion-label>
-      Trailer
+      {{ strings.animeOpt.trailer }}
     </ion-label>
   </ion-item-divider>
     <!--Trailer -->
     <div class="padding-container" *ngIf="animedata">
       <div class="embed-container" style="background-image: url('https://img.youtube.com/vi/{{animedata.trailer}}/hqdefault.jpg');" *ngIf="animedata.trailer">
             
-          <ion-button href="https://youtu.be/{{animedata.trailer}}">Watch on Youtube</ion-button> 
+          <ion-button href="https://youtu.be/{{animedata.trailer}}">{{ strings.animeOpt.wony }}</ion-button> 
           
           </div>
       </div>
@@ -271,19 +280,20 @@
 
     <ion-item-divider color="medium">
       <ion-label>
-        Genres
+        {{ strings.animeOpt.genres }}
       </ion-label>
     </ion-item-divider>
 
     <div class="padding-container" *ngIf="animedata">
       <ion-chip color="primary" *ngFor="let g of animedata.categorie">
-        <ion-label  ><b>{{ g.categorie }}</b></ion-label>
+        <ion-label  *ngIf="idi == 'en'"><b>{{ g.categorie }}</b></ion-label>
+        <ion-label  *ngIf="idi == 'pt'"><b>{{ g.categorie_pt }}</b></ion-label>
       </ion-chip>
     </div>
 
     <ion-item-divider color="medium">
       <ion-label>
-        Studios
+        {{ strings.animeOpt.studios }}
       </ion-label>
     </ion-item-divider>
     <div class="padding-container" *ngIf="animedata">
@@ -295,7 +305,7 @@
 
     <ion-item-divider color="medium">
       <ion-label>
-        Producers
+        {{ strings.animeOpt.producers }}
       </ion-label>
     </ion-item-divider>
 
@@ -307,7 +317,7 @@
     </div>
     <ion-item-divider color="medium">
       <ion-label>
-        Licensors
+        {{ strings.animeOpt.licensors }}
       </ion-label>
     </ion-item-divider>
     <div class="padding-container" *ngIf="animedata">
@@ -326,9 +336,9 @@
     <div *ngIf="segment == 2">
       <ion-card *ngIf="animedata">
     <ion-item>
-      <label><h4><b>Reviews</b></h4></label>
+      <label><h4><b>{{ strings.animeOpt.reviews}}</b></h4></label>
       <ion-button [routerLink]="['/reviews/',  animedata.id ]" color="primary" slot="end">
-        Show All Reviews
+        {{ strings.animeOpt.allReviews}}
       </ion-button>
     </ion-item>
     
@@ -343,12 +353,13 @@
         </ion-thumbnail>
         <ion-label>
           <h5>{{ r.user.username }}</h5>
-          <p>Status: {{ r.status.status.tag }}</p>
-          <p>Posted On: {{ r.date }}</p>
-          <a (click)="reportModal(r.id)">Report Review</a>
+          <p *ngIf="idi == 'en'">Status: {{ r.status.status.tag }}</p>
+          <p *ngIf="idi == 'pt'">Status: {{ r.status.status.tag_pt }}</p>
+          <p>{{ strings.animeOpt.postedOn}} {{ r.date }}</p>
+          <a (click)="reportModal(r.id)">{{ strings.animeOpt.reportReview}}</a>
         </ion-label>
         <div slot="end" class="score-font-small">
-          Score <br><b class="font-small">{{ r.status.score }} </b>
+          {{ strings.animeOpt.score}} <br><b class="font-small">{{ r.status.score }} </b>
         </div>
       </ion-item>
     
@@ -362,7 +373,7 @@
     <ion-item *ngIf="getstatus">
       <div *ngFor="let g of getstatus">
       <ion-button *ngIf="g.status.val == 2 || g.status.val == 1 || g.status == 3" color="primary" (click)="reviewModal(animedata.id)">
-        Create a Review
+        {{ strings.animeOpt.createReview}}
       </ion-button>
     </div>
     </ion-item>

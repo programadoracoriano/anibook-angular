@@ -11,20 +11,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="strings">
   <div class="padding-container margin-top">
-    <h4 class="white-text text-center"><b>Sign in Now</b></h4>
+    <h4 class="white-text text-center"><b>{{ strings.signin }}</b></h4>
 
     <ion-item>
       <ion-label><ion-icon name="person-outline"></ion-icon></ion-label>
-      <ion-input [(ngModel)]="username" type="text" placeholder="Username" required="true"></ion-input>
+      <ion-input [(ngModel)]="username" type="text" placeholder="{{ strings.user }}" required="true"></ion-input>
     </ion-item>
     <ion-item>
     <ion-label><ion-icon name="lock-closed-outline"></ion-icon></ion-label>
-    <ion-input [(ngModel)]="password" type="password" placeholder="Password" required="true"></ion-input>
+    <ion-input [(ngModel)]="password" type="password" placeholder="{{ strings.password }}" required="true"></ion-input>
   </ion-item>
   
-    <ion-button (click)="login()" primary placeholder="Username"><ion-icon name="log-in-outline"></ion-icon> Sign in </ion-button>
+    <ion-button (click)="login()" primary placeholder="Username" class="text-center"><ion-icon slot="start" name="log-in-outline"></ion-icon> {{ strings.signin }} </ion-button>
   </div>
 
   <div *ngIf="msg">
@@ -42,8 +42,8 @@
 
 
   <div class="component-center">
-    <h4><ion-text color="primary">Click below create a account</ion-text></h4>
-      <ion-button color="primary" routerLink="/signup">Signup</ion-button>
+    <h4><ion-text color="primary">{{ strings.profileOpts.belowToReg }}</ion-text></h4>
+      <ion-button color="primary" routerLink="/signup">{{ strings.signup }}</ion-button>
   </div>
 
   

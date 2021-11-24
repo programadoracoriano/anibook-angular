@@ -1,12 +1,16 @@
 import { Component, OnInit, } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { ApiService } from '../../services/api.service';
+import { LanguageService } from '../../services/language.service';
 @Component({
   selector: 'app-modal-list',
   templateUrl: './modal-list.page.html',
   styleUrls: ['./modal-list.page.scss'],
 })
 export class ModalListPage implements OnInit {
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
+
   public id:any;
   public postresponse:any;
   public ganime:any;
@@ -21,16 +25,22 @@ export class ModalListPage implements OnInit {
   public score:number;
   public scoreVar:number;
   public scoreArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
   constructor(
     public modalController: ModalController,
     public api: ApiService,
     public toastController: ToastController,
+    public language:LanguageService
   ) { }
 
   ngOnInit() {
     this.getNote(this.id);
   }
 
+
+  ionViewDidEnter(){
+    this.strings = this.language.setStrings();
+  }
   
 
   dismiss() {

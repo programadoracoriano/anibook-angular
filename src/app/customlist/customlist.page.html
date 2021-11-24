@@ -1,15 +1,15 @@
-<ion-header>
+<ion-header *ngIf="strings">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       
       <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button  (click)="createListModal()">Create</ion-button>
+      <ion-button  (click)="createListModal()">{{ strings.create }}</ion-button>
     </ion-buttons>
     <ion-title>
       <ion-text color="light">
-        <b>Custom List</b>
+        <b>{{ strings.menuOpt.customLists }}</b>
       </ion-text>
     </ion-title>
   </ion-toolbar>
@@ -17,17 +17,17 @@
 
 
 
-<ion-content>
+<ion-content *ngIf="strings">
   <div>
     <!-- Default Segment -->
   <ion-segment scrollable (ionChange)="segmentChanged($event)" value="all">
     <ion-segment-button value="all" (click)="publicList()">
       <ion-icon name="infinite-sharp"></ion-icon>
-      <ion-label>All</ion-label>
+      <ion-label>{{ strings.all }}</ion-label>
     </ion-segment-button>
     <ion-segment-button value="watching" (click)="customListData()">
       <ion-icon name="eye" ></ion-icon>
-      <ion-label>My Lists</ion-label>
+      <ion-label>{{ strings.myLists }}</ion-label>
     </ion-segment-button>
   </ion-segment>
 </div>

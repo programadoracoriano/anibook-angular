@@ -1,25 +1,25 @@
-<ion-header>
+<ion-header *ngIf="strings">
   <ion-toolbar color="primary">
     <ion-buttons slot="end">
       <ion-button>
         <ion-text color="light" (click)="dismiss()">
-          CLOSE
+          {{ strings.close }}
         </ion-text>
       </ion-button>
     </ion-buttons>
     <ion-title>
       <ion-text color="light">
-        Create Custom List
+        {{ strings.animeListOpt.createCustomList }}
       </ion-text>
       </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="strings">
   <div class="padding-container">
     <ion-item>
       <ion-label>
-        <h3>Create a New Custom List </h3>
+        <h3>{{ strings.animeListOpt.createCustomList }} </h3>
       </ion-label>
     </ion-item>
     <div *ngIf="error" class="text-center">
@@ -27,18 +27,18 @@
     </div>
     <ion-item>
       <ion-label>
-        Title
+        {{ strings.animeOpt.title }}
       </ion-label>
-      <ion-input name="title" [(ngModel)]="title" placeholder="Title Here"></ion-input>
+      <ion-input name="title" [(ngModel)]="title" placeholder="{{ strings.animeOpt.title }}"></ion-input>
     </ion-item>
     <ion-item>
     
-       <ion-label>Add Anime To Thumbnail</ion-label>
+       <ion-label>{{ strings.animeListOpt.addThumbnail }}</ion-label>
       
     </ion-item>
-    <ion-searchbar [(ngModel)]="search" name="search" (ionChange)="searchData()"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="search" name="search" (ionChange)="searchData()" placeholder="{{ strings.search }}"></ion-searchbar>
     
-      <ion-button color="primary" (click)="createCustomList()">Create Custom List</ion-button>
+      <ion-button color="primary" (click)="createCustomList()">{{ strings.animeListOpt.createCustomList }}</ion-button>
     
     <div *ngIf="postresponse">
       {{ postresponse.msg }}
@@ -52,7 +52,7 @@
         </ion-thumbnail>
         <ion-label>
           <h3>{{anime.name}}</h3>
-          <p>Nº of Episodes: {{ anime.episodes_number }}</p>
+          <p>{{ strings.animeOpt.epsNumber }}: {{ anime.episodes_number }}</p>
         </ion-label>
         <ion-radio slot="end" value="{{ anime.id }}"></ion-radio>
       </ion-item>

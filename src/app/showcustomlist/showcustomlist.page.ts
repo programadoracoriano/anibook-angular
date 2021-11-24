@@ -4,22 +4,27 @@ import { ActivatedRoute } from '@angular/router';
 import { ActionSheetController, MenuController, ModalController, 
   IonInfiniteScroll } from '@ionic/angular';
 import { AddAnimeCustomListPage } from '../modals/add-anime-custom-list/add-anime-custom-list.page';
-import { AdmobService } from '../services/admob.service';
+import { LanguageService } from '../services/language.service';
 @Component({
   selector: 'app-showcustomlist',
   templateUrl: './showcustomlist.page.html',
   styleUrls: ['./showcustomlist.page.scss'],
 })
 export class ShowcustomlistPage implements OnInit {
+
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
-  list_id: string;
-  getdata:any;
-  creating:boolean = false;
-  searchdata:any;
-  search:any;
-  postresponse:any;
-  main:any;
-  u_custom:any;
+
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
+
+  public list_id: string;
+  public getdata:any;
+  public creating:boolean = false;
+  public searchdata:any;
+  public search:any;
+  public postresponse:any;
+  public main:any;
+  public u_custom:any;
 
 
   it = [];
@@ -32,7 +37,7 @@ export class ShowcustomlistPage implements OnInit {
     private menu: MenuController,
     public actionSheetController: ActionSheetController,
     public modalController: ModalController,
-    private admobService: AdmobService,
+    public language:LanguageService,
   ) { 
     this.list_id = this.actRoute.snapshot.params.id;
   }
@@ -40,6 +45,8 @@ export class ShowcustomlistPage implements OnInit {
   ngOnInit() {
     
   }
+
+  
 
   openFirst() {
     this.menu.enable(true, 'first');
@@ -51,6 +58,7 @@ export class ShowcustomlistPage implements OnInit {
     
     this.getData();
     this.uniqueCustomData();
+    this.strings = this.language.setStrings();
   }
 
 

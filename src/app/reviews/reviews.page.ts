@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { MenuController, IonInfiniteScroll } from '@ionic/angular';
+import { LanguageService } from '../services/language.service';
 @Component({
   selector: 'app-reviews',
   templateUrl: './reviews.page.html',
@@ -9,16 +10,24 @@ import { MenuController, IonInfiniteScroll } from '@ionic/angular';
 })
 export class ReviewsPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
-  anime_id:any;
-  reviewdata:any;
-  animedata:any;
+
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
+
+  public anime_id:any;
+  public reviewdata:any;
+  public animedata:any;
+
+
   it = [];
   private readonly offset:number = 12;
   private index:number = 0;
+
   constructor(
     private actRoute: ActivatedRoute,
     public api: ApiService,
     private menu: MenuController,
+    public language:LanguageService
   ) { 
     this.anime_id = this.actRoute.snapshot.params.id;
   }
@@ -27,6 +36,11 @@ export class ReviewsPage implements OnInit {
     this.getReviews();
     this.getAnime();
   }
+
+  ionViewDidEnter(){
+    this.strings = this.language.setStrings();
+  }
+
 
   openFirst() {
     this.menu.enable(true, 'first');

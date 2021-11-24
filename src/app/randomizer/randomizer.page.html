@@ -1,16 +1,16 @@
-<ion-header>
+<ion-header *ngIf="strings">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
     </ion-buttons>
     <ion-title>
-      <ion-text color="light"><b>Randomizer</b></ion-text>
+      <ion-text color="light"><b>{{ strings.menuOpt.randomizer }}</b></ion-text>
     </ion-title>
 
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="strings">
   <div class="padding-container full-body">
 <ion-grid>
   <ion-row>
@@ -26,15 +26,20 @@
         <ion-card-content>
           <ion-item>
             <ion-label>
-              Genre
+              {{ strings.genre }}
             </ion-label>
             <ion-select [(ngModel)]="genre" name="genre" interface="popover">
-              <ion-select-option *ngFor="let g of getgenres" value="{{ g.id }}">{{ g.categorie }}</ion-select-option>
+              <div *ngIf="idi == 'en'" >
+                <ion-select-option *ngFor="let g of getgenres" value="{{ g.id }}">{{ g.categorie }}</ion-select-option>
+              </div>
+              <div *ngIf="idi == 'pt'" >
+                <ion-select-option *ngFor="let g of getgenres" value="{{ g.id }}">{{ g.categorie_pt }}</ion-select-option>
+              </div>
               
             </ion-select>
           </ion-item>
           <div class="text-center">
-            <ion-button (click)="getAnime()"> Pick</ion-button>
+            <ion-button (click)="getAnime()"> {{ strings.pick }}</ion-button>
           </div>
       </ion-card-content>
     </ion-card>

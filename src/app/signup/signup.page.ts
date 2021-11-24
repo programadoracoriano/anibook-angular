@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { ApiService } from '../services/api.service'
+import { LanguageService } from '../services/language.service';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit {
+
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
+
   public userdata:any;
   public username:any;
   public email:string;
@@ -18,6 +23,7 @@ export class SignupPage implements OnInit {
   constructor(
     public api: ApiService,
     private menu: MenuController,
+    public language:LanguageService
   ) { }
 
   ngOnInit() {
@@ -28,12 +34,26 @@ export class SignupPage implements OnInit {
     this.menu.open('first');
   }
 
+  ionViewDidEnter(){
+    this.strings = this.language.setStrings();
+  }
+
   signupUser(){
     if (this.username == undefined){
-      this.error = "You need to insert a username";
+      if( this.idi == 'en' ){
+        this.error = "You need to insert a username";
+      }
+      else if( this.idi == 'pt' ){
+        this.error = "Tu precisas de inserir um nome de utilizador.";
+      }
     }
     else if(this.password !== this.password2){
-      this.error = "The passwords don't match!"
+      if(this.idi == 'en'){
+        this.error = "The passwords don't match!"
+      }
+      else if(this.idi == 'pt'){
+        this.error = "As passwords não correspondem!"
+      }
     }
     else{
       this.error == undefined;

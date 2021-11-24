@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header *ngIf="strings">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
@@ -8,13 +8,13 @@
     </ion-buttons>
     <ion-title>
       <ion-text color="light">
-      My Reviews
+      {{ strings.profileOpts.myReviews }}
     </ion-text>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="strings">
 
   <div class="padding-container">
     <ion-list>
@@ -23,8 +23,8 @@
           <img [src]="a.anime.image_url">
         </ion-thumbnail>
         <ion-label (click)="reviewModal(a.anime.id)">
-          <p *ngIf="a.draft == 0"> Draft </p>
-          <p *ngIf="a.draft == 1"> <ion-text color="primary"><b>Published </b></ion-text></p>
+          <p *ngIf="a.draft == 0"> {{ strings.draft }} </p>
+          <p *ngIf="a.draft == 1"> <ion-text color="primary"><b>{{ strings.published }} </b></ion-text></p>
           {{ a.anime.name }}
           <p>{{ a.review | slice:0:25 }}...</p>
         </ion-label>

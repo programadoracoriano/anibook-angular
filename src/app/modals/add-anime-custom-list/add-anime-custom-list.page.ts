@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { ToastController, ModalController} from '@ionic/angular';
+import { LanguageService } from '../../services/language.service';
 @Component({
   selector: 'app-add-anime-custom-list',
   templateUrl: './add-anime-custom-list.page.html',
   styleUrls: ['./add-anime-custom-list.page.scss'],
 })
 export class AddAnimeCustomListPage implements OnInit {
+
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
+
+
   public search:string;
   public searchdata:any;
   public postresponse:any;
@@ -17,10 +23,15 @@ export class AddAnimeCustomListPage implements OnInit {
     public api: ApiService,
     public modalController: ModalController,
     public toastController: ToastController,
+    public language:LanguageService
   ) { }
 
   ngOnInit() {
     this.uniqueCustomData();
+  }
+
+  ionViewDidEnter(){
+    this.strings = this.language.setStrings();
   }
 
   dismiss() {

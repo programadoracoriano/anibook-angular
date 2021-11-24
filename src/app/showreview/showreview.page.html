@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header *ngIf="strings">
   
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
@@ -6,12 +6,12 @@
     </ion-buttons>
     
     <ion-title>
-     <ion-text color="light"> Review</ion-text>
+     <ion-text color="light"> {{ strings.review }}</ion-text>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="strings">
   <div *ngIf="reviewdata">
     <ion-item >
       <ion-thumbnail slot="start">

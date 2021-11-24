@@ -1,41 +1,41 @@
-<ion-header>
+<ion-header *ngIf="strings">
   <ion-toolbar color="primary">
     <ion-buttons slot="end">
       <ion-button>
         <ion-text color="light" (click)="dismiss()">
-          CLOSE
+          {{ strings.close }}
         </ion-text>
       </ion-button>
     </ion-buttons>
     <ion-title>
       <ion-text color="light">
-        User Details
+        {{ strings.profileOpts.userDetails }}
       </ion-text>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="strings">
 
   <ion-card *ngIf="uploadType == undefined">
     <ion-grid>
       <ion-row>
         <ion-col size="12">
           <div class="text-center">
-            <h3>Profile Image and Cover Upload</h3>
+            <h3>{{ strings.profileOpts.coverProfileImage }}</h3>
           </div>
         </ion-col>
-        <ion-col size="6">
+        <ion-col size="12">
           <div class="text-center">
             <ion-button color="primary" (click)="changeUploadType('pimage')">
-              User Image
+              {{ strings.profileOpts.userImage }}
             </ion-button>
           </div>
         </ion-col>
-        <ion-col size="6">
+        <ion-col size="12">
           <div class="text-center">
             <ion-button color="primary" (click)="changeUploadType('pcover')">
-              Cover Image
+              {{ strings.profileOpts.coverImage }}
             </ion-button>
           </div>
         </ion-col>
@@ -50,12 +50,12 @@
       <ion-row>
         <ion-col size="12">
           <div class="text-center">
-            <h4>Update Image</h4>
+            <h4>{{ strings.profileOpts.updateImage }}</h4>
           </div>
         </ion-col>
         <ion-col *ngIf="base64Image" size="12">
           <div  class="text-center">
-            <h6>Preview</h6>
+            <h6>{{ strings.preview }}</h6>
           </div>
           <div  class="user-img text-center" style="background-image: url('{{base64Image}}');">
             
@@ -63,14 +63,14 @@
             
           </div>
           <div  class="text-center">
-            <ion-button color="primary" (click)="uploadImage()">Upload</ion-button>
+            <ion-button color="primary" (click)="uploadImage()">{{ strings.upload }}</ion-button>
           </div>
         </ion-col>
        
       
       <ion-col size="12">
         <div class="text-center">
-          <ion-button color="primary" (click)="openCamera()"><ion-icon name="camera" slot="start"></ion-icon> Camera</ion-button>
+          <ion-button color="primary" (click)="openCamera()"><ion-icon name="camera" slot="start"></ion-icon> {{ strings.camera }}</ion-button>
         </div>
       </ion-col>
       
@@ -85,12 +85,12 @@
     <ion-row>
       <ion-col size="12">
         <div class="text-center">
-          <h4>Update Cover</h4>
+          <h4>{{ strings.profileOpts.updateCover }}</h4>
         </div>
       </ion-col>
       <ion-col *ngIf="base64Image" size="12">
         <div  class="text-center">
-          <h6>Preview</h6>
+          <h6>{{ strings.preview }}</h6>
         </div>
         <div  class="cover-img text-center" style="background-image: url('{{base64Image}}');">
           
@@ -98,12 +98,12 @@
           
         </div>
         <div  class="text-center">
-          <ion-button color="primary" (click)="uploadCover()">Upload</ion-button>
+          <ion-button color="primary" (click)="uploadCover()">{{ strings.upload }}</ion-button>
         </div>
       </ion-col>
       <ion-col size="12">
         <div class="text-center">
-          <ion-button color="primary" (click)="openCamera()"><ion-icon name="camera" slot="start"></ion-icon> Camera</ion-button>
+          <ion-button color="primary" (click)="openCamera()"><ion-icon name="camera" slot="start"></ion-icon> {{ strings.camera }}</ion-button>
         </div>
       </ion-col>
       
@@ -112,33 +112,41 @@
   </ion-grid>
 </ion-card>
 
+
 <ion-card>
   <ion-card-content>
-    <h4>This section is a filter of what type of content you don't want to see on app.</h4>
+    <h4>{{ strings.profileOpts.excludedMsg }}</h4>
     <ion-item>
       <ion-label>
-        Genre
+        {{ strings.rating }}
       </ion-label>
       <ion-select [(ngModel)]="rating" name="rating" interface="popover">
-        <ion-select-option *ngFor="let g of getrating" value="{{ g.id }}">{{ g.rating }}</ion-select-option>
-        
+        <div *ngIf="idi == 'en'">
+          <ion-select-option *ngFor="let g of getrating" value="{{ g.id }}">{{ g.rating }}</ion-select-option>
+        </div>
+        <div *ngIf="idi == 'pt'">
+          <ion-select-option *ngFor="let g of getrating" value="{{ g.id }}">{{ g.rating_pt }}</ion-select-option>
+        </div>
       </ion-select>
     </ion-item>
-    <ion-button (click)="excludeRating()"> Exclude</ion-button>
+    <ion-button (click)="excludeRating()"> {{ strings.exclude }}</ion-button>
     <hr>
     
     <div *ngIf="getuser">
-      <h4>Excluded Content</h4>
+      <h4>{{ strings.profileOpts.excludedContent }}</h4>
     <ion-item *ngFor="let item of getuser.profile.rating">
-      <ion-label slot="start">
+      <ion-label slot="start" *ngIf="idi == 'en'">
         {{ item.rating }}
+      </ion-label>
+      <ion-label slot="start" *ngIf="idi == 'pt'">
+        {{ item.rating_pt }}
       </ion-label>
         
           <ion-icon (click)="removeExcludeRating(item.id)" name="remove-circle" slot="end" color="danger"></ion-icon>
         
     </ion-item>
     <hr>
-    <h4>Blocked Users</h4>
+    <h4>{{ strings.profileOpts.blockedUsers }}</h4>
       <ion-item *ngFor="let item of getuser.profile.blockuser">
         <ion-label>
           {{ item.username }}

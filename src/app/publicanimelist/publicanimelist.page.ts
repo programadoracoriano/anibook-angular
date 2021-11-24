@@ -3,20 +3,28 @@ import { ApiService } from '../services/api.service';
 import { ActivatedRoute } from '@angular/router';
 import { AdmobService } from '../services/admob.service';
 import { MenuController } from '@ionic/angular';
+import { LanguageService } from '../services/language.service';
 @Component({
   selector: 'app-publicanimelist',
   templateUrl: './publicanimelist.page.html',
   styleUrls: ['./publicanimelist.page.scss'],
 })
 export class PublicanimelistPage implements OnInit {
-  user_id:number;
-  animedata:any;
-  userdata:any;
+
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
+
+  private user_id:number;
+  public animedata:any;
+  public userdata:any;
+
+
+
   constructor(
     public api: ApiService,
     private actRoute: ActivatedRoute,
-    private admobService: AdmobService,
     private menu: MenuController,
+    public language:LanguageService
   ) { 
     this.user_id = this.actRoute.snapshot.params.id;
   }
@@ -28,7 +36,9 @@ export class PublicanimelistPage implements OnInit {
   }
 
 
-  
+  ionViewDidEnter(){
+    this.strings = this.language.setStrings();
+  }
 
 
   

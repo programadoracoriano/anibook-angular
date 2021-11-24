@@ -5,7 +5,7 @@ import { ApiService } from '../services/api.service';
 
 import { ReviewModalPage } from '../modals/review-modal/review-modal.page';
 import { ToswarningService } from '../services/toswarning.service';
-
+import { LanguageService } from '../services/language.service';
 @Component({
   selector: 'app-myreviews',
   templateUrl: './myreviews.page.html',
@@ -13,6 +13,11 @@ import { ToswarningService } from '../services/toswarning.service';
 })
 export class MyreviewsPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+
+
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
+
   public reviewdata:any;
 
 
@@ -26,6 +31,7 @@ export class MyreviewsPage implements OnInit {
     public actionSheetController: ActionSheetController,
     public modalController: ModalController,
     private toswarning:ToswarningService,
+    public language:LanguageService
   ) { }
 
   ngOnInit() {
@@ -44,7 +50,7 @@ export class MyreviewsPage implements OnInit {
       this.toswarning.presentAlert();
     }
     this.getData();
-    
+    this.strings = this.language.setStrings();
   }
 
 

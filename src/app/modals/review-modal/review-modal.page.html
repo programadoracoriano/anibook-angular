@@ -1,31 +1,31 @@
-<ion-header>
+<ion-header *ngIf="strings">
   <ion-toolbar color="primary">
     <ion-buttons slot="end">
       <ion-button>
         <ion-text color="light" (click)="dismiss()">
-          CLOSE
+          {{ strings.close }}
         </ion-text>
       </ion-button>
     </ion-buttons>
     <ion-title>
       <ion-text color="light">
-        Create a Review
+        {{ strings.animeOpt.createReview }}
       </ion-text>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="strings">
 <!-- Review -->
-<div >
+<div>
   <ion-card *ngIf="getreview">
     <ion-card-content>
       <ion-item>
-        <ion-textarea type="textarea" placeholder="Write your review here..." [(ngModel)]="review" name="review"
+        <ion-textarea type="textarea" placeholder="{{ strings.animeOpt.writeReview }}" [(ngModel)]="review" name="review"
         value="{{ getreview.review }}"></ion-textarea>
       </ion-item>
-      <ion-button color="primary" (click)="addReview(1)"> Publish </ion-button>
-      <ion-button color="primary" (click)="addReview(0)"> Save as Draft </ion-button>
+      <ion-button color="primary" (click)="addReview(1)"> {{ strings.animeOpt.createReview }} </ion-button>
+      <ion-button color="primary" (click)="addReview(0)"> {{ strings.saveDraft }} </ion-button>
     </ion-card-content>
   </ion-card>
 </div>

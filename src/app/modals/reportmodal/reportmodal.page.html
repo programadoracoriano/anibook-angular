@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header *ngIf="strings">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button  (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
@@ -7,13 +7,13 @@
     <ion-buttons slot="end">
       <ion-button slot="end">
         <ion-text color="light" (click)="dismiss()">
-          CLOSE
+          {{ strings.close }}
         </ion-text>
       </ion-button>
     </ion-buttons>
     <ion-title>
       <ion-text color="light">
-        <b>Report User</b>
+        <b>{{ strings.profileOpts.reportUser }}</b>
       </ion-text>
     </ion-title>
   </ion-toolbar>
@@ -21,15 +21,16 @@
 
 
 
-<ion-content>
+<ion-content *ngIf="strings">
   <ion-list>
     <ion-radio-group name="motive" [(ngModel)]="motive">
       <ion-list-header>
-        <ion-label>Report Motive</ion-label>
+        <ion-label>{{ strings.profileOpts.reportMotive }}</ion-label>
       </ion-list-header>
   
       <ion-item *ngFor="let item of motives">
-        <ion-label>{{ item.motive }}</ion-label>
+        <ion-label *ngIf="idi == 'en'">{{ item.motive }}</ion-label>
+        <ion-label *ngIf="idi == 'pt'">{{ item.motive_pt }}</ion-label>
         <ion-radio slot="start" value="{{ item.id }}"></ion-radio>
       </ion-item>
   
@@ -37,7 +38,7 @@
     </ion-radio-group>
   </ion-list>
   <ion-button (click)="reportButton()">
-    Report
+    {{ strings.report }}
   </ion-button>
   <div class="ad-margin"></div>
 </ion-content>

@@ -6,7 +6,7 @@ import { MenuController, ModalController, ActionSheetController,
 import { AddAnimeListPage } from '../modals/add-anime-list/add-anime-list.page';
 import { ToswarningService } from '../services/toswarning.service';
 import { ListoptionspopoverPage } from '../popover/listoptionspopover/listoptionspopover.page';
-
+import { LanguageService } from '../services/language.service';
 
 var theme = localStorage.getItem("theme");
 
@@ -17,6 +17,9 @@ var theme = localStorage.getItem("theme");
 })
 export class AnimelistPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
   public animedata:any;
   public addstatus:boolean = false;
   public postresponse:any;
@@ -40,6 +43,7 @@ export class AnimelistPage implements OnInit {
     public modalController: ModalController,
     public popoverController: PopoverController,
     public actionSheetController: ActionSheetController,
+    public language:LanguageService
   ) { }
 
   ngOnInit() {
@@ -56,6 +60,7 @@ export class AnimelistPage implements OnInit {
     if (localStorage.getItem("tos") == "d" || localStorage.getItem("tos") == undefined){
       this.toswarning.presentAlert();
     }
+    this.strings = this.language.setStrings();
     this.addstatus = false;
   }
 

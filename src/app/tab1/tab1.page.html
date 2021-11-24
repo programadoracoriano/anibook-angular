@@ -100,7 +100,7 @@
                   </ion-avatar>
                   <ion-label>{{ list.user.username }}</ion-label>
                 </ion-chip>
-                <ion-text color="warning" class="text-bold">{{ strings.animeListOpt.completed }}</ion-text> <br>
+                <ion-text color="warning" class="text-bold">{{ strings.animeListOpt.isCompleted }}</ion-text> <br>
                 <ion-text [routerLink]="['/animedetails/',  list.anime.id ]">{{ list.anime.name }}</ion-text>
               </div>
 
@@ -112,7 +112,7 @@
                   </ion-avatar>
                   <ion-label>{{ list.user.username }}</ion-label>
                 </ion-chip>
-                <ion-text class="text-bold">{{ strings.animeListOpt.ptw }}</ion-text> <br>
+                <ion-text class="text-bold">{{ strings.animeListOpt.isPtw }}</ion-text> <br>
                 <ion-text [routerLink]="['/animedetails/',  list.anime.id ]">{{ list.anime.name }}</ion-text>
               </div>
 
@@ -125,7 +125,7 @@
                   </ion-avatar>
                   <ion-label>{{ list.user.username }}</ion-label>
                 </ion-chip>
-                <ion-text color="danger" class="text-bold">{{ strings.animeListOpt.dropped }}</ion-text> <br>
+                <ion-text color="danger" class="text-bold">{{ strings.animeListOpt.isDropped }}</ion-text> <br>
                 <ion-text [routerLink]="['/animedetails/',  list.anime.id ]">{{ list.anime.name }}</ion-text>
               </div>
 

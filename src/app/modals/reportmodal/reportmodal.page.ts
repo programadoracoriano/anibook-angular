@@ -1,27 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import {  ToastController, ModalController, MenuController} from '@ionic/angular';
 import { ApiService } from '../../services/api.service';
+import { LanguageService } from '../../services/language.service';
 @Component({
   selector: 'app-reportmodal',
   templateUrl: './reportmodal.page.html',
   styleUrls: ['./reportmodal.page.scss'],
 })
 export class ReportmodalPage implements OnInit {
+
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
+
+
   public pid:number;
   public type:any;
   public motives:any;
   public reportResponse:any;
   public motive:number;
+
   constructor(
     public api:ApiService,
     public modalController: ModalController,
     public toastController:ToastController,
     private menu: MenuController,
+    public language:LanguageService
   ) { }
 
   ngOnInit() {
     this.getReportMotive();
   }
+
+
+  ionViewDidEnter(){
+    this.strings = this.language.setStrings();
+  }
+
 
   async presentToast() {
     const toast = await this.toastController.create({

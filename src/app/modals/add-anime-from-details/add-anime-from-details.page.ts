@@ -1,14 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { ModalController, ToastController } from '@ionic/angular';
+import { LanguageService } from '../../services/language.service';
 @Component({
   selector: 'app-add-anime-from-details',
   templateUrl: './add-anime-from-details.page.html',
   styleUrls: ['./add-anime-from-details.page.scss'],
 })
 export class AddAnimeFromDetailsPage implements OnInit {
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
+
   public id:any;
   public scoreArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
   public animedata:any;
   public cover:any;
   public postresponse:any;
@@ -18,15 +23,22 @@ export class AddAnimeFromDetailsPage implements OnInit {
   public score:number;
   public options:any;
   public option:any;
+
   constructor(
     public api: ApiService,
     public modalController: ModalController,
     public toastController: ToastController,
+    public language:LanguageService
   ) { }
 
   ngOnInit() {
     this.getAnime();
   }
+
+  ionViewDidEnter(){
+    this.strings = this.language.setStrings();
+  }
+
 
   dismiss() {
     // using the injected ModalController this page

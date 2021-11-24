@@ -2,18 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { MenuController } from '@ionic/angular';
 import { ToswarningService } from '../services/toswarning.service';
+import { LanguageService } from '../services/language.service';
 @Component({
   selector: 'app-searchuser',
   templateUrl: './searchuser.page.html',
   styleUrls: ['./searchuser.page.scss'],
 })
 export class SearchuserPage implements OnInit {
+
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
+
+
   userdata:any;
   search:string;
+
+
   constructor(
     public api: ApiService,
     private menu: MenuController,
     private toswarning:ToswarningService,
+    public language:LanguageService
   ) { }
 
   
@@ -24,6 +33,7 @@ export class SearchuserPage implements OnInit {
     if (localStorage.getItem("tos") == "d" || localStorage.getItem("tos") == undefined){
       this.toswarning.presentAlert();
     }
+    this.strings = this.language.setStrings();
   }
 
 

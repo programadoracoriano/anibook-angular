@@ -3,14 +3,18 @@ import { ApiService } from '../services/api.service';
 import { ActionSheetController, MenuController, ModalController, AlertController } from '@ionic/angular';
 
 import { CreateCustomListPage } from '../modals/create-custom-list/create-custom-list.page';
-import { AdmobService } from '../services/admob.service';
 import { ToswarningService } from '../services/toswarning.service';
+import { LanguageService } from '../services/language.service';
 @Component({
   selector: 'app-customlist',
   templateUrl: './customlist.page.html',
   styleUrls: ['./customlist.page.scss'],
 })
 export class CustomlistPage implements OnInit {
+
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
+
   public mine:boolean = false;
   public nse:any;
   public listdata:any;
@@ -27,10 +31,12 @@ export class CustomlistPage implements OnInit {
     public modalController: ModalController,
     public alertController: AlertController,
     private toswarning:ToswarningService,
+    public language:LanguageService
   ) { }
 
   ngOnInit() {
   }
+  
   segmentChanged(ev: any) {
   }
 
@@ -39,6 +45,7 @@ export class CustomlistPage implements OnInit {
       this.toswarning.presentAlert();
     }
     this.publicList();
+    this.strings = this.language.setStrings();
   }
   
 
@@ -86,7 +93,6 @@ async publicList(){
   this.index = 0;
   await this.api.getData("get/public/customlist/?status=0")
     .subscribe(res => {
-      console.log(res);
       this.listdata = res;
       this.it = this.listdata.slice(this.index, this.offset + this.index)
     }, err => {
@@ -154,25 +160,23 @@ addItems(){
 
 
   async alertDelete(val) {
-    const actionSheet = await this.actionSheetController.create({
-      header: 'Are you sure you want to delete it?',
+    const alert = await this.alertController.create({
+      header: this.strings.deleteMsg,
       cssClass: 'my-custom-class',
       buttons: [{
-        text: 'Yes',
+        text: this.strings.yesText,
         role: 'destructive',
-        icon: 'sad',
         handler: () => {
           this.deleteData(val);
         }
       }, {
-        text: 'No',
-        icon: 'happy',
+        text: this.strings.noText,
         handler: () => {
           
         } 
       }]
     });
-    await actionSheet.present();
+    await alert.present();
   }
 
 }

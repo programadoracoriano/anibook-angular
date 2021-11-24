@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import {  ToastController, ModalController} from '@ionic/angular';
+import { LanguageService } from '../../services/language.service';
 @Component({
   selector: 'app-create-custom-list',
   templateUrl: './create-custom-list.page.html',
   styleUrls: ['./create-custom-list.page.scss'],
 })
 export class CreateCustomListPage implements OnInit {
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
+
   public search:string;
   public searchdata:any;
   public title:string;
@@ -18,6 +22,7 @@ export class CreateCustomListPage implements OnInit {
     public api: ApiService,
     public modalController: ModalController,
     public toastController: ToastController,
+    public language:LanguageService
   ) { }
 
   ngOnInit() {
@@ -29,6 +34,10 @@ export class CreateCustomListPage implements OnInit {
     this.modalController.dismiss({
       'dismissed': true
     });
+  }
+
+  ionViewDidEnter(){
+    this.strings = this.language.setStrings();
   }
 
   async presentToast() {

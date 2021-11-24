@@ -1,5 +1,5 @@
-<ion-list>
-  <ion-list-header>Options</ion-list-header>
-  <ion-item (click)="reportModal(id)" button>Report User</ion-item>
-  <ion-item (click)="blockButton()" routerLink="/tab1" button>Block User</ion-item>
+<ion-list *ngIf="strings">
+  <ion-list-header>{{ strings.options }}</ion-list-header>
+  <ion-item (click)="reportModal(id)" button>{{ strings.profileOpts.reportUser }}</ion-item>
+  <ion-item (click)="blockButton()" routerLink="/tab1" button>{{ strings.profileOpts.blockUser }}</ion-item>
 </ion-list>

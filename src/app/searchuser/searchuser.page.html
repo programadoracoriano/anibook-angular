@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header *ngIf="strings">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
@@ -6,12 +6,12 @@
     
     <ion-title>
       <ion-text color="light">
-        <b>Search User</b>
+        <b>{{ strings.searchUser }}</b>
       </ion-text>
     </ion-title>
   </ion-toolbar>
   <ion-toolbar color="primary">
-    <ion-searchbar [(ngModel)]="search" name="search" (ionChange)="searchUser()"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="search" name="search" (ionChange)="searchUser()" placeholder="{{ strings.search }}"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 

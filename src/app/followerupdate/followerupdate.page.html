@@ -1,25 +1,25 @@
-<ion-header>
+<ion-header *ngIf="strings">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
     </ion-buttons>
     <ion-title>
       <ion-text color="light">
-      <b>Follower Update</b>
+      {{ strings.profileOpts.lastFollowerUp }}
     </ion-text>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="strings">
   <div class="padding-container" *ngIf="getlist !== undefined">
-    <div class="cubic ">
+    <div>
       <ion-list>
         <ion-grid>
           <ion-row>
             <ion-col size="12">
               <ion-item>
-                <label><h5><b>Last Follower Updates</b></h5></label>
+                <label><h5><b>{{ strings.profileOpts.lastFollowerUp }}</b></h5></label>
                 
               </ion-item>
             </ion-col>
@@ -41,7 +41,8 @@
                   </ion-avatar>
                   <ion-label>{{ list.user.username }}</ion-label>
                 </ion-chip>
-                <ion-text color="success" class="text-bold" >is Watching</ion-text> <br>
+                <ion-text color="success" class="text-bold" >{{ strings.animeListOpt.isWatching }}</ion-text> <br>
+                
                 <ion-text [routerLink]="['/animedetails/',  list.anime.id ]">{{ list.anime.name }}</ion-text>
               </div>
 
@@ -54,7 +55,7 @@
                   </ion-avatar>
                   <ion-label>{{ list.user.username }}</ion-label>
                 </ion-chip>
-                <ion-text color="medium" class="text-bold">Completed</ion-text> <br>
+                <ion-text color="warning" class="text-bold">{{ strings.animeListOpt.isCompleted }}</ion-text> <br>
                 <ion-text [routerLink]="['/animedetails/',  list.anime.id ]">{{ list.anime.name }}</ion-text>
               </div>
 
@@ -66,7 +67,8 @@
                   </ion-avatar>
                   <ion-label>{{ list.user.username }}</ion-label>
                 </ion-chip>
-                <ion-text class="text-bold">Plans to Watch</ion-text> <br>
+                <ion-text  class="text-bold">{{ strings.animeListOpt.isPtw }}</ion-text> <br>
+                
                 <ion-text [routerLink]="['/animedetails/',  list.anime.id ]">{{ list.anime.name }}</ion-text>
               </div>
 
@@ -79,7 +81,7 @@
                   </ion-avatar>
                   <ion-label>{{ list.user.username }}</ion-label>
                 </ion-chip>
-                <ion-text color="danger" class="text-bold">Dropped</ion-text> <br>
+                <ion-text  color="danger" class="text-bold">{{ strings.animeListOpt.isDropped }}</ion-text> <br>
                 <ion-text [routerLink]="['/animedetails/',  list.anime.id ]">{{ list.anime.name }}</ion-text>
               </div>
 

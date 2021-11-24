@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header *ngIf="strings">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
@@ -10,16 +10,16 @@
     </ion-buttons>
     <ion-title>
       <ion-text color="light">
-      <b>Anime List</b>
+      <b>{{ strings.animeListOpt.aniList }}</b>
     </ion-text>
     </ion-title>
   </ion-toolbar>
   <ion-toolbar color="primary">
-    <ion-searchbar name="search" [(ngModel)]="search" (ionChange)="animeSearch()"></ion-searchbar>
+    <ion-searchbar name="search" [(ngModel)]="search" (ionChange)="animeSearch()" placeholder="{{ strings.search }}"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="strings">
 
   
 
@@ -28,23 +28,23 @@
   <ion-segment color="primary" scrollable (ionChange)="segmentChanged($event)" value="all">
     <ion-segment-button value="all" (click)="animeList(0)" layout="icon-start">
       <ion-icon name="infinite-sharp"></ion-icon>
-      <ion-label>All</ion-label>
+      <ion-label>{{ strings.all }}</ion-label>
     </ion-segment-button>
     <ion-segment-button value="watching" (click)="animeList(1)" layout="icon-start">
       <ion-icon name="eye" ></ion-icon>
-      <ion-label>Watching</ion-label>
+      <ion-label>{{ strings.animeListOpt.watching }}</ion-label>
     </ion-segment-button>
     <ion-segment-button value="completed" (click)="animeList(2)" layout="icon-start">
       <ion-icon name="checkmark-done" ></ion-icon>
-      <ion-label>Completed</ion-label>
+      <ion-label>{{ strings.animeListOpt.completed }}</ion-label>
     </ion-segment-button>
     <ion-segment-button value="ptw" (click)="animeList(3)" layout="icon-start">
       <ion-icon name="bookmark"></ion-icon>
-      <ion-label>Plan To Watch</ion-label>
+      <ion-label>{{ strings.animeListOpt.ptw }}</ion-label>
     </ion-segment-button>
     <ion-segment-button value="dropped" (click)="animeList(4)" layout="icon-start">
       <ion-icon name="close"></ion-icon>
-      <ion-label>Dropped</ion-label>
+      <ion-label>{{ strings.animeListOpt.dropped }}</ion-label>
     </ion-segment-button>
   </ion-segment>
 </div>
@@ -77,7 +77,8 @@
                   <ion-row>
                     <ion-col size="8" style="padding-top:20px">
                       <div *ngIf="anime.status.val == 1"> 
-                        <b> <ion-text color="success">{{ anime.status.tag }}</ion-text></b><br>
+                        <b *ngIf="idi == 'pt'"> <ion-text color="success">{{ anime.status.tag_pt }}</ion-text></b><br>
+                        <b *ngIf="idi == 'en'"> <ion-text color="success">{{ anime.status.tag }}</ion-text></b><br>
                       
                         {{anime.episodes_number}} Of  {{ anime.anime.episodes_number }} Eps
                         
@@ -85,24 +86,23 @@
                   
                   
                     <div *ngIf="anime.status.val == 2">
-                      
-                       <p><ion-text color="warning"> Completed</ion-text><br>
+                      <p *ngIf="idi == 'pt'"><ion-text color="warning"> {{ anime.status.tag_pt }}</ion-text><br>
+                       <p *ngIf="idi == 'en'"><ion-text color="warning"> {{ anime.status.tag }}</ion-text><br>
                       
                         
                     </div>
                   
                     <div *ngIf="anime.status.val == 3">
-                      
-                      <b> <ion-text color="danger"> {{ anime.status.tag }}</ion-text></b>
-                      <p>Score: {{ anime.score }}</p>
+                      <b *ngIf="idi == 'pt'"> <ion-text color="danger"> {{ anime.status.tag_pt }}</ion-text></b>
+                      <b *ngIf="idi == 'en'"> <ion-text color="danger"> {{ anime.status.tag }}</ion-text></b>
                        
                         
                     </div>
                   
                     <div *ngIf="anime.status.val == 5">
                       
-                      <b> <ion-text> {{ anime.status.tag }}</ion-text></b>
-                      
+                      <b *ngIf="idi == 'pt'"> <ion-text> {{ anime.status.tag_pt }}</ion-text></b>
+                      <b *ngIf="idi == 'en'"> <ion-text> {{ anime.status.tag }}</ion-text></b>
                         
                         
                     </div>

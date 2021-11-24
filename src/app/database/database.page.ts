@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
-import { AdmobService } from '../services/admob.service';
+import { LanguageService } from '../services/language.service';
 import { ToswarningService } from '../services/toswarning.service';
 @Component({
   selector: 'app-database',
@@ -10,10 +10,13 @@ import { ToswarningService } from '../services/toswarning.service';
 })
 export class DatabasePage implements OnInit {
   getdata:any;
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
   constructor(
     public api: ApiService,
     private menu: MenuController,
     private toswarning:ToswarningService,
+    public language:LanguageService
   ) { }
 
 
@@ -28,6 +31,7 @@ export class DatabasePage implements OnInit {
     if (localStorage.getItem("tos") == "d" || localStorage.getItem("tos") == undefined){
       this.toswarning.presentAlert();
     }
+    this.strings = this.language.setStrings();
   }
 
   openFirst() {

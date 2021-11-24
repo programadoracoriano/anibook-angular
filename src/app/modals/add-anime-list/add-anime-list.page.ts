@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { ModalController, ToastController } from '@ionic/angular';
+import { LanguageService } from '../../services/language.service';
 @Component({
   selector: 'app-add-anime-list',
   templateUrl: './add-anime-list.page.html',
   styleUrls: ['./add-anime-list.page.scss'],
 })
 export class AddAnimeListPage implements OnInit {
+
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
+
   public searchdata:any;
   public search:any;
   public ganime:any = undefined;
@@ -23,10 +28,16 @@ export class AddAnimeListPage implements OnInit {
     public api: ApiService,
     public modalController: ModalController,
     public toastController: ToastController,
+    public language:LanguageService
   ) { }
 
   ngOnInit() {
   }
+
+  ionViewDidEnter(){
+    this.strings = this.language.setStrings();
+  }
+
 
   async searchData(){
     if(this.search.length >3){

@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { MenuController } from '@ionic/angular';
-import { AdmobService } from '../services/admob.service';
+import { LanguageService } from '../services/language.service';
 @Component({
   selector: 'app-followerupdate',
   templateUrl: './followerupdate.page.html',
   styleUrls: ['./followerupdate.page.scss'],
 })
 export class FollowerupdatePage implements OnInit {
+
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
+
   public getlist:any;
   it = [];
   private readonly offset:number = 12;
@@ -16,7 +20,8 @@ export class FollowerupdatePage implements OnInit {
   constructor(
     public api: ApiService,
     private menu: MenuController,
-    private admobService: AdmobService,
+    public language:LanguageService,
+    
   ) { }
 
   ngOnInit() {
@@ -24,8 +29,8 @@ export class FollowerupdatePage implements OnInit {
 
 
   ionViewWillEnter(){
-    
     this.getFollowersUpdates();
+    this.strings = this.language.setStrings();
   }
 
   

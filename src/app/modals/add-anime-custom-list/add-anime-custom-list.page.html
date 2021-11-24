@@ -1,15 +1,15 @@
-<ion-header>
+<ion-header *ngIf="strings">
   <ion-toolbar color="primary">
     <ion-buttons slot="end">
       <ion-button>
         <ion-text color="light" (click)="dismiss()">
-          CLOSE
+          {{ strings.close }}
         </ion-text>
       </ion-button>
     </ion-buttons>
     <ion-title>
       <ion-text color="light">
-        Add Anime to Custom List
+        {{ strings.animeListOpt.addAnimeCustom }}
     </ion-text>
     </ion-title>
   </ion-toolbar>
@@ -17,7 +17,7 @@
 
 <ion-content>
 
-  <div class="padding-container">
+  <div class="padding-container" *ngIf="strings">
     <ion-item *ngIf="u_custom">
       <ion-thumbnail slot="start" >
         <img [src]=" u_custom.image_url ">
@@ -29,17 +29,17 @@
 
     <ion-item>
       <ion-label>
-        <h1>Add Anime</h1>
+        <h1>{{ strings.animeListOpt.addAnime }}</h1>
       </ion-label>
     </ion-item>
     <ion-item>
       <ion-label>
-        Search Anime
+        {{ strings.search }} Anime
       </ion-label>
-      <ion-searchbar [(ngModel)]="search" name="search" (ionChange)="searchData()"></ion-searchbar>
+      <ion-searchbar [(ngModel)]="search" name="search" (ionChange)="searchData()" placeholder="{{ strings.search }}"></ion-searchbar>
     </ion-item>
     
-      <ion-button color="primary" (click)="createAnimeCustomList()">Add Anime</ion-button>
+      <ion-button color="primary" (click)="createAnimeCustomList()">{{ strings.animeListOpt.addAnime }}</ion-button>
     
     <div class="padding-container" *ngIf="searchdata">
       <ion-list>
@@ -50,7 +50,7 @@
         </ion-thumbnail>
         <ion-label>
           <h3>{{anime.name}}</h3>
-          <p>Nº of Episodes: {{ anime.episodes_number }}</p>
+          <p>{{ strings.animeOpt.epsNumber }}: {{ anime.episodes_number }}</p>
         </ion-label>
         <ion-radio slot="end" value="{{ anime.id }}"></ion-radio>
       </ion-item>

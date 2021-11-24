@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import {  ToastController, ModalController} from '@ionic/angular';
+import { LanguageService } from '../../services/language.service';
 @Component({
   selector: 'app-review-modal',
   templateUrl: './review-modal.page.html',
   styleUrls: ['./review-modal.page.scss'],
 })
 export class ReviewModalPage implements OnInit {
+
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
+
   public id:number;
   public postresponse:any;
   public review:any;
@@ -15,10 +20,15 @@ export class ReviewModalPage implements OnInit {
     public api: ApiService,
     public modalController: ModalController,
     public toastController: ToastController,
+    public language:LanguageService
   ) { }
 
   ngOnInit() {
     this.getReview(this.id);
+  }
+
+  ionViewDidEnter(){
+    this.strings = this.language.setStrings();
   }
 
 
@@ -30,6 +40,9 @@ export class ReviewModalPage implements OnInit {
     });
   }
 
+
+
+  //--Toast Message
   async presentToast() {
     const toast = await this.toastController.create({
       message: this.postresponse.msg,
@@ -38,6 +51,8 @@ export class ReviewModalPage implements OnInit {
     toast.present();
   }
 
+
+  //--Get Review Function
   async getReview(id){
     id = this.id;
     await this.api.getData("get/my/review?id=" + id,)
@@ -49,6 +64,7 @@ export class ReviewModalPage implements OnInit {
        });
   }
 
+  //--add Review Function
   public addReview(draft){
     this.api.postData("get/reviews/", {"id":this.id, "review":this.review, "draft":draft})
       .subscribe(res => {

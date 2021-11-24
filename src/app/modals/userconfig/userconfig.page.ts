@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
-import { ActionSheetController } from '@ionic/angular';
 import { ApiService } from '../../services/api.service';
 import {  ToastController, ModalController} from '@ionic/angular';
 import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
+import { LanguageService } from '../../services/language.service';
 
 const { Camera } = Plugins;
 @Component({
@@ -12,24 +11,32 @@ const { Camera } = Plugins;
   styleUrls: ['./userconfig.page.scss'],
 })
 export class UserconfigPage implements OnInit {
+
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
+
   public uploadType:string;
   public base64Image:any;
   public postresponse:any;
   public getrating:any;
   public rating:any;
   public getuser:any;
+
   constructor(
-  public api:ApiService,
-  
-  public modalController: ModalController,
-  public toastController: ToastController,
-  ) { }
+            public api:ApiService,
+            public modalController: ModalController,
+            public toastController: ToastController,
+            public language:LanguageService
+            ) { }
 
   ngOnInit() {
     this.getRating();
     this.getUser();
   }
 
+  ionViewDidEnter(){
+    this.strings = this.language.setStrings();
+  }
 
   dismiss() {
     // using the injected ModalController this page

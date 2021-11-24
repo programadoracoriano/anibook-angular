@@ -1,21 +1,21 @@
-<ion-header>
+<ion-header *ngIf="strings">
   <ion-toolbar color="primary">
     <ion-buttons slot="end">
       <ion-button>
         <ion-text color="light" (click)="dismiss()">
-          CLOSE
+          {{ strings.close }}
         </ion-text>
       </ion-button>
     </ion-buttons>
     <ion-title> 
       <ion-text color="light">
-        Edit Anime
+        {{ strings.animeListOpt.editAnime }}
       </ion-text>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="strings">
 
   <div class="padding-container" *ngIf="getnote">
     <ion-item>
@@ -26,7 +26,8 @@
         <h4>
           {{ getnote.anime.name }}
         </h4>
-        <p *ngIf="getnote.status"><b>Status: <ion-text color="primary"> {{ getnote.status.tag }}</ion-text></b></p>
+        <p *ngIf="getnote.status && idi == 'en'"><b>Status: <ion-text color="primary"> {{ getnote.status.tag }}</ion-text></b></p>
+        <p *ngIf="getnote.status && idi == 'pt'"><b>Status: <ion-text color="primary"> {{ getnote.status.tag_pt }}</ion-text></b></p>
       </ion-label>
     </ion-item>
     <ion-card>
@@ -42,7 +43,7 @@
 
         <ion-col size="6">
           <ion-item>
-            <ion-button color="primary" (click)="changeMenuOptions(6)">Add Note</ion-button>
+            <ion-button color="primary" (click)="changeMenuOptions(6)">{{ strings.animeListOpt.addNote }}</ion-button>
           </ion-item>
         </ion-col>
 
@@ -50,12 +51,12 @@
     </ion-grid>
 
     <ion-item>
-      <ion-label><h4>Change Status</h4></ion-label>
-      <ion-select interface="action-sheet" value="notifications"  [(ngModel)]="options" name="options" (ionChange)="changeSelectOptions()">
-        <ion-select-option value="1">Watching</ion-select-option>
-        <ion-select-option value="2">Completed</ion-select-option>
-        <ion-select-option value="5">Plan To Watch</ion-select-option>
-        <ion-select-option value="3">Dropped</ion-select-option>
+      <ion-label><h4>{{ strings.animeListOpt.changeStatus }}</h4></ion-label>
+      <ion-select interface="popover" value="status"  [(ngModel)]="options" name="options" (ionChange)="changeSelectOptions()">
+        <ion-select-option value="1">{{ strings.animeListOpt.watching }}</ion-select-option>
+        <ion-select-option value="2">{{ strings.animeListOpt.completed }}</ion-select-option>
+        <ion-select-option value="5">{{ strings.animeListOpt.ptw }}</ion-select-option>
+        <ion-select-option value="3">{{ strings.animeListOpt.dropped}}</ion-select-option>
       </ion-select>
     </ion-item>
 
@@ -65,7 +66,7 @@
     <!-- Watching Menu Section -->
     <div *ngIf="option==1">
           <ion-item-divider color="medium">
-            Episodes
+            {{ strings.episodes }}
           </ion-item-divider>
          
           <ion-item>
@@ -74,17 +75,17 @@
           </ion-item>
           
           <ion-item-divider color="medium">
-            Score <ion-chip slot="end" color="primary">{{getnote.score}}</ion-chip>
+            {{ strings.animeOpt.score }} <ion-chip slot="end" color="primary">{{getnote.score}}</ion-chip>
           </ion-item-divider>
           <ion-item>
-            <label>Score <ion-icon name="star"></ion-icon></label>
-            <ion-select [(ngModel)]="score" name="score" interface="action-sheet" value="{{ getnote.score }}">
+            <label>{{ strings.animeOpt.score }} <ion-icon name="star"></ion-icon></label>
+            <ion-select [(ngModel)]="score" name="score" interface="popover" value="{{ getnote.score }}">
               
               <ion-select-option  *ngFor="let s of scoreArr" value="{{ s }}">{{ s }}  </ion-select-option>
             </ion-select>
           </ion-item>
           <div class="text-center"> 
-            <ion-button (click)="addWatching(1)"><ion-icon name="add-circle-outline"></ion-icon> Update</ion-button>
+            <ion-button (click)="addWatching(1)"><ion-icon name="add-circle-outline"></ion-icon> {{ strings.update }}</ion-button>
           </div>
     </div>
     <!-- End Menu Watching Section -->
@@ -92,20 +93,20 @@
     <!-- Completed Menu Section -->
     <div *ngIf="option==2">
       <ion-item-divider color="medium">
-        How Many Times?
+        {{ strings.animeListOpt.howManyTimes }}
       </ion-item-divider>
       
         
       <ion-item>
-        <ion-input type="number" placeholder="Type here" [(ngModel)]="completed" name="completed"></ion-input>
+        <ion-input type="number" placeholder="{{ strings.typeHere }}" [(ngModel)]="completed" name="completed"></ion-input>
       </ion-item>
       
       <ion-item-divider color="medium">
-        Score <ion-chip slot="end" color="primary">{{getnote.score}}</ion-chip>
+        {{ strings.animeOpt.score }} <ion-chip slot="end" color="primary">{{getnote.score}}</ion-chip>
       </ion-item-divider>
         <ion-item>
-          <label>Score <ion-icon name="star"></ion-icon></label>
-          <ion-select [(ngModel)]="score" name="score" interface="action-sheet" value="{{getnote.score}}" >
+          <label>{{ strings.animeOpt.score }} <ion-icon name="star"></ion-icon></label>
+          <ion-select [(ngModel)]="score" name="score" interface="popover" value="{{getnote.score}}" >
             
             <ion-select-option  *ngFor="let s of scoreArr" value="{{ s }}">{{ s }}  </ion-select-option>
           </ion-select>
@@ -122,11 +123,11 @@
     <!-- Begin plan to watch Menu Section -->
     <div *ngIf="option==5">
       <ion-item-divider color="medium">
-        Plan to Watch
+        {{ strings.animeListOpt.ptw }}
       </ion-item-divider>
         
         <ion-button color="primary" (click)="addWatching(3)">
-          Add to Plan To Watch
+          {{ strings.animeListOpt.addPtw }}
         </ion-button>
       
     </div>
@@ -136,12 +137,12 @@
     <!-- Begin Dropped Menu Section -->
     <div *ngIf="option==3">
       <ion-item-divider color="medium">
-        Dropped
+        {{ strings.animeListOpt.dropped }}
       </ion-item-divider>
         
         <ion-item>
-          <label>Score <ion-icon name="star"></ion-icon></label>
-          <ion-select [(ngModel)]="score" name="score" interface="action-sheet" value="notifications" (ionChange)="addWatching(4)">
+          <label>{{ strings.animeOpt.score }} <ion-icon name="star"></ion-icon></label>
+          <ion-select [(ngModel)]="score" name="score" interface="popover" value="notifications" (ionChange)="addWatching(4)">
             <ion-select-option  *ngFor="let s of scoreArr" value="{{ s }}">{{ s }}  </ion-select-option>
           </ion-select>
         </ion-item>
@@ -154,10 +155,10 @@
     <!-- Update Note-->
     <div  *ngIf="option == 6">
       <ion-item-divider color="medium">
-        Write your Note
+        {{ strings.animeListOpt.writeNote }}
       </ion-item-divider>
-      <ion-input type="textarea" name="note" [(ngModel)]="note" placeholder="Write your Note Here" value="{{getnote.note}}"></ion-input>
-        <ion-button color="primary" (click)="addNote(getnote.id)"><ion-icon name="add-circle-outline"></ion-icon>  Update</ion-button>
+      <ion-input type="textarea" name="note" [(ngModel)]="note" placeholder="{{ strings.animeList.Opt.writeNote }}" value="{{getnote.note}}"></ion-input>
+        <ion-button color="primary" (click)="addNote(getnote.id)"><ion-icon name="add-circle-outline"></ion-icon>  {{ strings.update }}</ion-button>
       </div>
    
     <!-- End Update  Note -->

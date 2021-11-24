@@ -2,22 +2,36 @@ import { Component, OnInit } from '@angular/core';
 import {ToastController, PopoverController, ActionSheetController, ModalController, } from '@ionic/angular';
 import { ApiService } from '../../services/api.service';
 import { ModalListPage } from '../../modals/modal-list/modal-list.page';
+import { LanguageService } from '../../services/language.service';
+
 @Component({
   selector: 'app-listoptionspopover',
   templateUrl: './listoptionspopover.page.html',
   styleUrls: ['./listoptionspopover.page.scss'],
 })
 export class ListoptionspopoverPage implements OnInit {
+
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
+
   public id:number;
   public animedata:any;
   public postresponse:any;
+
+
   constructor(public api:ApiService,
               public toastController:ToastController,
               public popover:PopoverController,
               public actionSheetController:ActionSheetController,
-              public modalController: ModalController) { }
+              public modalController: ModalController,
+              public language:LanguageService) { }
 
   ngOnInit() {
+  }
+
+
+  ionViewDidEnter(){
+    this.strings = this.language.setStrings();
   }
 
   async presentToast() {

@@ -1,23 +1,26 @@
-<ion-header>
+<ion-header *ngIf="strings">
   <ion-toolbar color="primary">
     <ion-buttons slot="end">
       <ion-button>
         <ion-text color="light" (click)="dismiss()">
-          CLOSE
+          {{ strings.close }}
         </ion-text>
       </ion-button>
     </ion-buttons>
     <ion-title>
       <ion-text color="light">
-        Add Anime to List
+        {{ strings.animeListOpt.addEditAnime }}
       </ion-text>
     </ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="search" name="search" (ionChange)="searchData()" placeholder="{{ strings.search }}"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="padding-container">
-    <ion-searchbar [(ngModel)]="search" name="search" (ionChange)="searchData()"></ion-searchbar>
+    
 
     <div *ngIf="ganime == undefined">
         <div class="padding-container" *ngIf="searchdata">
@@ -29,7 +32,7 @@
             </ion-thumbnail>
             <ion-label>
               <h3>{{anime.name}}</h3>
-              <p>Nº of Episodes: {{ anime.episodes_number }}</p>
+              <p>{{ strings.animeOpt.epsNumber }}: {{ anime.episodes_number }}</p>
             </ion-label>
             <ion-radio slot="end" value="{{ anime.id }}"></ion-radio>
           </ion-item>
@@ -47,7 +50,7 @@
       </ion-thumbnail >
       <ion-label>
         <h3>{{ ganime.name }}</h3>
-        <p>Ep Number: {{ ganime.episodes_number }}</p>
+        <p>{{ strings.animeOpt.epsNumber }}: {{ ganime.episodes_number }}</p>
       </ion-label>
     </ion-item>
     <!-- Anime -->
@@ -58,27 +61,27 @@
       <ion-label>
         <p><b>
           <ion-text color="primary">
-            Add Anime to:
+            {{ strings.animeListOpt.addTo }}:
           </ion-text>
         </b></p>
       </ion-label>
     </ion-item>
-    <ion-segment scrollable (ionChange)="segmentChanged($event)" value="all">
+    <ion-segment scrollable (ionChange)="segmentChanged($event)" value="watching">
       <ion-segment-button value="watching" (click)="changeStatus(1)">
         <ion-icon name="eye" ></ion-icon>
-        <ion-label>Watching</ion-label>
+        <ion-label>{{ strings.animeListOpt.watching }}</ion-label>
       </ion-segment-button>
       <ion-segment-button value="completed" (click)="changeStatus(2)">
         <ion-icon name="checkmark-done" ></ion-icon>
-        <ion-label>Completed</ion-label>
+        <ion-label>{{ strings.animeListOpt.completed }}</ion-label>
       </ion-segment-button>
       <ion-segment-button value="ptw" (click)="changeStatus(3)">
         <ion-icon name="bookmark"></ion-icon>
-        <ion-label>Plan To Watch</ion-label>
+        <ion-label>{{ strings.animeListOpt.ptw }}</ion-label>
       </ion-segment-button>
       <ion-segment-button value="dropped" (click)="changeStatus(4)">
         <ion-icon name="close-circle"></ion-icon>
-        <ion-label>Dropped</ion-label>
+        <ion-label>{{ strings.animeListOpt.dropped }}</ion-label>
       </ion-segment-button>
     </ion-segment>
 
@@ -88,25 +91,25 @@
         <ion-card-header>
           <ion-card-title>
             <ion-text color="primary">
-              <b>Watching</b>
+              <b>{{ strings.animeListOpt.watching }}</b>
             </ion-text>
           </ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <ion-item>
             <ion-label>
-              How Many Episodes?
+              {{ strings.animeListOpt.howManyEps }}
               
             </ion-label>
             <ion-input [(ngModel)]="n_episodes" name="n_episodes" type="text"></ion-input>
           </ion-item>
           <ion-item>
-            <label>Score <ion-icon name="star"></ion-icon></label>
+            <label>{{ strings.animeOpt.score }} <ion-icon name="star"></ion-icon></label>
             <ion-select [(ngModel)]="score" name="score" interface="popover">
               <ion-select-option  *ngFor="let s of scoreArr" value="{{ s }}">{{ s }}  </ion-select-option>
             </ion-select>
           </ion-item>
-          <ion-button (click)="addAnime(1)"><ion-icon name="add-circle-outline"></ion-icon></ion-button>
+          <ion-button (click)="addAnime(1)" class="text-center"><ion-icon name="add-circle-outline"></ion-icon></ion-button>
         </ion-card-content>
         
       </ion-card>
@@ -119,20 +122,20 @@
         <ion-card-header>
           <ion-card-title>
             <ion-text color="primary">
-              <b>Completed</b>
+              <b>{{ strings.animeListOpt.completed }}</b>
             </ion-text>
           </ion-card-title>
         </ion-card-header>
         <ion-card-content>
       <ion-item>
         <ion-label>
-          How Many Times?
+          {{ strings.animeListOpt.howManyTimes }}
         </ion-label>
         <ion-input type="number" placeholder="Type here" [(ngModel)]="completed" name="completed"></ion-input>
       </ion-item>
       
       <ion-item>
-        <label>Score <ion-icon name="star"></ion-icon></label>
+        <label>{{ strings.animeList.score }} <ion-icon name="star"></ion-icon></label>
         <ion-select [(ngModel)]="score" name="score" interface="popover">
           <ion-select-option  *ngFor="let s of scoreArr" value="{{ s }}">{{ s }}  </ion-select-option>
         </ion-select>
@@ -149,11 +152,11 @@
   <ion-card>
     <ion-card-header>
       <ion-text color="primary">
-        <b>Plan To Watch</b>
+        <b>{{ strings.animeListOpt.ptw }}</b>
       </ion-text>
     </ion-card-header>
     <ion-card-content>
-      <ion-button color="primary" (click)="addAnime(3)">Add To Plan To Watch</ion-button>
+      <ion-button color="primary" (click)="addAnime(3)">{{ strings.animeListOpt.addPtw }}</ion-button>
     </ion-card-content>
   </ion-card>
   </div>
@@ -166,17 +169,17 @@
   <ion-card>
     <ion-item>
       <ion-label>
-        <h4>Dropped</h4>
+        <h4>{{ strings.animeListOpt.dropped }}</h4>
       </ion-label>
     </ion-item>
     <ion-item>
-      <label>Score <ion-icon name="star"></ion-icon></label>
+      <label>{{ strings.animeOpt.score }} <ion-icon name="star"></ion-icon></label>
       <ion-select [(ngModel)]="score" name="score" interface="popover">
         <ion-select-option  *ngFor="let s of scoreArr" value="{{ s }}">{{ s }}  </ion-select-option>
       </ion-select>
     </ion-item>
     <ion-button color="primary" (click)="addAnime(4)">
-      Add to Dropped
+      {{ strings.animeListOpt.addDropped }}
     </ion-button>
   </ion-card>
 </div>

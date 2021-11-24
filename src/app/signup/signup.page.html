@@ -1,42 +1,42 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" *ngIf="strings">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
     </ion-buttons>
     <ion-title>
       <ion-text color="light">
-        Sign Up
+        {{ strings.signup }}
       </ion-text>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="strings">
   <div class="padding-container margin-top">
-    <h4 class="white-text text-center"><b>Sign up Now</b></h4>
+    <h4 class="white-text text-center"><b>{{ strings.signupNow }}</b></h4>
 
     <ion-item>
       <ion-label><ion-icon name="person-outline"></ion-icon></ion-label>
-      <ion-input [(ngModel)]="username" type="text" placeholder="Username"></ion-input>
+      <ion-input [(ngModel)]="username" type="text" placeholder="{{ strings.username }}"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label><ion-icon name="person-outline"></ion-icon></ion-label>
-      <ion-input [(ngModel)]="email" type="email" placeholder="Email"></ion-input>
+      <ion-input [(ngModel)]="email" type="email" placeholder="E-mail"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label><ion-icon name="lock-closed-outline"></ion-icon></ion-label>
-      <ion-input [(ngModel)]="password" type="password" placeholder="Password"></ion-input>
+      <ion-input [(ngModel)]="password" type="password" placeholder="{{ strings.password }}"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label><ion-icon name="lock-closed-outline"></ion-icon></ion-label>
-      <ion-input [(ngModel)]="password2" type="password" placeholder="Password"></ion-input>
+      <ion-input [(ngModel)]="password2" type="password" placeholder="{{ strings.password }}"></ion-input>
     </ion-item>
     
     
-    <ion-button (click)="signupUser()" primary ><ion-icon name="log-in-outline"></ion-icon> Sign up </ion-button><br>
+    <ion-button (click)="signupUser()" primary ><ion-icon name="log-in-outline"></ion-icon> {{ strings.signup }} </ion-button><br>
     <div *ngIf="error">
       <div class="danger-box">
       <p>{{ error }}</p>
@@ -45,7 +45,7 @@
   </div>
   
   <div class="text-center">
-    <p>Click Below to login</p>
+    <p>{{ strings.signinBelow }}</p>
         <ion-button color="primary" routerLink="/login">Login</ion-button>
   </div>
   
