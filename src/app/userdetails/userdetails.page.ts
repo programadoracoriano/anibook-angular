@@ -4,6 +4,7 @@ import { ApiService, mediaUrl } from '../services/api.service';
 import { MenuController, ModalController, PopoverController } from '@ionic/angular';
 import { ReportmodalPage } from '../modals/reportmodal/reportmodal.page';
 import { UserpopoverPage } from '../popover/userpopover/userpopover.page';
+import { LanguageService } from '../services/language.service';
 
 @Component({
   selector: 'app-userdetails',
@@ -11,9 +12,13 @@ import { UserpopoverPage } from '../popover/userpopover/userpopover.page';
   styleUrls: ['./userdetails.page.scss'],
 })
 export class UserdetailsPage implements OnInit {
+
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
+
   public user_id:any;
   public userdata:any;
-  public totaldays:number;
+  public totaldays:any;
   public extradata:any;
   public detectfollowing:any;
   public animedata:any;
@@ -24,17 +29,14 @@ export class UserdetailsPage implements OnInit {
     public api: ApiService,
     private menu: MenuController,
     public modalController: ModalController,
-    public popoverController: PopoverController
+    public popoverController: PopoverController,
+    public language:LanguageService
   ) { 
     this.user_id = this.actRoute.snapshot.params.id;
   }
 
   ngOnInit() {
-    this.getUser();
-    this.detectFollowing();
-    this.getUserData();
-    this.getAnimeList(2);
-    this.getCustomList(2);
+    
   }
 
   openFirst() {
@@ -42,6 +44,14 @@ export class UserdetailsPage implements OnInit {
     this.menu.open('first');
   }
 
+  ionViewDidEnter(){
+    this.strings = this.language.setStrings();
+    this.getUser();
+    this.detectFollowing();
+    this.getUserData();
+    this.getAnimeList(2);
+    this.getCustomList(2);
+  }
 
   
 
@@ -104,7 +114,8 @@ async getUserData() {
   await this.api.getData("get/user/profile/extra/?id=" + this.user_id,)
   .subscribe(res => {
     this.extradata = res;
-    this.totaldays = (this.extradata.total_hours + this.extradata.total_completed)/1440 
+    this.totaldays = ((this.extradata.total_hours + this.extradata.total_completed)/1440).toFixed(2);
+    
   }, err => {
     console.log(err);
   });

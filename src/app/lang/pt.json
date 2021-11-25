@@ -49,6 +49,13 @@
     "signupNow":"Regista-te agora",
     "username":"Utilizador",
     "signinBelow":"Faz login em baixo",
+    "content":"Conteúdo",
+    "privacy":"Privacidade",
+    "acceptTos":"Aceitar Termos",
+    "userDetails":"Detalhes de Utilizador",
+    "showFullList":"Mostrar Lista Completa",
+    "statistics":"Estatísticas",
+    "recentlyCompleted":"Completos recentemente",
     "seasons":{
         "winter":"Inverno",
         "spring":"Primavera",
@@ -82,7 +89,9 @@
         "score":"Pontuação",
         "createReview":"Publicar uma review",
         "title":"Título",
-        "writeReview":"Escreve a tua review"
+        "writeReview":"Escreve a tua review",
+        "studio":"Estúdio",
+        "animeDetails":"Detalhes de Anime"
     },
     "animeListOpt":{
         "watching":"Assistindo",
@@ -124,7 +133,8 @@
         "tos":"Termos e Condições",
         "tools":"Ferramentas",
         "main":"Principal",
-        "social":"Redes Sociais"
+        "social":"Redes Sociais",
+        "changeLang":"Mudar Idioma"
     },
     "profileOpts":{
         "lastFollowerUp":"Ultimas atualizações dos seguidores",

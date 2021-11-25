@@ -27,7 +27,7 @@
           {{ getnote.anime.name }}
         </h4>
         <p *ngIf="getnote.status && idi == 'en'"><b>Status: <ion-text color="primary"> {{ getnote.status.tag }}</ion-text></b></p>
-        <p *ngIf="getnote.status && idi == 'pt'"><b>Status: <ion-text color="primary"> {{ getnote.status.tag_pt }}</ion-text></b></p>
+        <p *ngIf="getnote.status && idi == 'pt' || idi == 'br'"><b>Status: <ion-text color="primary"> {{ getnote.status.tag_pt }}</ion-text></b></p>
       </ion-label>
     </ion-item>
     <ion-card>

@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header *ngIf="strings">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       
@@ -14,19 +14,19 @@
    
     <ion-title>
       <ion-text color="light">
-        <b>User Details</b>
+        <b>{{ strings.userDetails }}</b>
       </ion-text>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="strings">
 
-  <div *ngIf="userdata">
+  <div *ngIf="userdata && strings">
 
     <div class="profile-wrap" *ngIf="userdata">
       <div class="user-img text-center avatar-image" style="background-image: url('{{ userdata.profile.image_url }}');"></div>
-    <div >
+    <div>
       <div  class="profile-header" *ngIf="userdata.profile.cover_url == undefined">
         <div class="user-img text-center" style="background-image: url('{{ userdata.profile.image_url }}');">
           
@@ -57,7 +57,7 @@
     
       <div  class="padding-container box-div" *ngIf="userdata">
         
-        <h5 class="text-center">@{{ userdata.username }}</h5>
+        <h5 class="text-center">@{{ userdata.username }} </h5>
         
         <ion-grid>
           <ion-row>
@@ -92,7 +92,7 @@
 
 
   <ion-item-divider color="medium" *ngIf="userdata">
-    {{ userdata.username }}'s Statistics
+    {{ userdata.username }} {{ strings.statistics }}
   </ion-item-divider>
 
 
@@ -102,8 +102,8 @@
       <ion-row>
 
         <ion-col >
-          <p class="text-center">Days</p>
-          <p class="text-center">{{ totaldays | number : '1.1-1' }}</p>
+          <p class="text-center">{{ strings.days }}</p>
+          <p class="text-center" *ngIf="totaldays">{{ totaldays }}</p>
         </ion-col>
 
         <ion-col >
@@ -129,7 +129,7 @@
   </div>
   
   <ion-item-divider color="medium" *ngIf="userdata">
-    {{ userdata.username }}'s Custom Lists
+    {{ userdata.username }} {{ strings.menuOpt.customLists }}
   </ion-item-divider>
     <div class="padding-container">
       <ion-item [routerLink]="['/publiccustomlist/',  c.id ]" *ngFor="let c of customlist">
@@ -142,7 +142,7 @@
     
 
     <ion-item-divider color="medium" *ngIf="userdata">
-      {{ userdata.username }}'s Recently Completed
+      {{ userdata.username }} {{ strings.recentlyCompleted }}
     </ion-item-divider>
   
 
@@ -157,7 +157,7 @@
         
         <ion-button class="img-center" color="primary" [routerLink]="['/publiclist/',  userdata.id ]">
           <ion-text color="light">
-            Show Full List
+            {{ strings.showFullList }}
           </ion-text>
         </ion-button>
       </div>

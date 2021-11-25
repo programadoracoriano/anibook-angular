@@ -7,7 +7,6 @@ import { AddAnimeFromDetailsPage } from '../modals/add-anime-from-details/add-an
 import { ReviewModalPage } from '../modals/review-modal/review-modal.page';
 import { ReportmodalPage } from '../modals/reportmodal/reportmodal.page';
 import { ToswarningService } from '../services/toswarning.service';
-import {AdmobService } from '../services/admob.service';
 import { LanguageService } from '../services/language.service';
 @Component({
   selector: 'app-animedetails',
@@ -18,6 +17,8 @@ export class AnimedetailsPage implements OnInit {
 
   public strings:any;
   public idi:string = this.language.detectLang(localStorage.getItem("lang"));
+
+  public animeScore:any;
   public anime_id: string;
   public animedata: any;
   public extra:any;
@@ -44,7 +45,6 @@ export class AnimedetailsPage implements OnInit {
     private toswarning:ToswarningService,
     private sanitizer: DomSanitizer,
     public modalController: ModalController,
-    private admob: AdmobService,
     public language:LanguageService
   ) {
     this.anime_id = this.actRoute.snapshot.params.id;
@@ -83,6 +83,7 @@ export class AnimedetailsPage implements OnInit {
     this.api.getData("get/anime/score/?id=" + this.anime_id,)
      .subscribe(res => {
        this.animescore = res;
+       this.animeScore = this.animescore.total_score.toFixed(0);
      }, err => {
        console.log(err);
      });

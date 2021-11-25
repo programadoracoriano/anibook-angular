@@ -68,7 +68,7 @@
                     <ion-col size="8" style="padding-top:20px">
                       <div *ngIf="anime.status.val == 1"> 
                         <b> <ion-text color="success" *ngIf="idi == 'en'">{{ anime.status.tag }}</ion-text></b><br>
-                        <b> <ion-text color="success" *ngIf="idi == 'pt'">{{ anime.status.tag_pt }}</ion-text></b><br>
+                        <b> <ion-text color="success" *ngIf="idi == 'pt' || idi == 'br'">{{ anime.status.tag_pt }}</ion-text></b><br>
                         {{anime.episodes_number}} Of  {{ anime.anime.episodes_number }} Eps
                         
                     </div>
@@ -77,14 +77,14 @@
                     <div *ngIf="anime.status.val == 2">
                       
                        <p><ion-text color="warning" *ngIf="idi == 'en'"> {{ anime.status.tag }}</ion-text><br>
-                        <p><ion-text color="warning" *ngIf="idi == 'pt'"> {{ anime.status.tag_pt }}</ion-text><br>
+                        <p><ion-text color="warning" *ngIf="idi == 'pt' || idi == 'br'"> {{ anime.status.tag_pt }}</ion-text><br>
                         
                     </div>
                   
                     <div *ngIf="anime.status.val == 3">
                       
                       <b> <ion-text color="danger" *ngIf="idi == 'en'"> {{ anime.status.tag }}</ion-text></b>
-                      <b> <ion-text color="danger" *ngIf="idi == 'pt'"> {{ anime.status.tag_pt }}</ion-text></b>
+                      <b> <ion-text color="danger" *ngIf="idi == 'pt' || idi == 'br'"> {{ anime.status.tag_pt }}</ion-text></b>
                       
                        
                         
@@ -93,7 +93,7 @@
                     <div *ngIf="anime.status.val == 5">
                       
                       <b> <ion-text *ngIf="idi == 'en'"> {{ anime.status.tag }}</ion-text></b>
-                      <b> <ion-text *ngIf="idi == 'pt'"> {{ anime.status.tag_pt }}</ion-text></b>
+                      <b> <ion-text *ngIf="idi == 'pt' || idi == 'br'"> {{ anime.status.tag_pt }}</ion-text></b>
                         
                         
                     </div>

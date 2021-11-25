@@ -30,7 +30,7 @@
   
       <ion-item *ngFor="let item of motives">
         <ion-label *ngIf="idi == 'en'">{{ item.motive }}</ion-label>
-        <ion-label *ngIf="idi == 'pt'">{{ item.motive_pt }}</ion-label>
+        <ion-label *ngIf="idi == 'pt' || idi == 'br'">{{ item.motive_pt }}</ion-label>
         <ion-radio slot="start" value="{{ item.id }}"></ion-radio>
       </ion-item>
   

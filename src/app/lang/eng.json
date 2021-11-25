@@ -49,6 +49,14 @@
     "signupNow":"Sign up Now",
     "username":"Username",
     "signinBelow":"Sign in below",
+    "content":"Content",
+    "privacy":"Privacy",
+    "acceptTos":"Accept TOS",
+    "userDetails":"User Details",
+    "showFullList":"Mostrar Lista Completa",
+    "statistics":"Statistics",
+    "recentlyCompleted":"Recently Completed",
+    
     "seasons":{
         "winter":"Winter",
         "spring":"Spring",
@@ -82,7 +90,8 @@
         "score":"Score",
         "createReview":"Create Review",
         "title":"Title",
-        "writeReview":"Escreve a tua review"
+        "writeReview":"Escreve a tua review",
+        "animeDetails":"Anime Details"
     },
     "animeListOpt":{
         "watching":"Watching",
@@ -124,7 +133,8 @@
         "tos":"Terms and Conditions",
         "tools":"Tools",
         "main":"Main",
-        "social":"Social Nerworks"
+        "social":"Social Nerworks",
+        "changeLang":"Change Language"
     },
     "profileOpts":{
         "lastFollowerUp":"Last followers update",

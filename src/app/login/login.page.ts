@@ -50,6 +50,9 @@ export class LoginPage implements OnInit {
       else if(this.idi == 'pt'){
         this.msg = "O nome de utilizador está vazio.Precisas de digitar um nome de utilizador!";
       }
+      else if(this.idi == 'br'){
+        this.msg = "O nome de usuário está vazio.Necessita de digitar um nome de usuário!";
+      }
     }
     else if((this.password == undefined)){
       if(this.idi == 'en'){
@@ -57,6 +60,9 @@ export class LoginPage implements OnInit {
       }
       else if(this.idi == 'pt'){
         this.msg = "O campo da password está vazio.Precisas de digitar uma password!";
+      }
+      else if(this.idi == 'br'){
+        this.msg = "O campo da senha está vazio.Necessita de digitar uma senha!";
       }
     }
     else{

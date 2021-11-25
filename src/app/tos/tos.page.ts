@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { LanguageService } from '../services/language.service';
 
 @Component({
   selector: 'app-tos',
@@ -8,10 +9,17 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./tos.page.scss'],
 })
 export class TosPage implements OnInit {
+
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
+
   public tosbutton:boolean = false;
+
+
   constructor(
     private menu: MenuController,
     public router: Router,
+    public language:LanguageService
   ) { }
 
   ngOnInit() {
@@ -20,6 +28,7 @@ export class TosPage implements OnInit {
 
   ionViewDidEnter(){
     this.verifyTos();
+    this.strings = this.language.setStrings();
   }
 
   openFirst() {

@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header *ngIf="strings">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       
@@ -6,7 +6,7 @@
     </ion-buttons>
     
     <ion-title>
-      <ion-text color="light"><b>Anime Details</b></ion-text>
+      <ion-text color="light"><b>{{ strings.animeOpt.animeDetails }}</b></ion-text>
     </ion-title>
 
   </ion-toolbar>
@@ -21,11 +21,11 @@
       <h6><b>{{animedata.name}}</b></h6>
     </div>
 
-    <div *ngIf="animescore" class="text-center" slot="end">
+    <div *ngIf="animescore" slot="end">
              
       <div *ngIf="animescore.total_score !== null" class="score-font ">
-        <ion-icon name="star" size="small" slot="end"></ion-icon>
-        {{ animescore.total_score | number : '1.1-1' }} 
+        {{ animeScore }} <ion-icon name="star" size="small" slot="end"></ion-icon>
+        
       
     </div>
 
@@ -74,15 +74,15 @@
     <p *ngIf="getstatus"> <b><ion-text *ngFor="let g of getstatus" >
       <p *ngIf="g.status.val == 1" >
          <ion-text *ngIf="idi == 'en'" color="success">{{ g.status.tag }}</ion-text>
-         <ion-text *ngIf="idi == 'pt'" color="success">{{ g.status.tag_pt }}</ion-text>
+         <ion-text *ngIf="idi == 'pt' || idi == 'br'" color="success">{{ g.status.tag_pt }}</ion-text>
       </p>
       <p *ngIf="g.status.val == 2" >
         <ion-text *ngIf="idi == 'en'" color="warning">{{ g.status.tag }}</ion-text>
-        <ion-text *ngIf="idi == 'pt'" color="warning">{{ g.status.tag_pt }}</ion-text>
+        <ion-text *ngIf="idi == 'pt' || idi == 'br'" color="warning">{{ g.status.tag_pt }}</ion-text>
       </p>
       <p *ngIf="g.status.val == 3" >
         <ion-text *ngIf="idi == 'en'" color="danger">{{ g.status.tag }}</ion-text>
-        <ion-text *ngIf="idi == 'pt'" color="danger">{{ g.status.tag_pt }}</ion-text>
+        <ion-text *ngIf="idi == 'pt'|| idi == 'br'" color="danger">{{ g.status.tag_pt }}</ion-text>
       </p>
       
     </ion-text></b></p>
@@ -192,12 +192,12 @@
     
       <label>
         <div>
-          <div *ngIf="idi == 'pt'">
-            <div *ngIf="h_synopsis == false" class="text-synopsis" [innerHTML]="animedata.sinopse_pt | slice:0:75"></div>
+          <div *ngIf="idi == 'pt' || idi == 'br' ">
+            <div *ngIf="h_synopsis == false" class="text-synopsis" [innerHTML]="animedata.sinopse_pt  "></div>
             <div *ngIf="h_synopsis == true" class="text-synopsis" [innerHTML]="animedata.sinopse_pt"></div>
           </div>
           <div *ngIf="idi == 'en'">
-            <div *ngIf="h_synopsis == false" class="text-synopsis" [innerHTML]="animedata.sinopse | slice:0:75"></div>
+            <div *ngIf="h_synopsis == false" class="text-synopsis" [innerHTML]="animedata.sinopse "></div>
             <div *ngIf="h_synopsis == true" class="text-synopsis" [innerHTML]="animedata.sinopse"></div>
           </div>
           <p class="hidenshow" color="tertiary" *ngIf="h_synopsis == false" (click)="ShowHideSynopsis()"><ion-icon name="chevron-down-outline"></ion-icon></p>
@@ -287,7 +287,7 @@
     <div class="padding-container" *ngIf="animedata">
       <ion-chip color="primary" *ngFor="let g of animedata.categorie">
         <ion-label  *ngIf="idi == 'en'"><b>{{ g.categorie }}</b></ion-label>
-        <ion-label  *ngIf="idi == 'pt'"><b>{{ g.categorie_pt }}</b></ion-label>
+        <ion-label  *ngIf="  idi == 'pt'|| idi == 'br'"><b>{{ g.categorie_pt }}</b></ion-label>
       </ion-chip>
     </div>
 
@@ -354,7 +354,7 @@
         <ion-label>
           <h5>{{ r.user.username }}</h5>
           <p *ngIf="idi == 'en'">Status: {{ r.status.status.tag }}</p>
-          <p *ngIf="idi == 'pt'">Status: {{ r.status.status.tag_pt }}</p>
+          <p *ngIf="idi == 'pt' || idi == 'br'">Status: {{ r.status.status.tag_pt }}</p>
           <p>{{ strings.animeOpt.postedOn}} {{ r.date }}</p>
           <a (click)="reportModal(r.id)">{{ strings.animeOpt.reportReview}}</a>
         </ion-label>

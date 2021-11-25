@@ -36,7 +36,7 @@ export class CustomlistPage implements OnInit {
 
   ngOnInit() {
   }
-  
+
   segmentChanged(ev: any) {
   }
 

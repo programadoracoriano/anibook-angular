@@ -2,22 +2,28 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { MenuController} from '@ionic/angular';
-import { AdmobService } from '../services/admob.service';
+import { LanguageService } from '../services/language.service';
 @Component({
   selector: 'app-studioanime',
   templateUrl: './studioanime.page.html',
   styleUrls: ['./studioanime.page.scss'],
 })
 export class StudioanimePage implements OnInit {
+
+  public strings:any;
+  public idi:string = this.language.detectLang(localStorage.getItem("lang"));
+
   public studio_id: string;
   public responsedata:any;
   public getstudio:any;
+
+
   constructor(
     private actRoute: ActivatedRoute,
     public api: ApiService,
     private menu: MenuController,
+    public language:LanguageService
     
-    private admobService: AdmobService,
   ) {
     this.studio_id = this.actRoute.snapshot.params.id;
    }
@@ -28,7 +34,7 @@ export class StudioanimePage implements OnInit {
   }
 
   ionViewDidEnter(){
-    
+    this.strings = this.language.setStrings();
   }
 
   

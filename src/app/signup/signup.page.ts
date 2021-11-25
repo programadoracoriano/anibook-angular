@@ -46,6 +46,9 @@ export class SignupPage implements OnInit {
       else if( this.idi == 'pt' ){
         this.error = "Tu precisas de inserir um nome de utilizador.";
       }
+      else if( this.idi == 'br' ){
+        this.error = "Você precisa de inserir um nome de usuário.";
+      }
     }
     else if(this.password !== this.password2){
       if(this.idi == 'en'){
@@ -53,6 +56,9 @@ export class SignupPage implements OnInit {
       }
       else if(this.idi == 'pt'){
         this.error = "As passwords não correspondem!"
+      }
+      else if(this.idi == 'br'){
+        this.error = "As senhas não correspondem!"
       }
     }
     else{

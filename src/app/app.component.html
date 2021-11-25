@@ -39,7 +39,7 @@
           </ion-label>
         </ion-item-divider>
         
-
+        <ion-item (click)="closeFirst()" routerLink="/lang"><ion-icon slot="start"  name="flag"></ion-icon>  {{ strings.menuOpt.changeLang }}</ion-item>
         <ion-item (click)="closeFirst()" routerLink="/randomizer"><ion-icon slot="start"  name="refresh"></ion-icon>  {{ strings.menuOpt.randomizer }}</ion-item>
         <ion-item-divider color="primary">
           <ion-label>

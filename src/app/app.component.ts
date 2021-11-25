@@ -3,20 +3,17 @@ import { MenuController } from '@ionic/angular';
 
 import { AdmobService } from './services/admob.service';
 import { LanguageService } from './services/language.service';
+import { AdMob } from '@capacitor-community/admob';
+import { SplashScreen, StatusBar } from '@capacitor/core';
 // Events (iOS only)
 window.addEventListener('statusTap', function () {
   console.log("statusbar tapped");
 });
 
 //API
-import {
-  Plugins,
-  StatusBarStyle,
-} from '@capacitor/core';
 
-const { AdMob } = Plugins;
-const { StatusBar } = Plugins;
-const { SplashScreen } = Plugins;
+
+
 
 
 @Component({
@@ -56,7 +53,7 @@ export class AppComponent {
 
   ngOnInit() :void{
     this.strings = this.language.setStrings();
-    //this.admob.ShowBanner();
+    this.admob.ShowBanner();
   }
 
   closeFirst() {

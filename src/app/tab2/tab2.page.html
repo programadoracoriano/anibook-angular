@@ -74,7 +74,7 @@
                 <div *ngIf="idi == 'en'">
                   <ion-select-option *ngFor="let g of getgenres" value="{{ g.id }}">{{ g.categorie }}</ion-select-option>
                 </div>
-                <div *ngIf="idi == 'pt'">
+                <div *ngIf="idi == 'pt' || idi == 'br'">
                   <ion-select-option *ngFor="let g of getgenres" value="{{ g.id }}">{{ g.categorie_pt }}</ion-select-option>
                 </div>
               </ion-select>

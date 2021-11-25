@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import  strings from '../lang/pt.json';
 import strings_en from '../lang/eng.json';
+import strings_br from '../lang/br.json';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +32,12 @@ export class LanguageService {
           this.strings = strings;
           return this.strings;
         }
-        else{
+        else if(localStorage.getItem("lang") == "en"){
           this.strings = strings_en;
+          return this.strings;
+        }
+        else if(localStorage.getItem("lang") == "br"){
+          this.strings = strings_br;
           return this.strings;
         }
     

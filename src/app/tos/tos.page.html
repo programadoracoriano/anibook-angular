@@ -1,10 +1,10 @@
-<ion-header>
+<ion-header *ngIf="strings">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button (click)="openFirst()"><ion-icon color="light" name="menu"></ion-icon></ion-button>
     </ion-buttons>
     <ion-title>
-      <ion-text color="light"><b>Terms of Service</b></ion-text>
+      <ion-text color="light"><b>{{ strings.menuOpt.tos }}</b></ion-text>
     </ion-title>
 
   </ion-toolbar>
@@ -15,61 +15,120 @@
   
   
   <div class="padding-container">
+
     <ion-card>
       <ion-card-content>
         <a href="https://www.iubenda.com/privacy-policy/32696724">Privacy Policy - Important to Read</a>
   <br>
   <a href="https://www.iubenda.com/terms-and-conditions/32696724">Terms of Use - Important to Read</a><br><br>
 
-  <h3>More Clausules Below:</h3>
-        <p>The Anibook App is an app made for entertainment purposes only. All of our content serves to help users organize their
+  <h3 *ngIf="idi == 'en'">More Clausules Below:</h3>
+  <h3 *ngIf="idi == 'pt' || idi == 'br' ">Mais clausulas em baixo:</h3>
+        <p *ngIf="idi == 'en'">The Anibook App is an app made for entertainment purposes only. All of our content serves to help users organize their
           Anime Lists and let users share their own lists. All of the images used on the app are for informative use only, and are owned by their respective 
           copyright owners.<br><br>
           We have a list of terms of use that should be respected in order to use our app. The terms are listed below.
         </p><br>
+        <p *ngIf="idi == 'pt' || idi == 'br'">O Anibook App é um aplicativo feito apenas para fins de entretenimento. Todo o nosso conteúdo serve para ajudar os usuários a organizar as suas
+          listas de anime e permite que os usuários compartilhem suas próprias listas. Todas as imagens usadas no aplicativo são apenas para uso informativo e são propriedade de seus respectivos
+          proprietários de direitos autorais.<br><br>
+          Temos uma lista de termos de uso que devem ser respeitados para usar nosso aplicativo. Os termos estão listados abaixo.
+        </p><br>
         <h3>App</h3>
           <ol>
-            <li><p>Our app is maded by the "PROGRAMADOR AÇORIANO" group, any copy of our app distributed outside our group
-              will be reported to authorities.
-            </p></li>
-            <li><p>
-              Our app is secured by Amazon Web Services, so this mean any try to shut us down is dealing with Amazon Corporation,
-              our advice is simple, if you want to test our servers security, warn us first in order to make a request to Amazon.
-            </p></li>
-            <li><p>
-              Our App uses her own API, we do not use any of other anime list services API, this don't mean that our API is closed,
-              our API is open source and you can use it for your apps, but you can't use it to make apps like ours.
-            </p></li>
+            <li><p *ngIf="idi == 'en'">Our app is maded by the "PROGRAMADOR AÇORIANO" group, any copy of our app distributed outside our group
+                    will be reported to authorities.
+                </p>
+                <p *ngIf="idi == 'pt' || idi == 'br'">Nosso aplicativo é feito pelo grupo "PROGRAMADOR AÇORIANO", qualquer cópia de nosso aplicativo distribuída fora do nosso grupo
+                  será relatado às autoridades.
+                </p>
+            </li>
+            <li>
+              <p *ngIf="idi == 'en'">
+                  Our app is secured by Amazon Web Services, so this mean any try to shut us down is dealing with Amazon Corporation,
+                  our advice is simple, if you want to test our servers security, warn us first in order to make a request to Amazon.
+              </p>
+              <p *ngIf="idi == 'pt' || idi == 'br'">
+                  Nosso aplicativo é protegido pela Amazon Web Services, o que significa que qualquer tentativa de nos desligar está lidando com a Amazon Corporation,
+                  nosso conselho é simples, se você quiser testar a segurança de nossos servidores, avise-nos primeiro para fazer uma solicitação à Amazon.
+              </p>
+            </li>
+            <li>
+              <p *ngIf="idi == 'en'">
+                Our App uses her own API, we do not use any of other anime list services API, this don't mean that our API is closed,
+                our API is open source and you can use it for your apps, but you can't use it to make apps like ours.
+              </p>
+              <p *ngIf="idi == 'pt' || idi == 'br'">
+                  Nosso aplicativo usa sua própria API, nós não usamos nenhuma outra API de serviços de lista de anime, isso não significa que nossa API esteja fechada,
+                  nossa API é de código aberto e você pode usá-la para seus aplicativos, mas não pode usá-la para fazer aplicativos como o nosso.
+              </p>
+            </li>
           </ol>
-        <h3>Content</h3>
+        <h3>{{ strings.content }}</h3>
         <ol>
-          <li> <p>Never use religion terms on any of content you make on our app, because we follow the humanity principles, all users have their
-            own freedom and we want to avoid any discussions on this terms. Disrispecting this term and your account will be terminated.</p>
+          <li> 
+            <p *ngIf="idi == 'en'">
+            Never use religion terms on any of content you make on our app, because we follow the humanity principles, all users have their
+            own freedom and we want to avoid any discussions on this terms. Disrispecting this term and your account will be terminated.
+            </p>
+            <p *ngIf="idi == 'pt' || idi == 'br'">
+              Nunca use termos religiosos em qualquer conteúdo que você faça em nosso aplicativo, porque seguimos os princípios de humanidade, todos os usuários têm a sua
+              própria liberdade e queremos evitar quaisquer discussões sobre estes termos. Desrespeitar este termo e sua conta será encerrada.
+            </p>
           </li>
-          <li><p>Any racist content is forbidden, disrespecting this term and  your account will be terminated and your ip will be 
-            black listed.
-          </p></li>
-          <li><p>
-            In case of making any content, never use copyrighted content, this includes text, images or any type of media. Disrispecting this term and 
-            your account will be shutdown.
-          </p></li>
+          <li>
+            <p *ngIf="idi == 'en'">
+              Any racist content is forbidden, disrespecting this term and  your account will be terminated and your ip will be 
+              black listed.
+            </p>
+            <p *ngIf="idi == 'pt' || idi == 'br'">
+                  Qualquer conteúdo racista é proibido, se desrespeitares este termo e tua conta será encerrada e o seu ip será
+                  na lista negra.
+            </p>
+          </li>
+          <li>
+            <p *ngIf="idi == 'en'">
+              In case of making any content, never use copyrighted content, this includes text, images or any type of media. Disrispecting this term and 
+              your account will be shutdown.
+            </p>
+            <p *ngIf="idi == 'pt' || idi == 'br' ">
+              No caso de fazer qualquer conteúdo, nunca use conteúdo protegido por direitos autorais, incluindo textos, imagens ou qualquer tipo de média. Se não respeitares este termo e
+              sua conta será encerrada.
+            </p>
+          </li>
           
         </ol>
         <h3>
-          Privacy
+          {{ strings.privacy }}
         </h3>
         <ol>
-          <li><p>
+          <li>
+            <p *ngIf="idi == 'en'">
             Any personal data you use on our app is protected by HTTPS certificate by let's encrypt. This means any real name,
             or personal content will be encrypted on our app.
-          </p></li>
-          <p><li>
-            Don't insert any credit card number on our app, we do not guarantee the safety of this type of data.
-          </li></p>
+            </p>
+            <p *ngIf="idi == 'pt' || idi == 'br' ">
+              Todos os dados pessoais que você usa em nosso aplicativo são protegidos por certificado HTTPS pelo provedor Let's Encrypt. Isso significa qualquer nome real,
+              ou conteúdo pessoal será criptografado no nosso aplicativo.
+            </p>
+          </li>
+          <p>
+            <li *ngIf="idi == 'en'">
+              Don't insert any credit card number on our app, we do not guarantee the safety of this type of data.
+            </li>
+            <li *ngIf="idi == 'pt' || idi == 'br'">
+              Não insira nenhum número de cartão de crédito em nosso aplicativo, não garantimos a segurança deste tipo de dados.
+            </li>
+        </p>
           
             <li>
-              <p>Do not share personal images for your own security, we do not guarantee any safety of your pictures,
+              <p *ngIf="idi == 'en'">
+                Do not share personal images for your own security, we do not guarantee any safety of your pictures,
                 meaning you can be exposed on the internet.
+              </p>
+              <p *ngIf="idi == 'pt' || idi == 'br'">
+                Não compartilhe imagens pessoais para sua própria segurança, não garantimos a segurança de suas fotos,
+                o que significa que você pode ser exposto na internet.
               </p>
             </li>
           
@@ -78,7 +137,7 @@
     </ion-card>
     <ion-item>
       <ion-label slot="start">
-        Accept ToS
+        {{ strings.acceptTos }}
       </ion-label>
       <ion-toggle *ngIf="tosbutton == true" color="primary" slot="end" (click)="acceptTos()" checked></ion-toggle>
       <ion-toggle *ngIf="tosbutton == false" color="primary" slot="end" (click)="acceptTos()"></ion-toggle>
