@@ -4,7 +4,8 @@ import { MenuController } from '@ionic/angular';
 import { AdmobService } from './services/admob.service';
 import { LanguageService } from './services/language.service';
 import { AdMob } from '@capacitor-community/admob';
-import { SplashScreen, StatusBar } from '@capacitor/core';
+import { SplashScreen } from '@capacitor/splash-screen';
+import { StatusBar, Style } from '@capacitor/status-bar';
 // Events (iOS only)
 window.addEventListener('statusTap', function () {
   console.log("statusbar tapped");
@@ -31,7 +32,8 @@ export class AppComponent {
     private admob: AdmobService,
     public language:LanguageService
   ) {
-    AdMob.initialize();
+    this.admob.initialize();
+    this.admob.prepareInterstitial();
     
     StatusBar.setBackgroundColor({
     color: "#7e57c2",
@@ -41,13 +43,7 @@ export class AppComponent {
       autoHide: true
     });
 
-    this.eventOnAdSize = AdMob.addListener('onAdSize', (info: any) => {
-      this.appMargin = parseInt(info.height, 10);
-      if (this.appMargin > 0) {
-        const app: HTMLElement = document.querySelector('ion-router-outlet');
-        app.style.marginBottom = this.appMargin + 'px';
-      }
-    });
+    
     
   }
 

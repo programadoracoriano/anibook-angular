@@ -1,4 +1,4 @@
-<ion-app *ngIf="strings">
+<ion-app>
 
   <ion-menu side="start" menuId="first" contentId="main">
     <ion-header>
@@ -15,41 +15,36 @@
       <ion-list>
         <ion-item-divider color="primary">
           <ion-label>
-            {{ strings.menuOpt.main }}
+            Principal
           </ion-label>
         </ion-item-divider>
         
-        <ion-item (click)="closeFirst()" routerLink="/tab1"><ion-icon slot="start" name="home-sharp"></ion-icon>  {{ strings.menuOpt.home }}</ion-item>
-        <ion-item (click)="closeFirst()" routerLink="/database"><ion-icon slot="start" name="list-circle-sharp"></ion-icon>  {{ strings.menuOpt.lastAdded }}</ion-item>
-        <ion-item (click)="closeFirst()" routerLink="/tab2"><ion-icon slot="start"  name="search"></ion-icon>  {{ strings.menuOpt.searchAnime }}</ion-item>
-        <ion-item (click)="closeFirst()" routerLink="/searchuser"><ion-icon slot="start"  name="person-outline"></ion-icon>  {{ strings.menuOpt.searchUsers }}</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/tab1"><ion-icon slot="start" name="home-sharp"></ion-icon>  Home</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/database"><ion-icon slot="start" name="list-circle-sharp"></ion-icon>  Ultimos adicionados</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/tab2"><ion-icon slot="start"  name="search"></ion-icon>  Pesquisar Anime</ion-item>
         
         <ion-item-divider color="primary">
           <ion-label>
-            {{ strings.menuOpt.user }}
+            Usuário
           </ion-label>
         </ion-item-divider>
-        <ion-item (click)="closeFirst()" routerLink="/tab3"><ion-icon slot="start" name="person-sharp"></ion-icon>  {{ strings.menuOpt.profile }}</ion-item>
-        <ion-item (click)="closeFirst()" routerLink="/listtab"><ion-icon slot="start" name="list-sharp"></ion-icon>  {{ strings.menuOpt.animeList }}</ion-item>
-        <ion-item (click)="closeFirst()" routerLink="/customlist"><ion-icon slot="start" name="list-circle-sharp"></ion-icon>  {{ strings.menuOpt.customLists }}</ion-item>
-        <ion-item (click)="closeFirst()" routerLink="/myreviews"><ion-icon slot="start"  name="newspaper"></ion-icon>  {{ strings.menuOpt.reviews }}</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/tab3"><ion-icon slot="start" name="person-sharp"></ion-icon> Perfil</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/listtab"><ion-icon slot="start" name="list-sharp"></ion-icon> Lista de Anime</ion-item>
         <ion-item-divider color="primary">
           <ion-label>
             {{ strings.menuOpt.tools }}
           </ion-label>
         </ion-item-divider>
-        
-        <ion-item (click)="closeFirst()" routerLink="/lang"><ion-icon slot="start"  name="flag"></ion-icon>  {{ strings.menuOpt.changeLang }}</ion-item>
-        <ion-item (click)="closeFirst()" routerLink="/randomizer"><ion-icon slot="start"  name="refresh"></ion-icon>  {{ strings.menuOpt.randomizer }}</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/randomizer"><ion-icon slot="start"  name="refresh"></ion-icon>  Conselhos do Ichigo</ion-item>
         <ion-item-divider color="primary">
           <ion-label>
-            {{ strings.menuOpt.tos }}
+            Termos de Uso
           </ion-label>
         </ion-item-divider>
-        <ion-item (click)="closeFirst()" routerLink="/tos"><ion-icon slot="start" name="checkbox"></ion-icon> {{ strings.menuOpt.tos }}</ion-item>
+        <ion-item (click)="closeFirst()" routerLink="/tos"><ion-icon slot="start" name="checkbox"></ion-icon> Termos de Uso</ion-item>
         <ion-item-divider color="primary">
           <ion-label>
-            {{ strings.menuOpt.social }}
+            Redes Sociais
           </ion-label>
         </ion-item-divider>
         <ion-item >

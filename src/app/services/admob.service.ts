@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import { PluginListenerHandle, Plugins } from '@capacitor/core';
-import { AdOptions, AdSize, AdPosition } from '@capacitor-community/admob';
+
+import { AdMob, BannerAdOptions, BannerAdSize, BannerAdPosition, BannerAdPluginEvents, AdMobBannerSize,
+        AdOptions, AdLoadInfo, InterstitialAdPluginEvents } from '@capacitor-community/admob';
 import { AddAnimeListPageModule } from '../modals/add-anime-list/add-anime-list.module';
 
-const { AdMob } = Plugins;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,20 +26,45 @@ export class AdmobService {
   ) {
       
     }
+
+
+
+     async initialize(){
+      const { status } = await AdMob.trackingAuthorizationStatus();
     
-    private options: AdOptions = {
+      if (status === 'notDetermined') {
+        /**
+         * If you want to explain TrackingAuthorization before showing the iOS dialog,
+         * you can show the modal here.
+         * ex)
+         * const modal = await this.modalCtrl.create({
+         *   component: RequestTrackingPage,
+         * });
+         * await modal.present();
+         * await modal.onDidDismiss();  // Wait for close modal
+         **/
+      }
+     
+      AdMob.initialize({
+        requestTrackingAuthorization: true,
+        testingDevices: ['2077ef9a63d2b398840261c8221a0c9b'],
+        initializeForTesting: true,
+      });
+    }
+    
+    private options: BannerAdOptions = {
       adId: 'ca-app-pub-2428515290968728/5688669745',
-      adSize: AdSize.BANNER,
-      position: AdPosition.BOTTOM_CENTER,
+      adSize: BannerAdSize.BANNER,
+      position: BannerAdPosition.BOTTOM_CENTER,
       margin: 0,
       isTesting: false
       // npa: true
     };
 
-    private iOSBanner: AdOptions = {
+    private iOSBanner: BannerAdOptions = {
       adId: 'ca-app-pub-2428515290968728/3472137038',
-      adSize: AdSize.BANNER,
-      position: AdPosition.BOTTOM_CENTER,
+      adSize: BannerAdSize.BANNER,
+      position: BannerAdPosition.BOTTOM_CENTER,
       margin: 0,
       isTesting: false
     }
@@ -54,9 +80,6 @@ export class AdmobService {
       // isTesting: true
       // npa: true
     }
-
-
-    private eventOnAdSize: PluginListenerHandle;
 
 
     async ShowBanner(){
@@ -86,28 +109,31 @@ export class AdmobService {
       
     }
 
-    async ShowInterstitial(){
+    async prepareInterstitial(){
       await this.platform.ready().then(() => {
-      if(this.platform.is('android')){
-         AdMob.prepareInterstitial(this.intOptions);
-         AdMob.showInterstitial();
-        console.log("running in toilet!");
+        if(this.platform.is('android')){
+           AdMob.prepareInterstitial(this.intOptions);
+          console.log("running in toilet!");
+        }
+        else if(this.platform.is('ios')){
+          AdMob.prepareInterstitial(this.iOSOptions);
+          console.log("running in iFode!");
+        }
+        else if (this.platform.is('mobileweb')) {
+          console.log("running in a browser on mobile!");
       }
-      else if(this.platform.is('ios')){
-        AdMob.prepareInterstitial(this.iOSOptions);
-         AdMob.showInterstitial();
-        console.log("running in iFode!");
-      }
-      else if (this.platform.is('mobileweb')) {
-        console.log("running in a browser on mobile!");
+      else if (this.platform.is('desktop')) {
+        console.log("running in desktop");
     }
-    else if (this.platform.is('desktop')) {
-      console.log("running in desktop");
-  }
-    
   });
+    }
+
+
+    async ShowInterstitial(){
+      
+      AdMob.showInterstitial();
     
-  }
+    }
 
 }
 

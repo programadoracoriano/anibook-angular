@@ -24,7 +24,6 @@ const routes: Routes = [
   {
     path: 'animedetails/:id',
     loadChildren: () => import('./animedetails/animedetails.module').then( m => m.AnimedetailsPageModule),
-    canActivate: [LoginguardService],
   },
   {
     path: 'userdetails/:id',
@@ -149,7 +148,6 @@ const routes: Routes = [
   {
     path: 'tab1',
     loadChildren: () => import('./tab1/tab1.module').then(m => m.Tab1PageModule),
-    canActivate: [LoginguardService],
   },
   {
     path: 'tab2',

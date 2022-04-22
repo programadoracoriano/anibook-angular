@@ -3,114 +3,27 @@
     <ion-buttons slot="end">
       <ion-button>
         <ion-text color="light" (click)="dismiss()">
-          {{ strings.close }}
+          Fechar
         </ion-text>
       </ion-button>
     </ion-buttons>
     <ion-title>
       <ion-text color="light">
-        {{ strings.profileOpts.userDetails }}
+        Detalhes do usuário
       </ion-text>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="strings">
+<ion-content >
 
-  <ion-card *ngIf="uploadType == undefined">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="12">
-          <div class="text-center">
-            <h3>{{ strings.profileOpts.coverProfileImage }}</h3>
-          </div>
-        </ion-col>
-        <ion-col size="12">
-          <div class="text-center">
-            <ion-button color="primary" (click)="changeUploadType('pimage')">
-              {{ strings.profileOpts.userImage }}
-            </ion-button>
-          </div>
-        </ion-col>
-        <ion-col size="12">
-          <div class="text-center">
-            <ion-button color="primary" (click)="changeUploadType('pcover')">
-              {{ strings.profileOpts.coverImage }}
-            </ion-button>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
+  
 
 
 
-  <ion-card *ngIf="uploadType == 'pimage'">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="12">
-          <div class="text-center">
-            <h4>{{ strings.profileOpts.updateImage }}</h4>
-          </div>
-        </ion-col>
-        <ion-col *ngIf="base64Image" size="12">
-          <div  class="text-center">
-            <h6>{{ strings.preview }}</h6>
-          </div>
-          <div  class="user-img text-center" style="background-image: url('{{base64Image}}');">
-            
-            
-            
-          </div>
-          <div  class="text-center">
-            <ion-button color="primary" (click)="uploadImage()">{{ strings.upload }}</ion-button>
-          </div>
-        </ion-col>
-       
-      
-      <ion-col size="12">
-        <div class="text-center">
-          <ion-button color="primary" (click)="openCamera()"><ion-icon name="camera" slot="start"></ion-icon> {{ strings.camera }}</ion-button>
-        </div>
-      </ion-col>
-      
-        
-      </ion-row>
-    </ion-grid>
-</ion-card>
+  
 
-<!-- cover section -->
-<ion-card *ngIf="uploadType == 'pcover'">
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12">
-        <div class="text-center">
-          <h4>{{ strings.profileOpts.updateCover }}</h4>
-        </div>
-      </ion-col>
-      <ion-col *ngIf="base64Image" size="12">
-        <div  class="text-center">
-          <h6>{{ strings.preview }}</h6>
-        </div>
-        <div  class="cover-img text-center" style="background-image: url('{{base64Image}}');">
-          
-          
-          
-        </div>
-        <div  class="text-center">
-          <ion-button color="primary" (click)="uploadCover()">{{ strings.upload }}</ion-button>
-        </div>
-      </ion-col>
-      <ion-col size="12">
-        <div class="text-center">
-          <ion-button color="primary" (click)="openCamera()"><ion-icon name="camera" slot="start"></ion-icon> {{ strings.camera }}</ion-button>
-        </div>
-      </ion-col>
-      
-      
-    </ion-row>
-  </ion-grid>
-</ion-card>
+
 
 
 <ion-card>

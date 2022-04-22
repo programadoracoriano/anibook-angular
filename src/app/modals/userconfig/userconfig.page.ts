@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import {  ToastController, ModalController} from '@ionic/angular';
-import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
 import { LanguageService } from '../../services/language.service';
 
-const { Camera } = Plugins;
+
 @Component({
   selector: 'app-userconfig',
   templateUrl: './userconfig.page.html',
@@ -55,14 +54,7 @@ export class UserconfigPage implements OnInit {
   }
 
 
-  async openCamera(){
-    const image = await Camera.getPhoto({
-      quality: 90,
-      resultType: CameraResultType.DataUrl,
-      source: CameraSource.Prompt
-    });
-    this.base64Image = image.dataUrl;
-  }
+ 
 
   public openGallery(){
     

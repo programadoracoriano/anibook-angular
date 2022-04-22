@@ -6,13 +6,13 @@
     </ion-buttons>
     
     <ion-title>
-      <ion-text color="light"><b>{{ strings.animeOpt.animeDetails }}</b></ion-text>
+      <ion-text color="light"><b>Detalhes do Anime</b></ion-text>
     </ion-title>
 
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="strings && animedata">
+<ion-content *ngIf="animedata">
   
   <div class="anime-wrap" *ngIf="animedata">
     <div class="anime-image" style="background-image: url('{{animedata.image_url}}')"></div>
@@ -55,11 +55,11 @@
           <ion-col size="6">
             
               <ion-button *ngIf="getstatus != ''" shape="round" color="primary" (click)="presentModal(animedata.id)" >
-                <ion-icon name="create" slot="start"></ion-icon> {{strings.update}}
+                <ion-icon name="create" slot="start"></ion-icon> Atualizar
               </ion-button>
 
               <ion-button *ngIf="getstatus == ''" shape="round" color="primary" (click)="presentModal(animedata.id)">
-                <ion-icon name="add" slot="start"></ion-icon> {{strings.addToList}}
+                <ion-icon name="add" slot="start"></ion-icon> Adicionar à lista
               </ion-button>
             
               
@@ -73,26 +73,21 @@
   <ion-col size="6">
     <p *ngIf="getstatus"> <b><ion-text *ngFor="let g of getstatus" >
       <p *ngIf="g.status.val == 1" >
-         <ion-text *ngIf="idi == 'en'" color="success">{{ g.status.tag }}</ion-text>
-         <ion-text *ngIf="idi == 'pt' || idi == 'br'" color="success">{{ g.status.tag_pt }}</ion-text>
+         
+         <ion-text color="success">{{ g.status.tag_pt }}</ion-text>
       </p>
       <p *ngIf="g.status.val == 2" >
-        <ion-text *ngIf="idi == 'en'" color="warning">{{ g.status.tag }}</ion-text>
-        <ion-text *ngIf="idi == 'pt' || idi == 'br'" color="warning">{{ g.status.tag_pt }}</ion-text>
+        
+        <ion-text color="warning">{{ g.status.tag_pt }}</ion-text>
       </p>
       <p *ngIf="g.status.val == 3" >
-        <ion-text *ngIf="idi == 'en'" color="danger">{{ g.status.tag }}</ion-text>
-        <ion-text *ngIf="idi == 'pt'|| idi == 'br'" color="danger">{{ g.status.tag_pt }}</ion-text>
+        <ion-text color="danger">{{ g.status.tag_pt }}</ion-text>
       </p>
       
     </ion-text></b></p>
   </ion-col>
   
-  <ion-col size="12">
-    <div class="text-center">
-      
-    </div>
-  </ion-col>
+
     </ion-row>
   </ion-grid>
 </div>
@@ -114,7 +109,7 @@
 
 
 
-  <div *ngIf="animedata" class="extreme-top">
+  <div class="extreme-top">
   
   
   
@@ -127,57 +122,52 @@
       
 
       <div class="padding-container">
-    <!-- Default Segment -->
-    <div class="white-section">
-  <ion-segment scrollable (ionChange)="segmentChanged($event)" value="info">
-    <ion-segment-button value="info" (click)="clickSegment(0)">
-      <ion-icon name="infinite-sharp"></ion-icon>
-      <ion-label>{{ strings.animeOpt.info }}</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="details" (click)="clickSegment(1)">
-      <ion-icon name="eye" ></ion-icon>
-      <ion-label>{{ strings.animeOpt.details }}</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="reviews" (click)="clickSegment(2)">
-      <ion-icon name="newspaper"></ion-icon>
-      <ion-label>{{ strings.animeOpt.reviews }}</ion-label>
-    </ion-segment-button>
-    <!--<ion-segment-button value="ptw" >
-      <ion-icon name="bookmark"></ion-icon>
-      <ion-label>Related</ion-label>
-    </ion-segment-button>-->
-  </ion-segment>
-</div>
-</div>
+          <!-- Default Segment -->
+          <div class="white-section">
+            <ion-segment scrollable (ionChange)="segmentChanged($event)" value="info">
+              <ion-segment-button value="info" (click)="clickSegment(0)">
+                <ion-icon name="infinite-sharp"></ion-icon>
+                <ion-label>Info</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="details" (click)="clickSegment(1)">
+                <ion-icon name="eye" ></ion-icon>
+                <ion-label>Detalhes</ion-label>
+              </ion-segment-button>
+              
+            </ion-segment>
+        </div>
+      </div>
 
 
 <ion-item-divider color="medium">
   <ion-label>
-    {{ strings.animeOpt.statistics }}
+    Estatísticas 
   </ion-label>
 </ion-item-divider>
+
 <div class="" *ngIf="extra">
   <ion-grid>
     <ion-row>
       <ion-col size="3" class="text-center">
         <h4><ion-text color="success"><ion-icon name="eye" color="success"></ion-icon></ion-text></h4>
-        <p class="tiny-font">{{ extra.watching }} {{ strings.users }}</p>
+        <p class="tiny-font">{{ extra.watching }} usuários</p>
       </ion-col>
       <ion-col size="3" class="text-center">
         <h4><ion-text ><ion-icon name="checkmark-done" color="warning"></ion-icon></ion-text></h4>
-        <p class="tiny-font">{{ extra.completed }} {{ strings.users }}</p>
+        <p class="tiny-font">{{ extra.completed }} usuários</p>
       </ion-col>
       <ion-col size="3" class="text-center">
         <h4><ion-text color="dark"><ion-icon name="bookmark" color="dark"></ion-icon></ion-text></h4>
-        <p class="tiny-font">{{ extra.plan }} {{ strings.users }}</p>
+        <p class="tiny-font">{{ extra.plan }} usuários</p>
       </ion-col>
       <ion-col size="3" class="text-center">
         <h4><ion-text color="danger"><ion-icon name="close" color="danger"></ion-icon></ion-text></h4>
-        <p class="tiny-font">{{ extra.dropped }} {{ strings.users }}</p>
+        <p class="tiny-font">{{ extra.dropped }} usuários</p>
       </ion-col>
     </ion-row>
   </ion-grid>
 </div>
+
 
 <!-- begin info section -->
   <div *ngIf="segment == 0">
@@ -185,72 +175,69 @@
     <!-- begin synopsis-->
     <ion-item-divider color="medium">
       <ion-label>
-        {{ strings.animeOpt.synopsis }}
+        Sinopse
       </ion-label>
     </ion-item-divider>
-    <div class="padding-container" *ngIf="animedata">
+
+    <div class="padding-container">
     
       <label>
-        <div>
-          <div *ngIf="idi == 'pt' || idi == 'br' ">
+        
             <div *ngIf="h_synopsis == false" class="text-synopsis" [innerHTML]="animedata.sinopse_pt  "></div>
             <div *ngIf="h_synopsis == true" class="text-synopsis" [innerHTML]="animedata.sinopse_pt"></div>
-          </div>
-          <div *ngIf="idi == 'en'">
-            <div *ngIf="h_synopsis == false" class="text-synopsis" [innerHTML]="animedata.sinopse "></div>
-            <div *ngIf="h_synopsis == true" class="text-synopsis" [innerHTML]="animedata.sinopse"></div>
-          </div>
+          
           <p class="hidenshow" color="tertiary" *ngIf="h_synopsis == false" (click)="ShowHideSynopsis()"><ion-icon name="chevron-down-outline"></ion-icon></p>
           <p class="hidenshow" *ngIf="h_synopsis == true" (click)="ShowHideSynopsis()"><ion-icon name="chevron-up-outline"></ion-icon></p>
-        </div>
+        
       </label>
     
-  </div>
+    </div>
     <!-- end synopsis -->
 
   <!-- begin synopsis-->
   <ion-item-divider color="medium">
     <ion-label>
-      {{ strings.animeOpt.broadData }}
+      Dados de Broadcast
     </ion-label>
   </ion-item-divider>
-    <div class="padding-container" *ngIf="animedata">
+
+    <div class="padding-container">
     
       <ion-label>
-        <h3><b>{{ strings.animeOpt.epsNumber }} </b>{{ animedata.episodes_number }}</h3>
-        <h3><b>{{ strings.animeOpt.epsMinutes }} </b>{{ animedata.minutes_per_episode }} min.</h3>
-        <h3><b>{{ strings.animeOpt.type }} :  </b>{{ animedata.type.type }} </h3>
-        <h3><b>{{ strings.animeOpt.source }} :   </b>{{ animedata.source.source }} </h3>
+        <h3><b>Número de episódios </b>{{ animedata.episodes_number }}</h3>
+        <h3><b>Minutos por episódio </b>{{ animedata.minutes_per_episode }} min.</h3>
+        <h3><b>Tipo :  </b>{{ animedata.type.type }} </h3>
+        <h3><b>Fonte :   </b>{{ animedata.source.source }} </h3>
         <div *ngIf="animedata.date_option">
 
         <div *ngIf="animedata.date_option.id == 1">
-          <h3><b>{{ strings.animeOpt.aired }} : </b>{{ animedata.aired | date:'MMMM , y' }}</h3>
+          <h3><b>Começou em : </b>{{ animedata.aired | date:'MMMM , y' }}</h3>
         </div>
         <div *ngIf="animedata.date_option.id == 2">
-          <h3><b>{{ strings.animeOpt.aired }} : </b>{{ animedata.aired | date:'y' }}</h3>
+          <h3><b>Começou em : </b>{{ animedata.aired | date:'y' }}</h3>
         </div>
         <div *ngIf="animedata.date_option.id == 3">
-          <h3><b>{{ strings.animeOpt.aired }} : </b>{{ animedata.aired | date:'y' }}</h3>
-          <h3><b>{{ strings.animeOpt.end }} : </b>{{ animedata.date_end | date:'y' }}</h3>
+          <h3><b>Começou em : </b>{{ animedata.aired | date:'y' }}</h3>
+          <h3><b>Terminou em : </b>{{ animedata.date_end | date:'y' }}</h3>
         </div>
         <div *ngIf="animedata.date_option.id == 4">
-          <h3><b>{{ strings.animeOpt.aired }} : </b>{{ animedata.aired | date:'MMMM , y' }}</h3>
-          <h3><b>{{ strings.animeOpt.end }} : </b>{{ animedata.date_end | date:'MMMM , y' }}</h3>
+          <h3><b>Começou em : </b>{{ animedata.aired | date:'MMMM , y' }}</h3>
+          <h3><b>Terminou em : </b>{{ animedata.date_end | date:'MMMM , y' }}</h3>
         </div>
         <div *ngIf="animedata.date_option.id == 5">
-          <h3><b>{{ strings.animeOpt.aired }} : </b>{{ animedata.aired | date:'EEEE, MMMM d, y' }}</h3>
-          <h3><b>{{ strings.animeOpt.end }} : </b>{{ animedata.date_end | date:'y' }}</h3>
+          <h3><b>Começou em : </b>{{ animedata.aired | date:'EEEE, MMMM d, y' }}</h3>
+          <h3><b>Terminou em : </b>{{ animedata.date_end | date:'y' }}</h3>
         </div>
         <div *ngIf="animedata.date_option.id == 6">
-          <h3><b>{{ strings.animeOpt.aired }} : </b>{{ animedata.aired | date:'EEEE, MMMM d, y' }}</h3>
-          <h3><b>{{ strings.animeOpt.end }} : </b>{{ animedata.date_end | date:'MMMM, y' }}</h3>
+          <h3><b>Começou em : </b>{{ animedata.aired | date:'EEEE, MMMM d, y' }}</h3>
+          <h3><b>Terminou em : </b>{{ animedata.date_end | date:'MMMM, y' }}</h3>
         </div>
       </div>
 
         <div *ngIf="animedata.date_option == undefined">
-          <h3><b>{{ strings.animeOpt.broadcast }} : </b>{{ animedata.aired | date:'EEEE ' }}</h3>
-          <h3><b>{{ strings.animeOpt.aired }} : </b>{{ animedata.aired | date:' MMMM d, y' }}</h3>
-          <h3><b>{{ strings.animeOpt.end }} : </b>{{ animedata.date_end | date:' MMMM d, y' }}</h3>
+          <h3><b>Broadcast : </b>{{ animedata.aired | date:'EEEE ' }}</h3>
+          <h3><b>Começou em : </b>{{ animedata.aired | date:' MMMM d, y' }}</h3>
+          <h3><b>Acabou em : </b>{{ animedata.date_end | date:' MMMM d, y' }}</h3>
         </div>
       </ion-label>
     
@@ -258,14 +245,14 @@
     
   <ion-item-divider color="medium">
     <ion-label>
-      {{ strings.animeOpt.trailer }}
+      Trailer
     </ion-label>
   </ion-item-divider>
     <!--Trailer -->
-    <div class="padding-container" *ngIf="animedata">
+    <div class="padding-container">
       <div class="embed-container" style="background-image: url('https://img.youtube.com/vi/{{animedata.trailer}}/hqdefault.jpg');" *ngIf="animedata.trailer">
             
-          <ion-button href="https://youtu.be/{{animedata.trailer}}">{{ strings.animeOpt.wony }}</ion-button> 
+          <ion-button href="https://youtu.be/{{animedata.trailer}}">Assistir no youtube</ion-button> 
           
           </div>
       </div>
@@ -280,23 +267,22 @@
 
     <ion-item-divider color="medium">
       <ion-label>
-        {{ strings.animeOpt.genres }}
+        Gêneros
       </ion-label>
     </ion-item-divider>
 
-    <div class="padding-container" *ngIf="animedata">
+    <div class="padding-container">
       <ion-chip color="primary" *ngFor="let g of animedata.categorie">
-        <ion-label  *ngIf="idi == 'en'"><b>{{ g.categorie }}</b></ion-label>
-        <ion-label  *ngIf="  idi == 'pt'|| idi == 'br'"><b>{{ g.categorie_pt }}</b></ion-label>
+        <ion-label><b>{{ g.categorie_pt }}</b></ion-label>
       </ion-chip>
     </div>
 
     <ion-item-divider color="medium">
       <ion-label>
-        {{ strings.animeOpt.studios }}
+        Estúdios
       </ion-label>
     </ion-item-divider>
-    <div class="padding-container" *ngIf="animedata">
+    <div class="padding-container">
       
       <ion-chip color="primary" *ngFor="let s of animedata.studio" [routerLink]="['/studioanime/',  s.id ]">
         <ion-label  ><b>{{ s.name }}</b></ion-label>
@@ -305,22 +291,23 @@
 
     <ion-item-divider color="medium">
       <ion-label>
-        {{ strings.animeOpt.producers }}
+        Produtores
       </ion-label>
     </ion-item-divider>
 
-    <div class="padding-container" *ngIf="animedata">
+    <div class="padding-container">
       
       <ion-chip color="primary" *ngFor="let p of animedata.producers">
-        <ion-label  ><b>{{ p.name }}</b></ion-label>
+        <ion-label ><b>{{ p.name }}</b></ion-label>
       </ion-chip>
     </div>
+
     <ion-item-divider color="medium">
       <ion-label>
-        {{ strings.animeOpt.licensors }}
+        Licenciadores
       </ion-label>
     </ion-item-divider>
-    <div class="padding-container" *ngIf="animedata">
+    <div class="padding-container">
     
     <ion-chip color="primary" *ngFor="let l of animedata.licensors">
       <ion-label  ><b>{{ l.name }}</b></ion-label>
@@ -332,55 +319,7 @@
 
 
   
-    <!--  Reviews section -->
-    <div *ngIf="segment == 2">
-      <ion-card *ngIf="animedata">
-    <ion-item>
-      <label><h4><b>{{ strings.animeOpt.reviews}}</b></h4></label>
-      <ion-button [routerLink]="['/reviews/',  animedata.id ]" color="primary" slot="end">
-        {{ strings.animeOpt.allReviews}}
-      </ion-button>
-    </ion-item>
     
-    <div *ngIf="reviewres">
-
-      
-
-      <div *ngFor="let r of reviewres">
-      <ion-item >
-        <ion-thumbnail slot="start">
-          <img [src]="r.user.profile.image_url">
-        </ion-thumbnail>
-        <ion-label>
-          <h5>{{ r.user.username }}</h5>
-          <p *ngIf="idi == 'en'">Status: {{ r.status.status.tag }}</p>
-          <p *ngIf="idi == 'pt' || idi == 'br'">Status: {{ r.status.status.tag_pt }}</p>
-          <p>{{ strings.animeOpt.postedOn}} {{ r.date }}</p>
-          <a (click)="reportModal(r.id)">{{ strings.animeOpt.reportReview}}</a>
-        </ion-label>
-        <div slot="end" class="score-font-small">
-          {{ strings.animeOpt.score}} <br><b class="font-small">{{ r.status.score }} </b>
-        </div>
-      </ion-item>
-    
-      <ion-card-content [routerLink]="['/showreview/',  r.id ]">
-        
-        {{ r.review | slice:0:250 }}
-      </ion-card-content>
-      </div>
-      
-    </div>
-    <ion-item *ngIf="getstatus">
-      <div *ngFor="let g of getstatus">
-      <ion-button *ngIf="g.status.val == 2 || g.status.val == 1 || g.status == 3" color="primary" (click)="reviewModal(animedata.id)">
-        {{ strings.animeOpt.createReview}}
-      </ion-button>
-    </div>
-    </ion-item>
-  </ion-card>
-  </div>
-  </div>
-    <!-- End Reviews Section -->
   
 
     
@@ -390,5 +329,6 @@
 
 
   
-
+</div>
 </ion-content>
+
